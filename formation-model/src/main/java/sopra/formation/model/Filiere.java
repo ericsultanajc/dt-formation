@@ -11,7 +11,7 @@ public class Filiere {
 	private Date dtDebut;
 	private Integer duree;
 	private Dispositif dispositif;
-	private Formateur formateur = new Formateur();
+	private Formateur formateur;
 	private List<UE> ues = new ArrayList<UE>();
 	private List<Stagiaire> stagiaires = new ArrayList<Stagiaire>();
 	

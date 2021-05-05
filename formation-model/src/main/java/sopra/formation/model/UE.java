@@ -5,10 +5,10 @@ public class UE {
 	private Integer code;
 	private Integer duree;
 	private int order;
-	private Matiere matiere = new Matiere();
-	private Salle salle = new Salle();
-	private Formateur formateur = new Formateur();
-	private Filiere filiere = new Filiere();
+	private Matiere matiere;
+	private Salle salle;
+	private Formateur formateur;
+	private Filiere filiere;
 	
 	public UE() {
 		super();

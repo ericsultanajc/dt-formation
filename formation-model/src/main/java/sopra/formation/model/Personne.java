@@ -7,7 +7,7 @@ public class Personne {
 	private String prenom;
 	private String email;
 	private String telephone;
-	private Adresse adresse = new Adresse();
+	private Adresse adresse;
 	
 	public Personne() {
 		super();

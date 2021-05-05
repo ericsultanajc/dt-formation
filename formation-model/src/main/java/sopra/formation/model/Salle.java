@@ -8,7 +8,7 @@ public class Salle {
 	private String nom;
 	private Integer capacite;
 	private Boolean videoProjecteur;
-	private Adresse adresse = new Adresse();
+	private Adresse adresse;
 	private List<UE> ues = new ArrayList<UE>();
 	
 	public Salle() {
