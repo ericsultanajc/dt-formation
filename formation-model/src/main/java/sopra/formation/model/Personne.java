@@ -8,9 +8,7 @@ public class Personne {
 	private String prenom;
 	private String  email;
 	private String telephone;
-	
-	
-	
+		
 	
 	public Personne() {
 		super();

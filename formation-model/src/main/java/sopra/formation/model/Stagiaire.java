@@ -6,10 +6,33 @@ public class Stagiaire {
 	private Date dtNaissance;
 	private NiveauEtude niveauEtude;
 	
+	private Evaluation evaluation;
+	private Filiere filiere;
+	
+	public Stagiaire() {
+		super();
+	}
+	
+	public Stagiaire(Date dtNaissance, NiveauEtude niveauEtude) {
+		super();
+		this.dtNaissance = dtNaissance;
+		this.niveauEtude = niveauEtude;
+	}
 	
 	
 	
-	
+	public Evaluation getEvaluation() {
+		return evaluation;
+	}
+	public void setEvaluation(Evaluation evaluation) {
+		this.evaluation = evaluation;
+	}
+	public Filiere getFiliere() {
+		return filiere;
+	}
+	public void setFiliere(Filiere filiere) {
+		this.filiere = filiere;
+	}
 	public Date getDtNaissance() {
 		return dtNaissance;
 	}

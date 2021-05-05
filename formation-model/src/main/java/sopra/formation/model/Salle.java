@@ -1,5 +1,8 @@
 package sopra.formation.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Salle {
 	
 	private Long id;
@@ -7,6 +10,8 @@ public class Salle {
 	private Integer capacite;
 	private Boolean videoProjecteur;
 	
+	private Adresse adresse;
+	private List<UE> ue = new ArrayList<>();	
 	
 	public Salle() {
 		super();
@@ -28,6 +33,24 @@ public class Salle {
 	}
 	
 	
+	
+	
+	public Adresse getAdresse() {
+		return adresse;
+	}
+
+	public void setAdresse(Adresse adresse) {
+		this.adresse = adresse;
+	}
+
+	public List<UE> getUe() {
+		return ue;
+	}
+
+	public void setUe(List<UE> ue) {
+		this.ue = ue;
+	}
+
 	public Long getId() {
 		return id;
 	}

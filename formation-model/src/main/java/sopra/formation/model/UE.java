@@ -7,6 +7,10 @@ public class UE {
 	private Integer duree;
 	private int ordre;
 	
+	private Matiere matiere;
+	private Salle salle;
+	private Formateur formateur;
+	
 	
 	public UE () {
 		super();
@@ -29,6 +33,32 @@ public class UE {
 	
 	
 	
+	
+	
+	public Matiere getMatiere() {
+		return matiere;
+	}
+
+	public void setMatiere(Matiere matiere) {
+		this.matiere = matiere;
+	}
+
+	public Salle getSalle() {
+		return salle;
+	}
+
+	public void setSalle(Salle salle) {
+		this.salle = salle;
+	}
+
+	public Formateur getFormateur() {
+		return formateur;
+	}
+
+	public void setFormateur(Formateur formateur) {
+		this.formateur = formateur;
+	}
+
 	public Long getId() {
 		return id;
 	}

@@ -5,10 +5,39 @@ public class Evaluation {
 	private Integer comportemental;
 	private Integer technique;
 	private String commentaires;
-
+	
+	private Stagiaire stagiaire;
+	
+	
 	public Evaluation() {
 		super();
 	}
+	
+	
+	public Evaluation(Integer comportemental, Integer technique, String commentaires) {
+		super();
+		this.comportemental = comportemental;
+		this.technique = technique;
+		this.commentaires = commentaires;
+	}
+
+	public Evaluation(Long id, Integer comportemental, Integer technique, String commentaires) {
+		super();
+		this.id = id;
+		this.comportemental = comportemental;
+		this.technique = technique;
+		this.commentaires = commentaires;
+	}
+
+	public Stagiaire getStagiaire() {
+		return stagiaire;
+	}
+
+	public void setStagiaire(Stagiaire stagiaire) {
+		this.stagiaire = stagiaire;
+	}
+
+	
 
 	public Long getId() {
 		return id;
