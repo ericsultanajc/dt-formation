@@ -13,9 +13,8 @@ public abstract class Personne {
 	}
 	
 	
-	public Personne(Long id, Civilite civilite, String nom, String prenom, String mail, String telephone) {
+	public Personne(Civilite civilite, String nom, String prenom, String mail, String telephone) {
 		super();
-		this.id = id;
 		this.civilite = civilite;
 		this.nom = nom;
 		this.prenom = prenom;

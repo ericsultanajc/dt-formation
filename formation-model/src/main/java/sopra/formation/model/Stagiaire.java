@@ -6,13 +6,24 @@ public class Stagiaire extends Personne {
 	 private Date dtnaissance;
 	 private NiveauEtude niveauEtude;
 	 private Evaluation eval;
-	 public Stagiaire() {
+	 private Filiere filiere;
+	 public Filiere getFiliere() {
+		return filiere;
+	}
+
+
+	public void setFiliere(Filiere filiere) {
+		this.filiere = filiere;
+	}
+
+
+	public Stagiaire() {
 		super();
 	 }
 	 
 	 
-	public Stagiaire(Date dtnaissance, NiveauEtude niveauEtude) {
-		super();
+	public Stagiaire(Civilite civilite, String nom, String prenom, String email, String tel,Date dtnaissance, NiveauEtude niveauEtude) {
+		super(civilite,nom,prenom,email,tel);
 		this.dtnaissance = dtnaissance;
 		this.niveauEtude = niveauEtude;
 	}

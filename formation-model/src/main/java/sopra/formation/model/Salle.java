@@ -15,9 +15,8 @@ public class Salle {
 	}
 	
 	
-	public Salle(Long id, String nom, Integer capacite, Boolean videoProjecteur) {
+	public Salle(String nom, Integer capacite, Boolean videoProjecteur) {
 		super();
-		this.id = id;
 		this.nom = nom;
 		this.capacite = capacite;
 		this.videoProjecteur = videoProjecteur;

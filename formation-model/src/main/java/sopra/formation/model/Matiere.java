@@ -16,9 +16,8 @@ public class Matiere {
 	
 	
 
-	public Matiere(Long id, String nom, Integer matiere) {
+	public Matiere(String nom, Integer matiere) {
 		super();
-		this.id = id;
 		this.nom = nom;
 		this.matiere = matiere;
 	}

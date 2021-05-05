@@ -9,8 +9,8 @@ public class Formateur extends Personne {
 	
 	
 
-	public Formateur(Integer experience) {
-		super();
+	public Formateur(Civilite civilite, String nom, String prenom, String email, String tel,Integer experience) {
+		super(civilite,nom,prenom,email,tel);
 		this.experience = experience;
 	}
 
