@@ -6,10 +6,12 @@ public class Evaluation {
 	private Integer technique;
 	private String commentaires;
 
+	
 	public Evaluation() {
 		super();
 	}
 
+	
 	public Long getId() {
 		return id;
 	}
