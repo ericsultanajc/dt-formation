@@ -7,6 +7,7 @@ public class UE {
 		private Integer duree;
 		private int ordre;
 		private Salle salle;
+		private Filiere filiere;
 		
 		public UE() {
 			this(0l,0,0,0);
@@ -50,6 +51,14 @@ public class UE {
 
 		public void setSalle(Salle salle) {
 			this.salle = salle;
+		}
+
+		public Filiere getFiliere() {
+			return filiere;
+		}
+
+		public void setFiliere(Filiere filiere) {
+			this.filiere = filiere;
 		}
 		
 		

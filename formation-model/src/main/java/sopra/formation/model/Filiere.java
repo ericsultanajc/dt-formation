@@ -1,6 +1,8 @@
 package sopra.formation.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Filiere {
 
@@ -10,6 +12,7 @@ public class Filiere {
 	private Date dtDebut;
 	private Integer duree;
 	private Dispositif dispositif;
+	private List<UE> ues;
 	
 	public Filiere(){
 		this(0l, null, null, null, 0, null);
@@ -23,6 +26,7 @@ public class Filiere {
 		this.dtDebut = dtDebut;
 		this.duree = duree;
 		this.dispositif = dispositif;
+		ues = new ArrayList<UE>();
 	}
 	public Long getId() {
 		return id;
@@ -59,6 +63,24 @@ public class Filiere {
 	}
 	public void setDispositif(Dispositif dispositif) {
 		this.dispositif = dispositif;
+	}
+	
+	public List<UE> getUes(){
+		return ues;
+	}
+
+	public UE getUE(Long unId) {
+		for (int i = 0; i < ues.size(); i++) {
+			if (ues.get(i)!= null && ues.get(i).getId() ==
+					unId) {
+				return ues.get(i);
+			}
+		}
+		return null;
+	}
+
+	public void ajouterUE(UE unUE) {
+		this.ues.add(unUE);		
 	}
 	
 	
