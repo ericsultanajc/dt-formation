@@ -1,23 +1,34 @@
 package sopra.formation.model;
 
-public class Personne {
-	private long id;
+public abstract class Personne {
+	private Long id;
 	private Civilite civilite;
 	private String nom;
 	private String prenom;
 	private String email;
 	private String telephone;
 	private Adresse adresse;
-	
+
 	public Personne() {
 		super();
 	}
 
-	public long getId() {
+	public Personne(String email) {
+		super();
+		this.email = email;
+	}
+
+	public Personne(Long id, String email) {
+		super();
+		this.id = id;
+		this.email = email;
+	}
+
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -68,8 +79,15 @@ public class Personne {
 	public void setAdresse(Adresse adresse) {
 		this.adresse = adresse;
 	}
-	
-	
-	
-	
+
+	public void setAdresse(String rue, String complement, String codePostal, String ville) {
+		this.adresse = new Adresse(rue, complement, codePostal, ville);
+	}
+
+	@Override
+	public String toString() {
+		return "Personne [civilite=" + civilite.getLabel() + ", nom=" + nom + ", prenom=" + prenom + ", email=" + email
+				+ ", telephone=" + telephone + ", adresse=" + adresse + "]";
+	}
+
 }

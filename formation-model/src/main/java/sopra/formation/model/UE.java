@@ -8,17 +8,25 @@ public class UE {
 	private Filiere filiere;
 	private Formateur formateur;
 	private Matiere matiere;
-	
+	private Salle salle;
+
 	public UE() {
 		super();
 	}
 
-	public Integer getCode() {
-		return code;
+	public UE(Integer code, Integer duree, int ordre) {
+		super();
+		this.code = code;
+		this.duree = duree;
+		this.ordre = ordre;
 	}
 
-	public void setCode(Integer code) {
+	public UE(Long id, Integer code, Integer duree, int ordre) {
+		super();
+		this.id = id;
 		this.code = code;
+		this.duree = duree;
+		this.ordre = ordre;
 	}
 
 	public Long getId() {
@@ -27,6 +35,14 @@ public class UE {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Integer getCode() {
+		return code;
+	}
+
+	public void setCode(Integer code) {
+		this.code = code;
 	}
 
 	public Integer getDuree() {
@@ -68,6 +84,19 @@ public class UE {
 	public void setMatiere(Matiere matiere) {
 		this.matiere = matiere;
 	}
-	
-	
+
+	public Salle getSalle() {
+		return salle;
+	}
+
+	public void setSalle(Salle salle) {
+		this.salle = salle;
+	}
+
+	@Override
+	public String toString() {
+		return "UE [code=" + code + ", duree=" + duree + ", ordre=" + ordre + ", formateur=" + formateur + ", matiere="
+				+ matiere + ", salle=" + salle + "]";
+	}
+
 }

@@ -1,29 +1,40 @@
 package sopra.formation.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.ArrayList;
 
 public class Filiere {
-	private long id;
+	private Long id;
 	private String intitule;
 	private String promotion;
 	private Date dtDebut;
 	private Integer duree;
 	private Dispositif dispositif;
 	private List<Stagiaire> stagiaires = new ArrayList<Stagiaire>();
-	private Formateur formateur;
 	private List<UE> ues = new ArrayList<UE>();
-	
+	private Formateur referent;
+
 	public Filiere() {
 		super();
 	}
 
-	public long getId() {
+	public Filiere(String promotion) {
+		super();
+		this.promotion = promotion;
+	}
+
+	public Filiere(Long id, String promotion) {
+		super();
+		this.id = id;
+		this.promotion = promotion;
+	}
+
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -75,12 +86,8 @@ public class Filiere {
 		this.stagiaires = stagiaires;
 	}
 
-	public Formateur getFormateur() {
-		return formateur;
-	}
-
-	public void setFormateur(Formateur formateur) {
-		this.formateur = formateur;
+	public void addStagiaire(Stagiaire stagiaire) {
+		this.stagiaires.add(stagiaire);
 	}
 
 	public List<UE> getUes() {
@@ -90,7 +97,24 @@ public class Filiere {
 	public void setUes(List<UE> ues) {
 		this.ues = ues;
 	}
-	
-	
-	
+
+	public void addUe(UE ue) {
+		this.ues.add(ue);
+	}
+
+	public Formateur getReferent() {
+		return referent;
+	}
+
+	public void setReferent(Formateur referent) {
+		this.referent = referent;
+	}
+
+	@Override
+	public String toString() {
+		return "Filiere [intitule=" + intitule + ", promotion=" + promotion + ", dtDebut=" + dtDebut + ", duree="
+				+ duree + ", dispositif=" + dispositif + ", stagiaires=" + stagiaires + ", ues=" + ues + ", referent="
+				+ referent + "]";
+	}
+
 }
