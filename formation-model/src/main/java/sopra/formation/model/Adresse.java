@@ -7,6 +7,9 @@ public class Adresse {
 	private String codePostal;
 	private String ville;
 	
+	private Personne personne;
+	private Salle salle;
+	
 	
 	public Adresse() {
 		super();
@@ -43,6 +46,22 @@ public class Adresse {
 	
 	public void setVille(String ville) {
 		this.ville = ville;
+	}
+
+	public Personne getPersonne() {
+		return personne;
+	}
+
+	public void setPersonne(Personne personne) {
+		this.personne = personne;
+	}
+
+	public Salle getSalle() {
+		return salle;
+	}
+
+	public void setSalle(Salle salle) {
+		this.salle = salle;
 	}
 	
 	

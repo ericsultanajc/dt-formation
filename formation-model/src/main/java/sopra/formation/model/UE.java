@@ -7,6 +7,10 @@ public class UE {
 	private Integer duree;
 	private int ordre;
 	
+	private Matiere matiere;
+	private Formateur formateur;
+	private Filiere filiere;
+	
 	
 	public UE() {
 		super();
@@ -50,6 +54,36 @@ public class UE {
 
 	public void setOrdre(int ordre) {
 		this.ordre = ordre;
+	}
+
+
+	public Matiere getMatiere() {
+		return matiere;
+	}
+
+
+	public void setMatiere(Matiere matiere) {
+		this.matiere = matiere;
+	}
+
+
+	public Formateur getFormateur() {
+		return formateur;
+	}
+
+
+	public void setFormateur(Formateur formateur) {
+		this.formateur = formateur;
+	}
+
+
+	public Filiere getFiliere() {
+		return filiere;
+	}
+
+
+	public void setFiliere(Filiere filiere) {
+		this.filiere = filiere;
 	}
 	
 	
