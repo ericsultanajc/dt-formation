@@ -7,6 +7,7 @@ public abstract class Personne {
 	private String prenom;
 	private String email;
 	private String telephone;
+	private Adresse adresse;
 	
 	
 	
@@ -14,6 +15,14 @@ public abstract class Personne {
 	
 	
 	
+	public Adresse getAdresse() {
+		return adresse;
+	}
+
+	public void setAdresse(Adresse adresse) {
+		this.adresse = adresse;
+	}
+
 	public Personne() {
 		super();
 	}

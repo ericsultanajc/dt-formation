@@ -8,6 +8,15 @@ public class UE {
 	private Formateur formateur;
 	private Matiere matiere;
 	private Filiere filiere;
+	private Salle salle;
+	public Salle getSalle() {
+		return salle;
+	}
+
+	public void setSalle(Salle salle) {
+		this.salle = salle;
+	}
+
 	public UE() {
 		super();
 	}
