@@ -1,6 +1,7 @@
 package sopra.formation.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class Filiere {
 	
@@ -10,6 +11,9 @@ public class Filiere {
 	private Date dtDebut;
 	private Integer duree;
 	private Dispositif dispositif;
+	private List<Stagiaire> stagiaires;
+	private List<UE> UES;
+	private Formateur formateur;
 	
 	public Filiere() {
 		super();
@@ -58,6 +62,24 @@ public class Filiere {
 	}
 	public void setDispositif(Dispositif dispositif) {
 		this.dispositif = dispositif;
+	}
+	public List<Stagiaire> getStagiaires() {
+		return stagiaires;
+	}
+	public void setStagiaires(List<Stagiaire> stagiaires) {
+		this.stagiaires = stagiaires;
+	}
+	public List<UE> getUES() {
+		return UES;
+	}
+	public void setUES(List<UE> uES) {
+		UES = uES;
+	}
+	public Formateur getFormateur() {
+		return formateur;
+	}
+	public void setFormateur(Formateur formateur) {
+		this.formateur = formateur;
 	}
 	
 	

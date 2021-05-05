@@ -1,11 +1,15 @@
 package sopra.formation.model;
 
+import java.util.List;
+
 public class Salle {
 
 	private Long id;
 	private String nom;
 	private Integer capacite;
 	private Boolean videoProjecteur;
+	private List<UE> UES;
+	private Adresse adresse;
 	
 	public Salle() {
 		super();
@@ -49,6 +53,22 @@ public class Salle {
 
 	public void setVideoProjecteur(Boolean videoProjecteur) {
 		this.videoProjecteur = videoProjecteur;
+	}
+
+	public List<UE> getUES() {
+		return UES;
+	}
+
+	public void setUES(List<UE> uES) {
+		UES = uES;
+	}
+
+	public Adresse getAdresse() {
+		return adresse;
+	}
+
+	public void setAdresse(Adresse adresse) {
+		this.adresse = adresse;
 	}
 	
 	

@@ -1,9 +1,13 @@
 package sopra.formation.model;
 
+import java.util.List;
+
 public class Matiere {
 	private Long id;
 	private String nom;
 	private Integer duree;
+	private List<Formateur> formateurs;
+	private List<UE> UES;
 
 	public Matiere() {
 		super();
@@ -31,6 +35,22 @@ public class Matiere {
 
 	public void setMatiere(Integer matiere) {
 		this.duree = matiere;
+	}
+
+	public List<Formateur> getFormateurs() {
+		return formateurs;
+	}
+
+	public void setFormateurs(List<Formateur> formateurs) {
+		this.formateurs = formateurs;
+	}
+
+	public List<UE> getUES() {
+		return UES;
+	}
+
+	public void setUES(List<UE> uES) {
+		UES = uES;
 	}
 
 }
