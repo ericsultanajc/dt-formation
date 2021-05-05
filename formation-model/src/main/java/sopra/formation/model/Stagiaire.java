@@ -12,12 +12,6 @@ public class Stagiaire extends Personne {
 	public Stagiaire() {
 		super();
 	}
-	
-	public Stagiaire(Date dtNaissance, NiveauEtude niveauEtude) {
-		super();
-		this.dtNaissance = dtNaissance;
-		this.niveauEtude = niveauEtude;
-	}
 
 	public Date getDtNaissance() {
 		return dtNaissance;
