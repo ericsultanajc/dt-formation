@@ -14,6 +14,19 @@ public class Matiere {
 		super();
 	}
 
+	public Matiere(String nom, Integer duree) {
+		super();
+		this.nom = nom;
+		this.duree = duree;
+	}
+
+	public Matiere(Long id, String nom, Integer duree) {
+		super();
+		this.id = id;
+		this.nom = nom;
+		this.duree = duree;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -46,6 +59,10 @@ public class Matiere {
 		this.ues = ues;
 	}
 
+	public void addUe(UE ue) {
+		this.ues.add(ue);
+	}
+
 	public List<Formateur> getFormateurs() {
 		return formateurs;
 	}
@@ -53,4 +70,14 @@ public class Matiere {
 	public void setFormateurs(List<Formateur> formateurs) {
 		this.formateurs = formateurs;
 	}
+
+	public void addFormateur(Formateur formateur) {
+		this.formateurs.add(formateur);
+	}
+
+	@Override
+	public String toString() {
+		return "Matiere [nom=" + nom + ", duree=" + duree + "]";
+	}
+
 }

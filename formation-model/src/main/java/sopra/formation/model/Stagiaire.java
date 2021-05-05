@@ -7,9 +7,17 @@ public class Stagiaire extends Personne {
 	private NiveauEtude niveauEtude;
 	private Filiere filiere;
 	private Evaluation evaluation;
-	
+
 	public Stagiaire() {
 		super();
+	}
+
+	public Stagiaire(String email) {
+		super(email);
+	}
+
+	public Stagiaire(Long id, String email) {
+		super(id, email);
 	}
 
 	public Date getDtNaissance() {
@@ -43,4 +51,11 @@ public class Stagiaire extends Personne {
 	public void setEvaluation(Evaluation evaluation) {
 		this.evaluation = evaluation;
 	}
+
+	@Override
+	public String toString() {
+		return "Stagiaire [dtNaissance=" + dtNaissance + ", niveauEtude=" + niveauEtude + ", evaluation=" + evaluation
+				+ ", " + super.toString() + "]";
+	}
+
 }

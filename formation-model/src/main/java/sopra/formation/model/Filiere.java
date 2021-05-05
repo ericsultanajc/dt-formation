@@ -11,12 +11,23 @@ public class Filiere {
 	private Date dtDebut;
 	private Integer duree;
 	private Dispositif dispositif;
-	private Formateur formateur;
-	private List<UE> ues = new ArrayList<UE>();
 	private List<Stagiaire> stagiaires = new ArrayList<Stagiaire>();
-	
+	private List<UE> ues = new ArrayList<UE>();
+	private Formateur referent;
+
 	public Filiere() {
 		super();
+	}
+
+	public Filiere(String promotion) {
+		super();
+		this.promotion = promotion;
+	}
+
+	public Filiere(Long id, String promotion) {
+		super();
+		this.id = id;
+		this.promotion = promotion;
 	}
 
 	public Long getId() {
@@ -67,12 +78,16 @@ public class Filiere {
 		this.dispositif = dispositif;
 	}
 
-	public Formateur getFormateur() {
-		return formateur;
+	public List<Stagiaire> getStagiaires() {
+		return stagiaires;
 	}
 
-	public void setFormateur(Formateur formateur) {
-		this.formateur = formateur;
+	public void setStagiaires(List<Stagiaire> stagiaires) {
+		this.stagiaires = stagiaires;
+	}
+
+	public void addStagiaire(Stagiaire stagiaire) {
+		this.stagiaires.add(stagiaire);
 	}
 
 	public List<UE> getUes() {
@@ -83,11 +98,23 @@ public class Filiere {
 		this.ues = ues;
 	}
 
-	public List<Stagiaire> getStagiaires() {
-		return stagiaires;
+	public void addUe(UE ue) {
+		this.ues.add(ue);
 	}
 
-	public void setStagiaires(List<Stagiaire> stagiaires) {
-		this.stagiaires = stagiaires;
+	public Formateur getReferent() {
+		return referent;
 	}
+
+	public void setReferent(Formateur referent) {
+		this.referent = referent;
+	}
+
+	@Override
+	public String toString() {
+		return "Filiere [intitule=" + intitule + ", promotion=" + promotion + ", dtDebut=" + dtDebut + ", duree="
+				+ duree + ", dispositif=" + dispositif + ", stagiaires=" + stagiaires + ", ues=" + ues + ", referent="
+				+ referent + "]";
+	}
+
 }
