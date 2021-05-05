@@ -1,6 +1,9 @@
 package sopra.formation.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 
 public class Filiere {
 	
@@ -10,6 +13,8 @@ public class Filiere {
 	private Date dtDebut;
 	private Integer duree;
 	private Dispositif dispositif;
+	private Formateur formateur;
+	private List<UE> ue = new ArrayList<UE>();
 	
 	public Filiere() {
 		super();
@@ -17,6 +22,22 @@ public class Filiere {
 
 	public Long getId() {
 		return id;
+	}
+
+	public Formateur getFormateur() {
+		return formateur;
+	}
+
+	public void setFormateur(Formateur formateur) {
+		this.formateur = formateur;
+	}
+
+	public List<UE> getUe() {
+		return ue;
+	}
+
+	public void setUe(List<UE> ue) {
+		this.ue = ue;
 	}
 
 	public void setId(Long id) {
