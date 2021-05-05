@@ -2,15 +2,22 @@ package sopra.formation.model;
 
 import java.util.Date;
 
-public class Stagiaire {
-
-	private Date dtNaissance ;
-	private NiveauEtude niveauEtude ;
+public class Stagiaire extends Personne {
+	private Date dtNaissance;
+	private NiveauEtude niveauEtude;
 	private Filiere filiere;
 	private Evaluation evaluation;
-	
+
 	public Stagiaire() {
 		super();
+	}
+
+	public Stagiaire(String email) {
+		super(email);
+	}
+
+	public Stagiaire(Long id, String email) {
+		super(id, email);
 	}
 
 	public Date getDtNaissance() {
@@ -45,6 +52,10 @@ public class Stagiaire {
 		this.evaluation = evaluation;
 	}
 
-	
-	
+	@Override
+	public String toString() {
+		return "Stagiaire [dtNaissance=" + dtNaissance + ", niveauEtude=" + niveauEtude + ", evaluation=" + evaluation
+				+ ", " + super.toString() + "]";
+	}
+
 }

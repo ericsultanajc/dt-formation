@@ -4,20 +4,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Salle {
-	
 	private Long id;
 	private String nom;
 	private Integer capacite;
 	private Boolean videoProjecteur;
-	private List<UE> ue = new ArrayList<UE>();
-	
-	
+	private Adresse adr;
+	private List<UE> ues = new ArrayList<UE>();
 
 	public Salle() {
 		super();
 	}
-	
-	
+
+	public Salle(String nom, Integer capacite, Boolean videoProjecteur) {
+		super();
+		this.nom = nom;
+		this.capacite = capacite;
+		this.videoProjecteur = videoProjecteur;
+	}
+
+	public Salle(Long id, String nom, Integer capacite, Boolean videoProjecteur) {
+		super();
+		this.id = id;
+		this.nom = nom;
+		this.capacite = capacite;
+		this.videoProjecteur = videoProjecteur;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -50,16 +62,30 @@ public class Salle {
 		this.videoProjecteur = videoProjecteur;
 	}
 
-
-	public List<UE> getUe() {
-		return ue;
+	public Adresse getAdr() {
+		return adr;
 	}
 
-
-	public void setUe(List<UE> ue) {
-		this.ue = ue;
+	public void setAdr(Adresse adr) {
+		this.adr = adr;
 	}
-	
-	
+
+	public List<UE> getUes() {
+		return ues;
+	}
+
+	public void setUes(List<UE> ues) {
+		this.ues = ues;
+	}
+
+	public void addUe(UE ue) {
+		this.ues.add(ue);
+	}
+
+	@Override
+	public String toString() {
+		return "Salle [nom=" + nom + ", capacite=" + capacite + ", videoProjecteur=" + videoProjecteur + ", adr=" + adr
+				+ "]";
+	}
 
 }
