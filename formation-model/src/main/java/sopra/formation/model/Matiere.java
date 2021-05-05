@@ -3,7 +3,7 @@ package sopra.formation.model;
 public class Matiere {
 	private Long id;
 	private String nom;
-	private Integer matiere;
+	private Integer duree;
 
 	public Matiere() {
 		super();
@@ -26,11 +26,11 @@ public class Matiere {
 	}
 
 	public Integer getMatiere() {
-		return matiere;
+		return duree;
 	}
 
 	public void setMatiere(Integer matiere) {
-		this.matiere = matiere;
+		this.duree = matiere;
 	}
 
 }
