@@ -45,6 +45,14 @@ public class Matiere {
 	public void setUes(List<UE> ues) {
 		this.ues = ues;
 	}
+
+	public List<Formateur> getFormateurs() {
+		return formateurs;
+	}
+
+	public void setFormateurs(List<Formateur> formateurs) {
+		this.formateurs = formateurs;
+	}
 	
 	
 
