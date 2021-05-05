@@ -5,6 +5,7 @@ public class Evaluation {
 	private Integer comportemental;
 	private Integer technique;
 	private String commentaires;
+	private Stagiaire stagiaire;
 
 	public Evaluation() {
 		super();
@@ -41,5 +42,15 @@ public class Evaluation {
 	public void setCommentaires(String commentaires) {
 		this.commentaires = commentaires;
 	}
+
+	public Stagiaire getStagiaire() {
+		return stagiaire;
+	}
+
+	public void setStagiaire(Stagiaire stagiaire) {
+		this.stagiaire = stagiaire;
+	}
+	
+	
 
 }
