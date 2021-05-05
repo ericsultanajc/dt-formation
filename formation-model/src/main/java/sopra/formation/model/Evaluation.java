@@ -5,7 +5,6 @@ public class Evaluation {
 	private Integer comportemental;
 	private Integer technique;
 	private String commentaires;
-	private Stagiaire stagiaire;
 
 	public Evaluation() {
 		super();
