@@ -7,13 +7,15 @@ public class Adresse {
 	private String codePostal;
 	private String ville;
 	private Salle salle;
-	private List<Personne> personnes = new ArrayList<Personne>();
+	private Personne personne;
 	
 // ------------------------------------------------------------------------------------
 	
 	public Adresse() {
 		super();
 	}
+	
+// ------------------------------------------------------------------------------------
 
 	public String getRue() {
 		return rue;
@@ -55,18 +57,12 @@ public class Adresse {
 		this.salle = salle;
 	}
 
-	public List<Personne> getPersonnes() {
-		return personnes;
+	public Personne getPersonne() {
+		return personne;
 	}
 
-	public void setPersonnes(List<Personne> personnes) {
-		this.personnes = personnes;
+	public void setPersonne(Personne personne) {
+		this.personne = personne;
 	}
-	
-// ------------------------------------------------------------------------------------
-	
-	
-
-	
-	
+		
 }
