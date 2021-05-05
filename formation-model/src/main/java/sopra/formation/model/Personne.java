@@ -1,0 +1,83 @@
+package sopra.formation.model;
+
+public class Personne {
+
+	private Long id;
+	private Civilite civilite;
+	private String nom;
+	private String prenom;
+	private String  email;
+	private String telephone;
+	
+	
+	
+	
+	public Personne() {
+		super();
+	}
+	
+		
+	public Personne( Civilite civilite, String nom, String prenom, String email, String telephone) {
+		super();
+		
+		this.civilite = civilite;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.email = email;
+		this.telephone = telephone;
+	}
+
+	public Personne(Long id, Civilite civilite, String nom, String prenom, String email, String telephone) {
+		super();
+		this.id = id;
+		this.civilite = civilite;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.email = email;
+		this.telephone = telephone;
+	}
+
+
+
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public Civilite getCivilite() {
+		return civilite;
+	}
+	public void setCivilite(Civilite civilite) {
+		this.civilite = civilite;
+	}
+	public String getNom() {
+		return nom;
+	}
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+	public String getPrenom() {
+		return prenom;
+	}
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getTelephone() {
+		return telephone;
+	}
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
+	}
+	
+	
+	
+	
+	
+}
