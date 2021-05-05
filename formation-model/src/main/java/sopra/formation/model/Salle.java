@@ -4,88 +4,75 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Salle {
+	
 	private Long id;
 	private String nom;
 	private Integer capacite;
 	private Boolean videoProjecteur;
-	private Adresse adr;
-	private List<UE> ues = new ArrayList<UE>();
-
+	private Adresse adresse;
+	private List<UE> ues;
+	
 	public Salle() {
-		super();
+		this(0l,null,0,null);
 	}
-
-	public Salle(String nom, Integer capacite, Boolean videoProjecteur) {
-		super();
-		this.nom = nom;
-		this.capacite = capacite;
-		this.videoProjecteur = videoProjecteur;
-	}
-
+	
 	public Salle(Long id, String nom, Integer capacite, Boolean videoProjecteur) {
 		super();
 		this.id = id;
 		this.nom = nom;
 		this.capacite = capacite;
 		this.videoProjecteur = videoProjecteur;
+		ues = new ArrayList<UE>();
 	}
-
 	public Long getId() {
 		return id;
 	}
-
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 	public String getNom() {
 		return nom;
 	}
-
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-
 	public Integer getCapacite() {
 		return capacite;
 	}
-
 	public void setCapacite(Integer capacite) {
 		this.capacite = capacite;
 	}
-
 	public Boolean getVideoProjecteur() {
 		return videoProjecteur;
 	}
-
 	public void setVideoProjecteur(Boolean videoProjecteur) {
 		this.videoProjecteur = videoProjecteur;
 	}
 
-	public Adresse getAdr() {
-		return adr;
+	public Adresse getAdresse() {
+		return adresse;
 	}
 
-	public void setAdr(Adresse adr) {
-		this.adr = adr;
+	public void setAdresse(Adresse adresse) {
+		this.adresse = adresse;
 	}
-
-	public List<UE> getUes() {
+	
+	public List<UE> getUes(){
 		return ues;
 	}
 
-	public void setUes(List<UE> ues) {
-		this.ues = ues;
+	public UE getUE(Long unId) {
+		for (int i = 0; i < ues.size(); i++) {
+			if (ues.get(i)!= null && ues.get(i).getId() ==
+					unId) {
+				return ues.get(i);
+			}
+		}
+		return null;
 	}
 
-	public void addUe(UE ue) {
-		this.ues.add(ue);
-	}
-
-	@Override
-	public String toString() {
-		return "Salle [nom=" + nom + ", capacite=" + capacite + ", videoProjecteur=" + videoProjecteur + ", adr=" + adr
-				+ "]";
+	public void ajouterUE(UE unUE) {
+		this.ues.add(unUE);		
 	}
 
 }
