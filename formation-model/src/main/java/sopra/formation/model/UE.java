@@ -7,6 +7,11 @@ public class UE {
 	private Integer duree;
 	private int ordre;
 	
+	//Cardinalite
+	private Filiere filiere;
+	private Formateur formateur;
+	private Matiere matiere;
+	private Salle salle;
 	
 	
 	public UE() {
@@ -59,6 +64,54 @@ public class UE {
 
 	public void setOrdre(int ordre) {
 		this.ordre = ordre;
+	}
+
+
+
+	public Filiere getFiliere() {
+		return filiere;
+	}
+
+
+
+	public void setFiliere(Filiere filiere) {
+		this.filiere = filiere;
+	}
+
+
+
+	public Formateur getFormateur() {
+		return formateur;
+	}
+
+
+
+	public void setFormateur(Formateur formateur) {
+		this.formateur = formateur;
+	}
+
+
+
+	public Matiere getMatiere() {
+		return matiere;
+	}
+
+
+
+	public void setMatiere(Matiere matiere) {
+		this.matiere = matiere;
+	}
+
+
+
+	public Salle getSalle() {
+		return salle;
+	}
+
+
+
+	public void setSalle(Salle salle) {
+		this.salle = salle;
 	}
 	
 	

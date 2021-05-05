@@ -6,6 +6,9 @@ public class Evaluation {
 	private Integer technique;
 	private String commentaires;
 	
+	//Cardinalite
+	private Stagiaire stagiaire;
+	
 	
 
 	public Evaluation() {
@@ -43,5 +46,15 @@ public class Evaluation {
 	public void setCommentaires(String commentaires) {
 		this.commentaires = commentaires;
 	}
+
+	public Stagiaire getStagiaire() {
+		return stagiaire;
+	}
+
+	public void setStagiaire(Stagiaire stagiaire) {
+		this.stagiaire = stagiaire;
+	}
+	
+	
 
 }

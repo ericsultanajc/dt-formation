@@ -1,9 +1,16 @@
 package sopra.formation.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Matiere {
 	private Long id;
 	private String nom;
 	private Integer matiere;
+	
+	//Cardinalite
+	private List<Formateur> formateur = new ArrayList();
+	private List<UE> ue = new ArrayList();
 
 	public Matiere() {
 		super();
