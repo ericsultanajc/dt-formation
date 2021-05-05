@@ -1,14 +1,22 @@
 package sopra.formation.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Matiere {
 	private Long id;
 	private String nom;
 	private Integer matiere;
+	private List<UE> ues = new ArrayList<UE>();
+	private List<Formateur> formateurs = new ArrayList<Formateur>();
 
+// ------------------------------------------------------------------------------------
+	
 	public Matiere() {
 		super();
 	}
-
+// ------------------------------------------------------------------------------------
+	
 	public Long getId() {
 		return id;
 	}
