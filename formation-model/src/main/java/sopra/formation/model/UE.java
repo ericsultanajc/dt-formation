@@ -13,6 +13,17 @@ public class UE {
 	public UE() {
 		super();
 	}
+	
+	
+	public UE(Long id, Integer code, Integer duree, int ordre) {
+		super();
+		this.id = id;
+		this.code = code;
+		this.duree = duree;
+		this.ordre = ordre;
+	}
+
+
 	public Long getId() {
 		return id;
 	}

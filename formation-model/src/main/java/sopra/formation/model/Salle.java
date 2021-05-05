@@ -13,6 +13,27 @@ public class Salle {
 	public Salle() {
 		super();
 	}
+	
+	
+	public Salle(Long id, String nom, Integer capacite, Boolean videoProjecteur) {
+		super();
+		this.id = id;
+		this.nom = nom;
+		this.capacite = capacite;
+		this.videoProjecteur = videoProjecteur;
+	}
+
+
+	public List<UE> getUes() {
+		return ues;
+	}
+
+
+	public void setUes(List<UE> ues) {
+		this.ues = ues;
+	}
+
+
 	public Long getId() {
 		return id;
 	}

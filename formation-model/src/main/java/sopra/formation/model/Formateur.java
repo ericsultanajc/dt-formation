@@ -6,6 +6,15 @@ public class Formateur extends Personne {
 	public Formateur() {
 		super();
 	}
+	
+	
+
+	public Formateur(Integer experience) {
+		super();
+		this.experience = experience;
+	}
+
+
 
 	public Integer getExperience() {
 		return experience;

@@ -17,6 +17,19 @@ public class Filiere {
 	public Filiere() {
 		super();
 	}
+	
+	
+	public Filiere(Long id, String intitule, String promotion, Date dtDebut, Integer duree, Dispositif dispositif) {
+		super();
+		this.id = id;
+		this.intitule = intitule;
+		this.promotion = promotion;
+		this.dtDebut = dtDebut;
+		this.duree = duree;
+		this.dispositif = dispositif;
+	}
+
+
 	public Long getId() {
 		return id;
 	}

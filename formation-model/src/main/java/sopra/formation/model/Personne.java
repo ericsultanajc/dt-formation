@@ -11,6 +11,29 @@ public abstract class Personne {
 	public Personne() {
 		super();
 	}
+	
+	
+	public Personne(Long id, Civilite civilite, String nom, String prenom, String mail, String telephone) {
+		super();
+		this.id = id;
+		this.civilite = civilite;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.mail = mail;
+		this.telephone = telephone;
+	}
+
+
+	public Adresse getAdresse() {
+		return adresse;
+	}
+
+
+	public void setAdresse(Adresse adresse) {
+		this.adresse = adresse;
+	}
+
+
 	public Long getId() {
 		return id;
 	}

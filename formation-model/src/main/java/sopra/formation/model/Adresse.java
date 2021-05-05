@@ -8,6 +8,17 @@ public class Adresse {
 	public Adresse() {
 		super();
 	}
+	
+	
+	public Adresse(String rue, String complement, String codePostal, String ville) {
+		super();
+		this.rue = rue;
+		this.complement = complement;
+		this.codePostal = codePostal;
+		this.ville = ville;
+	}
+
+
 	public String getRue() {
 		return rue;
 	}

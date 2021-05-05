@@ -13,6 +13,41 @@ public class Matiere {
 	public Matiere() {
 		super();
 	}
+	
+	
+
+	public Matiere(Long id, String nom, Integer matiere) {
+		super();
+		this.id = id;
+		this.nom = nom;
+		this.matiere = matiere;
+	}
+
+
+	
+	public List<Formateur> getFormateurs() {
+		return Formateurs;
+	}
+
+
+
+	public void setFormateurs(List<Formateur> formateurs) {
+		Formateurs = formateurs;
+	}
+
+
+
+	public List<UE> getUes() {
+		return ues;
+	}
+
+
+
+	public void setUes(List<UE> ues) {
+		this.ues = ues;
+	}
+
+
 
 	public Long getId() {
 		return id;

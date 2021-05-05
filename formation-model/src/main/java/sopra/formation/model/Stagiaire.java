@@ -9,6 +9,25 @@ public class Stagiaire extends Personne {
 	 public Stagiaire() {
 		super();
 	 }
+	 
+	 
+	public Stagiaire(Date dtnaissance, NiveauEtude niveauEtude) {
+		super();
+		this.dtnaissance = dtnaissance;
+		this.niveauEtude = niveauEtude;
+	}
+
+
+	public Evaluation getEval() {
+		return eval;
+	}
+
+
+	public void setEval(Evaluation eval) {
+		this.eval = eval;
+	}
+
+
 	public Date getDtnaissance() {
 		return dtnaissance;
 	}
