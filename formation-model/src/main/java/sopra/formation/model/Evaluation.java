@@ -5,7 +5,6 @@ public class Evaluation {
 	private Integer comportemental;
 	private Integer technique;
 	private String commentaires;
-	private boolean sansDent;
 
 	public Evaluation() {
 		super();
