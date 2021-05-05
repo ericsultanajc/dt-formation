@@ -1,103 +1,59 @@
 package sopra.formation.model;
 
-	
 public class Adresse {
-		
-		private Long id;
-		private String rue;
-		private String complement;
-		private String codePostal;
-		private String ville;
-		private String pays;
-		
-		private Salle salle;
-		private Personne personne;
-		
-		
-		
-		// Constructeur
-		
-		public Adresse() {
-			this(null,null,null,null,null,null);
-		}
-		
-		public Adresse(Long id, String rue, String complement, String codePostal, String ville, String pays) {
-			this.id = id;
-			this.rue = rue;
-			this.complement = complement;
-			this.codePostal = codePostal;
-			this.ville = ville;
-			this.pays = pays;
-		}
-		
-		//Getter / SEtter
-		
-		
-		
-		
-		public Long getId() {
-			return id;
-		}
+	private String rue;
+	private String complement;
+	private String codePostal;
+	private String ville;
 
-		public Salle getSalle() {
-			return salle;
-		}
+	public Adresse() {
+		super();
+	}
 
-		public void setSalle(Salle salle) {
-			this.salle = salle;
-		}
+	public Adresse(String rue, String complement, String codePostal, String ville) {
+		super();
+		this.rue = rue;
+		this.complement = complement;
+		this.codePostal = codePostal;
+		this.ville = ville;
+	}
 
-		public Personne getPersonne() {
-			return personne;
-		}
+	public String getRue() {
+		return rue;
+	}
 
-		public void setPersonne(Personne personne) {
-			this.personne = personne;
-		}
+	public void setRue(String rue) {
+		this.rue = rue;
+	}
 
-		public void setId(Long id) {
-			this.id = id;
-		}
+	public String getComplement() {
+		return complement;
+	}
 
-		public String getRue() {
-			return rue;
-		}
+	public void setComplement(String complement) {
+		this.complement = complement;
+	}
 
-		public void setRue(String rue) {
-			this.rue = rue;
-		}
+	public String getCodePostal() {
+		return codePostal;
+	}
 
-		public String getComplement() {
-			return complement;
-		}
+	public void setCodePostal(String codePostal) {
+		this.codePostal = codePostal;
+	}
 
-		public void setComplement(String complement) {
-			this.complement = complement;
-		}
+	public String getVille() {
+		return ville;
+	}
 
-		public String getCodePostal() {
-			return codePostal;
-		}
+	public void setVille(String ville) {
+		this.ville = ville;
+	}
 
-		public void setCodePostal(String codePostal) {
-			this.codePostal = codePostal;
-		}
-
-		public String getVille() {
-			return ville;
-		}
-
-		public void setVille(String ville) {
-			this.ville = ville;
-		}
-
-		public String getPays() {
-			return pays;
-		}
-
-		public void setPays(String pays) {
-			this.pays = pays;
-		}
-
+	@Override
+	public String toString() {
+		return "Adresse [rue=" + rue + ", complement=" + complement + ", codePostal=" + codePostal + ", ville=" + ville
+				+ "]";
+	}
 
 }

@@ -6,14 +6,9 @@ import java.util.List;
 public class Matiere {
 	private Long id;
 	private String nom;
-	private Integer matiere;
-	
-	private List<UE> ue = new ArrayList<>();
-	private Formateur formateur;
-	
-	
-	
-	
+	private Integer duree;
+	private List<UE> ues = new ArrayList<UE>();
+	private List<Formateur> formateurs = new ArrayList<Formateur>();
 
 	public Matiere() {
 		super();
@@ -23,37 +18,18 @@ public class Matiere {
 	
 	
 
-	public List<UE> getUe() {
-		return ue;
+	public Matiere(String nom, Integer duree) {
+		super();
+		this.nom = nom;
+		this.duree = duree;
 	}
 
-
-
-
-
-	public void setUe(List<UE> ue) {
-		this.ue = ue;
+	public Matiere(Long id, String nom, Integer duree) {
+		super();
+		this.id = id;
+		this.nom = nom;
+		this.duree = duree;
 	}
-
-
-
-
-
-	public Formateur getFormateur() {
-		return formateur;
-	}
-
-
-
-
-
-	public void setFormateur(Formateur formateur) {
-		this.formateur = formateur;
-	}
-
-
-
-
 
 	public Long getId() {
 		return id;
@@ -71,12 +47,41 @@ public class Matiere {
 		this.nom = nom;
 	}
 
-	public Integer getMatiere() {
-		return matiere;
+	public Integer getDuree() {
+		return duree;
 	}
 
-	public void setMatiere(Integer matiere) {
-		this.matiere = matiere;
+	public void setDuree(Integer duree) {
+		this.duree = duree;
+	}
+
+	public List<UE> getUes() {
+		return ues;
+	}
+
+	public void setUes(List<UE> ues) {
+		this.ues = ues;
+	}
+
+	public void addUe(UE ue) {
+		this.ues.add(ue);
+	}
+
+	public List<Formateur> getFormateurs() {
+		return formateurs;
+	}
+
+	public void setFormateurs(List<Formateur> formateurs) {
+		this.formateurs = formateurs;
+	}
+
+	public void addFormateur(Formateur formateur) {
+		this.formateurs.add(formateur);
+	}
+
+	@Override
+	public String toString() {
+		return "Matiere [nom=" + nom + ", duree=" + duree + "]";
 	}
 
 }
