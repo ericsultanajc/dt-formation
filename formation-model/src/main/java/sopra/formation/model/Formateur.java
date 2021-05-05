@@ -4,16 +4,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Formateur extends Personne {
-	
+	private Boolean referent;
 	private Integer experience;
+	private List<UE> ues = new ArrayList<UE>();
+	private List<Matiere> competences = new ArrayList<Matiere>();
 
-	//Cardinalite
-	private List<Filiere> filiere = new ArrayList();
-	private List<UE> ue = new ArrayList();
-	private List<Matiere> matiere = new ArrayList();
-	
 	public Formateur() {
 		super();
+	}
+
+	public Formateur(String email) {
+		super(email);
+	}
+
+	public Formateur(Long id, String email) {
+		super(id, email);
+	}
+
+	public Boolean getReferent() {
+		return referent;
+	}
+
+	public void setReferent(Boolean referent) {
+		this.referent = referent;
 	}
 
 	public Integer getExperience() {
@@ -24,31 +37,33 @@ public class Formateur extends Personne {
 		this.experience = experience;
 	}
 
-	public List<Filiere> getFiliere() {
-		return filiere;
+	public List<UE> getUes() {
+		return ues;
 	}
 
-	public void setFiliere(List<Filiere> filiere) {
-		this.filiere = filiere;
+	public void setUes(List<UE> ues) {
+		this.ues = ues;
 	}
 
-	public List<UE> getUe() {
-		return ue;
+	public void addUe(UE ue) {
+		this.ues.add(ue);
 	}
 
-	public void setUe(List<UE> ue) {
-		this.ue = ue;
+	public List<Matiere> getCompetences() {
+		return competences;
 	}
 
-	public List<Matiere> getMatiere() {
-		return matiere;
+	public void setCompetences(List<Matiere> competences) {
+		this.competences = competences;
 	}
 
-	public void setMatiere(List<Matiere> matiere) {
-		this.matiere = matiere;
+	public void addCompetence(Matiere matiere) {
+		this.competences.add(matiere);
 	}
-	
-	
-	
+
+	@Override
+	public String toString() {
+		return "Formateur [referent=" + referent + ", experience=" + experience + ", competences=" + competences + "]";
+	}
 
 }

@@ -3,22 +3,21 @@ package sopra.formation.model;
 import java.util.Date;
 
 public class Stagiaire extends Personne {
-	
 	private Date dtNaissance;
 	private NiveauEtude niveauEtude;
-	
-	//Cardinalite
-	private Evaluation evaluation;
 	private Filiere filiere;
-	
+	private Evaluation evaluation;
+
 	public Stagiaire() {
 		super();
 	}
-	
-	public Stagiaire(Date dtNaissance, NiveauEtude niveauEtude) {
-		super();
-		this.dtNaissance = dtNaissance;
-		this.niveauEtude = niveauEtude;
+
+	public Stagiaire(String email) {
+		super(email);
+	}
+
+	public Stagiaire(Long id, String email) {
+		super(id, email);
 	}
 
 	public Date getDtNaissance() {
@@ -37,6 +36,14 @@ public class Stagiaire extends Personne {
 		this.niveauEtude = niveauEtude;
 	}
 
+	public Filiere getFiliere() {
+		return filiere;
+	}
+
+	public void setFiliere(Filiere filiere) {
+		this.filiere = filiere;
+	}
+
 	public Evaluation getEvaluation() {
 		return evaluation;
 	}
@@ -45,19 +52,10 @@ public class Stagiaire extends Personne {
 		this.evaluation = evaluation;
 	}
 
-	public Filiere getFiliere() {
-		return filiere;
+	@Override
+	public String toString() {
+		return "Stagiaire [dtNaissance=" + dtNaissance + ", niveauEtude=" + niveauEtude + ", evaluation=" + evaluation
+				+ ", " + super.toString() + "]";
 	}
-
-	public void setFiliere(Filiere filiere) {
-		this.filiere = filiere;
-	}
-	
-	
-	
-	
-	
-	
-	
 
 }

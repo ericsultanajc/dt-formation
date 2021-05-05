@@ -1,18 +1,21 @@
 package sopra.formation.model;
 
 public class Adresse {
-	
 	private String rue;
 	private String complement;
 	private String codePostal;
 	private String ville;
-	
-	//Cardinalite
-	private Salle salle;
-	private Personne personne;
-	
+
 	public Adresse() {
 		super();
+	}
+
+	public Adresse(String rue, String complement, String codePostal, String ville) {
+		super();
+		this.rue = rue;
+		this.complement = complement;
+		this.codePostal = codePostal;
+		this.ville = ville;
 	}
 
 	public String getRue() {
@@ -47,30 +50,10 @@ public class Adresse {
 		this.ville = ville;
 	}
 
-
-
-	public Salle getSalle() {
-		return salle;
+	@Override
+	public String toString() {
+		return "Adresse [rue=" + rue + ", complement=" + complement + ", codePostal=" + codePostal + ", ville=" + ville
+				+ "]";
 	}
-
-
-
-	public void setSalle(Salle salle) {
-		this.salle = salle;
-	}
-
-
-
-	public Personne getPersonne() {
-		return personne;
-	}
-
-
-
-	public void setPersonne(Personne personne) {
-		this.personne = personne;
-	}
-	
-	
 
 }
