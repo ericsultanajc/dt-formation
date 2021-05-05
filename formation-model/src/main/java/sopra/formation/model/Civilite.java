@@ -1,9 +1,7 @@
 package sopra.formation.model;
 
 public enum Civilite {
-<<<<<<< HEAD
-	M, MME, MLLE;
-=======
+
 	M("Monsieur"), MME("Madame"), MLLE("Mademoiselle");
 
 	private final String label;
@@ -16,5 +14,4 @@ public enum Civilite {
 		return label;
 	}
 
->>>>>>> main
 }
