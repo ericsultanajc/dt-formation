@@ -30,21 +30,6 @@ public class Evaluation {
 	}
 
 
-	public Evaluation(Integer comportemental, Integer technique, String commentaires) {
-		super();
-		this.comportemental = comportemental;
-		this.technique = technique;
-		this.commentaires = commentaires;
-	}
-
-	public Evaluation(Long id, Integer comportemental, Integer technique, String commentaires) {
-		super();
-		this.id = id;
-		this.comportemental = comportemental;
-		this.technique = technique;
-		this.commentaires = commentaires;
-	}
-
 	public Long getId() {
 		return id;
 	}
@@ -75,12 +60,6 @@ public class Evaluation {
 
 	public void setCommentaires(String commentaires) {
 		this.commentaires = commentaires;
-	}
-
-	@Override
-	public String toString() {
-		return "Evaluation [comportemental=" + comportemental + ", technique=" + technique + ", commentaires="
-				+ commentaires + "]";
 	}
 
 }
