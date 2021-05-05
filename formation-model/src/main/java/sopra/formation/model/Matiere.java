@@ -6,9 +6,9 @@ import java.util.List;
 public class Matiere {
 	private Long id;
 	private String nom;
-	private Integer duree;
-	private List<UE> ues = new ArrayList<UE>();
-	private List<Formateur> formateurs = new ArrayList<Formateur>();
+	private Integer matiere;
+	private List<Formateur> Formateurs = new ArrayList<>();
+	private List<UE> ues = new ArrayList<>();
 
 	public Matiere() {
 		super();
