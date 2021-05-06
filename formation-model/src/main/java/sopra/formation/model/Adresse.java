@@ -4,7 +4,7 @@ public class Adresse {
 	private String rue;
 	private String complement;
 	private String codePostal;
-	private String ville;
+	private String villes;
 
 	public Adresse() {
 		super();
@@ -15,7 +15,7 @@ public class Adresse {
 		this.rue = rue;
 		this.complement = complement;
 		this.codePostal = codePostal;
-		this.ville = ville;
+		this.villes = ville;
 	}
 
 	public String getRue() {
@@ -43,16 +43,16 @@ public class Adresse {
 	}
 
 	public String getVille() {
-		return ville;
+		return villes;
 	}
 
 	public void setVille(String ville) {
-		this.ville = ville;
+		this.villes = ville;
 	}
 
 	@Override
 	public String toString() {
-		return "Adresse [rue=" + rue + ", complement=" + complement + ", codePostal=" + codePostal + ", ville=" + ville
+		return "Adresse [rue=" + rue + ", complement=" + complement + ", codePostal=" + codePostal + ", ville=" + villes
 				+ "]";
 	}
 
