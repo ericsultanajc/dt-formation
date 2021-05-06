@@ -6,8 +6,6 @@ public class Evaluation {
 	private Integer technique;
 	private String commentaires;
 	
-	//Cardinalite
-	private Stagiaire stagiaire;
 	
 	
 
