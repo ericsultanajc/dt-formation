@@ -62,11 +62,15 @@ public class TestWrite {
 		}
 	}
 	
+	// Tom
+	
 	public static void writeWithPrintWrite(String chaine, PrintWriter writer) {
 			    
 				writer.println(chaine);
 			}
 
+	// Eric 
+	
 	private static void writeWithNIO(String chaine) {
 		Path path = Paths.get(EVAL_FILENAME);
 
