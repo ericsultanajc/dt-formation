@@ -1,2 +1,8 @@
 1;15;18;Très bon élément
-1;15;18;Très bon élément
+2;15;18;Très bon élément
+5;15;18;Très bon élément
+10;15;18;Très bon élément
+12;15;18;Très bon élément
+13;15;18;Très bon élément
+14;14;12;Peut mieux faire
+15;18;15;Grosse amélioration
