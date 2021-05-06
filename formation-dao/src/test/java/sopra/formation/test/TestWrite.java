@@ -16,6 +16,7 @@ public class TestWrite {
 
 	public static void main(String[] args) throws IOException {
 		String evaluation1 = "1;15;18;Très bon élément";
+		writeWithNIO(evaluation1);
 		writeWithBuffered(evaluation1);
 		
 		System.out.println("##############################");
@@ -60,7 +61,7 @@ public class TestWrite {
 		}
 	}
 	
-	private static void writeLikeABoss(String chaine) throws IOException {
+	
 
 	private static void writeWithNIO(String chaine) {
 		Path path = Paths.get(EVAL_FILENAME);

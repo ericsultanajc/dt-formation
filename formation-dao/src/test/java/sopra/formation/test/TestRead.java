@@ -17,7 +17,7 @@ public class TestRead {
 
 	public static void main(String[] args) {
 
-		for (String line : readWithBufferedReader()) {
+		for(String line : ReadWithNIO()) {
 			System.out.println(line);
 		}
 
@@ -76,4 +76,19 @@ public class TestRead {
 
 		return lines;
 	}
+	
+    public static List<String> ReadWithNIO() {
+
+        Path path = Paths.get(EVAL_FILENAME);
+        List<String> content = null;
+        try {
+        	content = Files.readAllLines(path);
+            
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+		return content;
+        }
 }
+	
+
