@@ -3,8 +3,12 @@ package sopra.formation.test;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.LineNumberReader;
+import java.io.Reader;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class TestRead {
 
@@ -13,6 +17,10 @@ public class TestRead {
 	public static void main(String[] args) {
 
 		for(String line : readWithBufferedReader()) {
+			System.out.println(line);
+		}
+		
+		for(String line : readwithLineNumberReader()) {
 			System.out.println(line);
 		}
 		
@@ -32,4 +40,11 @@ public class TestRead {
 		
 		return lines;
 	}
+
+	private List<String> readwithLineNumberReader() {
+		
+		
+		
+	}
+
 }
