@@ -25,7 +25,13 @@ public class TestWrite {
 		writer.close();
 		
 		writeWithBuffered(evaluation1);
+		
+		System.out.println("##############################");
+		
 		writeWithFileOutputStream(evaluation1);
+		
+		System.out.println("##############################");
+		
 		writeWithNIO(evaluation1);
 
 	}
