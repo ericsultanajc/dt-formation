@@ -11,7 +11,7 @@ public class TestWrite {
 	public static void main(String[] args) {
 		String evaluation1 = "1;15;18;Très bon élément";
 
-		writeWithBuffered(evaluation1);
+		writeWithPrintWriter(evaluation1);
 		
 	}
 
@@ -24,6 +24,15 @@ public class TestWrite {
 			e.printStackTrace();
 		}
 
+	}
+	
+	private static void writeWithPrintWriter(String chaine) {
+		try (FileWriter writer = new FileWriter(EVAL_FILENAME)) {
+		writer.write(chaine);
+		}
+		 catch (IOException e) {
+				e.printStackTrace();
+			}
 	}
 
 }
