@@ -72,8 +72,8 @@ public class Evaluation {
 
 	@Override
 	public String toString() {
-		return "Evaluation [comportemental=" + comportemental + ", technique=" + technique + ", commentaires="
-				+ commentaires + "]";
+		return "Evaluation [id=" + id + ", comportemental=" + comportemental + ", technique=" + technique
+				+ ", commentaires=" + commentaires + "]";
 	}
 
 }
