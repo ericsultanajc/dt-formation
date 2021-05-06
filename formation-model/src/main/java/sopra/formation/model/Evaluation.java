@@ -5,14 +5,11 @@ public class Evaluation {
 	private Integer comportemental;
 	private Integer technique;
 	private String commentaires;
-	private Stagiaire stagiaire;
 
 	public Evaluation() {
 		super();
 	}
 
-<<<<<<< HEAD
-=======
 	public Evaluation(Integer comportemental, Integer technique, String commentaires) {
 		super();
 		this.comportemental = comportemental;
@@ -28,7 +25,6 @@ public class Evaluation {
 		this.commentaires = commentaires;
 	}
 
->>>>>>> main
 	public Long getId() {
 		return id;
 	}
@@ -61,14 +57,10 @@ public class Evaluation {
 		this.commentaires = commentaires;
 	}
 
-	public Stagiaire getStagiaire() {
-		return stagiaire;
+	@Override
+	public String toString() {
+		return "Evaluation [comportemental=" + comportemental + ", technique=" + technique + ", commentaires="
+				+ commentaires + "]";
 	}
-
-	public void setStagiaire(Stagiaire stagiaire) {
-		this.stagiaire = stagiaire;
-	}
-	
-	
 
 }
