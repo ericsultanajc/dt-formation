@@ -2,7 +2,6 @@ package sopra.formation.test;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import sopra.formation.model.Adresse;
 import sopra.formation.model.Civilite;
