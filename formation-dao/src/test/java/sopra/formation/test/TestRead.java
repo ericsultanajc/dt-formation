@@ -1,7 +1,12 @@
 package sopra.formation.test;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -17,23 +22,15 @@ public class TestRead {
 
 	public static void main(String[] args) {
 
-		for (String line : readWithBufferedReader()) {
-			System.out.println(line);
-		}
-
-		System.out.println("##############################");
-
-		for (String line : readWithScanner()) {
-			System.out.println(line);
-		}
-
-		System.out.println("##############################");
-
-		for (String line : readWithNIO()) {
-			System.out.println(line);
-		}
+		//for(String line : readWithBufferedReader()) {
+		//System.out.println(line);
+		//}
+		
+		readWithScanner()
+				
 	}
-
+	
+	
 	private static List<String> readWithBufferedReader() {
 		List<String> lines = new ArrayList<String>();
 
@@ -76,4 +73,30 @@ public class TestRead {
 
 		return lines;
 	}
+	
+	
+	private static void readWithScanner() throws IOException {
+		
+		FileInputStream inputStream = new FileInputStream(EVAL_FILENAME);	
+		try {
+		Scanner sc = new Scanner(inputStream);
+		//String line = null;
+	  	    
+	    while (sc.hasNextLine()) {
+	   	   
+	    String i = sc.nextLine();
+	    System.out.println(i);
+	    }	    	    
+	    catch (FileNotFoundException e) {
+	    	e.printStackTrace();
+	    }
+					
+	}
+
+
+	private static void While(boolean b) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 }
