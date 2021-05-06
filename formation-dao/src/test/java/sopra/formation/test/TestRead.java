@@ -41,7 +41,7 @@ public class TestRead {
 	
 	private static List<String> readWithNIO() {
 	    Path path = Paths.get(EVAL_FILENAME);
-	    List<String> read = null;
+	    List<String> read = new ArrayList<String>();
 	    try {
 			read = Files.readAllLines(path);
 		} catch (IOException e) {
