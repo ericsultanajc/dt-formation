@@ -1,9 +1,16 @@
 package sopra.formation.test;
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -43,6 +50,14 @@ public class TestRead {
 				lines.add(line);
 			}
 		} catch (IOException e) {
+//		for(String line : readWithBufferedReader()) {
+//			System.out.println(line);
+//		}
+		
+		try {
+			whenReadLargeFileJava7_thenCorrect();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -76,4 +91,37 @@ public class TestRead {
 
 		return lines;
 	}
+
+//	private static List<String> readWithBufferedReader() {
+//		List<String> lines = new ArrayList<String>();
+//		
+//		try (BufferedReader br = new BufferedReader(new FileReader(EVAL_FILENAME))) {
+//			String line = null;
+//			while ((line = br.readLine()) != null) {
+//				lines.add(line);
+//			}
+//		} catch(IOException e) {
+//			e.printStackTrace();
+//		}
+//		
+//		return lines;
+//	}
+	
+	
+	public static void whenReadLargeFileJava7_thenCorrect() throws IOException {
+			    
+
+			    Path path = Paths.get(EVAL_FILENAME);
+
+			    BufferedReader reader = Files.newBufferedReader(path);
+			    String line = reader.readLine();
+			    do {
+			    	System.out.println(line);
+			    } while ((line = reader.readLine())!=null);
+			    		
+			    }
+			    
+			
+	
+	
 }
