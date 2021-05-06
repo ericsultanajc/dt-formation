@@ -1,6 +1,7 @@
 package sopra.formation.test;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -12,6 +13,7 @@ public class TestWrite {
 		String evaluation1 = "1;15;18;Très bon élément";
 
 		writeWithBuffered(evaluation1);
+		writeTristan(evaluation1);
 		
 	}
 
@@ -26,4 +28,12 @@ public class TestWrite {
 
 	}
 
+	private static void writeTristan(String chaine) {
+		try (FileWriter writer = new FileWriter(new File(EVAL_FILENAME), true)) {
+			writer.write(chaine + "\n");
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }
