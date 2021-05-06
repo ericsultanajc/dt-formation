@@ -1,5 +1,8 @@
 package sopra.formation.test;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -10,13 +13,22 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+
 
 public class TestRead {
 
 	private static final String EVAL_FILENAME = "evaluations.txt";
 	
 	public static void main(String[] args) {
-		File file = new File("evaluations.txt");
+		
+		try {
+			whenReadWithScanner_thenCorrect();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		/*File file = new File("evaluations.txt");
 		InputStream inputStream = null;
 		try {
 			try {
@@ -39,7 +51,7 @@ public class TestRead {
 					e.printStackTrace();
 				}
 			}
-		}
+		}*/
 
 	}
 
@@ -68,4 +80,16 @@ public class TestRead {
 		}
 		return resultStringBuilder.toString();
 	}
+	
+	public static void whenReadWithScanner_thenCorrect()
+			  throws IOException {
+			    String file = "evaluations.txt";
+			    Scanner scanner = new Scanner(new File(file));
+			    scanner.useDelimiter(" ");
+
+			    assertTrue(scanner.hasNext());
+
+			    scanner.close();
+			    
+			}
 }
