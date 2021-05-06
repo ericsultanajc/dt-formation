@@ -29,7 +29,7 @@ public class TestWrite {
 	}
 	
 	private static void writeWithPrintWriter(String chaine) {
-		try (FileWriter fileWriter = new FileWriter(EVAL_FILENAME)){
+		try (FileWriter fileWriter = new FileWriter(EVAL_FILENAME, true)){
 			PrintWriter printWriter = new PrintWriter(fileWriter);
 		    printWriter.print(chaine);
 		} catch (IOException e) {
