@@ -53,35 +53,49 @@ public class EvaluationDaoCsv implements IEvaluationDao {
 		write(evaluations);
 	}
 
-	public void update(Evaluation obj) {
+	public void update(Evaluation obj) { // map?
 		List<Evaluation> evaluations = read();
 
-		int index = 0;
-		boolean find = false;
+		boolean update = false;
 
-		for (Evaluation eval : evaluations) {
-			if (eval.getId() == obj.getId()) {
-				find = true;
+		//changer les valeurs au lieu de changer l'objet
+		for (Evaluation evaluation : evaluations) {
+			if (obj != null && evaluation.getId() == obj.getId()) {
+				evaluation.update(obj);
 				break;
 			}
-
-			index++;
 		}
-		
-		if (find) {
-			evaluations.set(index, obj);
 
+		if (update) {
 			write(evaluations);
 		}
+		
+//		int index = 0;
+//		boolean find = false;
+
+//		for (Evaluation eval : evaluations) {
+//			if (eval.getId() == obj.getId()) {
+//				find = true;
+//				break;
+//			}
+//
+//			index++;
+//		}
+//		
+//		if (find) {
+//			evaluations.set(index, obj);
+//
+//			write(evaluations);
+//		}
 	}
 
 	public void delete(Evaluation obj) {
 		deleteById(obj.getId());
 	}
-	
+
 	public void deleteById(Long id) {
 		List<Evaluation> evaluations = read();
-		
+
 		int index = 0;
 		boolean find = false;
 
@@ -93,7 +107,7 @@ public class EvaluationDaoCsv implements IEvaluationDao {
 
 			index++;
 		}
-		
+
 		if (find) {
 			evaluations.remove(index);
 
@@ -164,7 +178,7 @@ public class EvaluationDaoCsv implements IEvaluationDao {
 				evaluations.add(evaluation);
 			}
 		}
-		
+
 		return evaluations;
 	}
 }

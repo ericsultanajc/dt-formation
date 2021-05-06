@@ -56,6 +56,16 @@ public class Evaluation {
 	public void setCommentaires(String commentaires) {
 		this.commentaires = commentaires;
 	}
+	
+	public boolean update(Evaluation evaluation) {
+		if (evaluation == null || this.id != evaluation.getId()) {
+			return false;
+		}
+		setTechnique(evaluation.technique);
+		setComportemental(evaluation.comportemental);
+		setCommentaires(evaluation.commentaires);
+		return true;
+	}
 
 	@Override
 	public String toString() {
