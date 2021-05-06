@@ -18,7 +18,13 @@ public class TestWrite {
 		String evaluation1 = "1;15;18;Très bon élément";
 
 		writeWithBuffered(evaluation1);
+		
+		System.out.println("##############################");
+		
 		writeWithFileOutputStream(evaluation1);
+		
+		System.out.println("##############################");
+		
 		writeWithNIO(evaluation1);
 
 	}
