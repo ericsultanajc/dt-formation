@@ -21,15 +21,9 @@ public class TestWrite {
 		writeWithBuffered(evaluation1);
 		writeWithFileOutputStream(evaluation1);
 		writeWithNIO(evaluation1);
-
-		//writeWithBuffered(evaluation1);
-		//writeWithPrintWriter(evaluation1);
 		
-		try {
-			writeWithFileOutputStream(evaluation1);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		writeWithPrintWriter(evaluation1);
+		
 		
 	}
 
@@ -65,21 +59,21 @@ public class TestWrite {
 		}
 	}
 	
-	private static void writeWithPrintWriter(String chaine) {
-		try (FileWriter writer = new FileWriter(EVAL_FILENAME, true)) {
-			PrintWriter printWriter = new PrintWriter(writer);
-			printWriter.print(chaine+"\n");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	private static void writeWithFileOutputStream(String chaine) throws IOException {
+	private static void writeWithFileOutputStream2(String chaine) throws IOException {
 		try (FileOutputStream writer = new FileOutputStream(EVAL_FILENAME, true)) {
 			chaine += "\n";
 			byte[] strToBytes = (chaine+"\n").getBytes();
 			writer.write(strToBytes);
 		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private static void writeWithPrintWriter(String chaine) {
+		try (FileWriter writer = new FileWriter(EVAL_FILENAME, true)) {
+			PrintWriter printWriter = new PrintWriter(writer);
+			printWriter.print(chaine+"\n");
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}

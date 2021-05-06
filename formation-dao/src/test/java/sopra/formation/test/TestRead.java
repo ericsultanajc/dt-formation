@@ -1,6 +1,9 @@
 package sopra.formation.test;
 
 import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,6 +17,14 @@ public class TestRead {
 
 		for(String line : readWithBufferedReader()) {
 			System.out.println(line);
+		}
+		
+		System.out.println("----------------------------");
+		
+		try {
+			System.out.println(readWithDataInputStream());
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		
 	}
@@ -31,5 +42,22 @@ public class TestRead {
 		}
 		
 		return lines;
+	}
+	
+	private static String readWithDataInputStream() throws IOException{
+		String result = null;
+		
+		try (DataInputStream reader = new DataInputStream(new FileInputStream(EVAL_FILENAME))){
+			int toRead = reader.available();
+			if(toRead>0) {
+				byte[] bytes = new byte[toRead];
+				reader.read(bytes);
+				result = new String(bytes);
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		return result;
+		
 	}
 }
