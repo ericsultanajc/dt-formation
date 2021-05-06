@@ -31,6 +31,14 @@ public class TestWrite {
 	    outputStream.write(strToBytes);
 	    outputStream.write('\n');
 		outputStream.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
+	}
+		
+		
 	private static void writeWithBuffered(String chaine) {
 		try (BufferedWriter writer = new BufferedWriter(new FileWriter(EVAL_FILENAME, true))) {
 			writer.write(chaine);
@@ -62,7 +70,7 @@ public class TestWrite {
 			}
 		}
 		}
-	}
+	
 
 	private static void writeWithNIO(String chaine) {
 		Path path = Paths.get(EVAL_FILENAME);
