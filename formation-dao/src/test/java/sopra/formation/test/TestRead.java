@@ -48,21 +48,12 @@ public class TestRead {
 			String line = null;
 			while ((line = br.readLine()) != null) {
 				lines.add(line);
-			}
+			} 
 		} catch (IOException e) {
-//		for(String line : readWithBufferedReader()) {
-//			System.out.println(line);
-//		}
-		
-		try {
-			whenReadLargeFileJava7_thenCorrect();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
-
 		return lines;
-	}
+		}
+	
 
 	private static List<String> readWithScanner() {
 		List<String> lines = new ArrayList<String>();
