@@ -3,15 +3,20 @@ package sopra.formation.test;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 public class TestWrite {
 
 	private static final String EVAL_FILENAME = "evaluations.txt";
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		String evaluation1 = "1;15;18;Très bon élément";
+		FileWriter fileWriter = new FileWriter("evaluations.txt", true);
+		PrintWriter writer = new PrintWriter(fileWriter);
 
-		writeWithBuffered(evaluation1);
+		//writeWithBuffered(evaluation1);		
+		writeWithPrintWrite(evaluation1, writer);
+		writer.close();
 		
 	}
 
@@ -25,5 +30,10 @@ public class TestWrite {
 		}
 
 	}
+	
+	public static void writeWithPrintWrite(String chaine, PrintWriter writer) {
+			    
+				writer.println(chaine);
+			}
 
 }
