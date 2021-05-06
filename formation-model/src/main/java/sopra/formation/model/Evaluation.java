@@ -14,7 +14,7 @@ public class Evaluation {
 		super();
 		this.comportemental = comportemental;
 		this.technique = technique;
-		this.commentaires = commentaires ;
+		this.commentaires = commentaires;
 	}
 
 	public Evaluation(Long id, Integer comportemental, Integer technique, String commentaires) {
@@ -59,8 +59,8 @@ public class Evaluation {
 
 	@Override
 	public String toString() {
-		return "Evaluation [comportemental=" + comportemental + ", technique=" + technique + ", commentaires="
-				+ commentaires + "]";
+		return "Evaluation [id=" + id + ", comportemental=" + comportemental + ", technique=" + technique
+				+ ", commentaires=" + commentaires + "]";
 	}
 
 }
