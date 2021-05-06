@@ -3,6 +3,7 @@ package sopra.formation.test;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 public class TestWrite {
 
@@ -11,7 +12,8 @@ public class TestWrite {
 	public static void main(String[] args) {
 		String evaluation1 = "1;15;18;Très bon élément";
 
-		writeWithBuffered(evaluation1);
+//		writeWithBuffered(evaluation1);
+		writeWithPrintWriter(evaluation1);
 		
 	}
 
@@ -24,6 +26,16 @@ public class TestWrite {
 			e.printStackTrace();
 		}
 
+	}
+	
+	private static void writeWithPrintWriter(String chaine) {
+		try (FileWriter fileWriter = new FileWriter(EVAL_FILENAME)){
+			PrintWriter printWriter = new PrintWriter(fileWriter);
+		    printWriter.print(chaine);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	    
 	}
 
 }
