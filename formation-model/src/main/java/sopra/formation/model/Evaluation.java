@@ -43,7 +43,7 @@ public class Evaluation {
 		super();
 		this.comportemental = comportemental;
 		this.technique = technique;
-		this.commentaires = commentaires;
+		this.commentaires = commentaires ;
 	}
 
 	public Evaluation(Long id, Integer comportemental, Integer technique, String commentaires) {
