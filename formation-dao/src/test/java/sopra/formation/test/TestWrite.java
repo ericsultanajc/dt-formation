@@ -20,7 +20,13 @@ public class TestWrite {
 		solennwrite(evaluation1);
 		
 		writeWithBuffered(evaluation1);
+		
+		System.out.println("##############################");
+		
 		writeWithFileOutputStream(evaluation1);
+		
+		System.out.println("##############################");
+		
 		writeWithNIO(evaluation1);
 
 	}
