@@ -20,8 +20,13 @@ public class TestWrite {
 		String evaluation2 = "2;20;10;Peut mieux faire";
 
 		writeWithBuffered(evaluation1);
-		writeWithPrintWriter(evaluation2);
+		
+		System.out.println("##############################");
+		
 		writeWithFileOutputStream(evaluation1);
+		
+		System.out.println("##############################");
+		
 		writeWithNIO(evaluation1);
 
 	}
