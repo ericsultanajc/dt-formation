@@ -5,10 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
+import java.io.PrintWriter;
 
 public class TestWrite {
 
@@ -16,11 +13,14 @@ public class TestWrite {
 
 	public static void main(String[] args) {
 		String evaluation1 = "1;15;18;Très bon élément";
+		String evaluation2 = "1;15;18;Très bon élément 2 !";
 
 		writeWithBuffered(evaluation1);
 		writeWithFileOutputStream(evaluation1);
 		writeWithNIO(evaluation1);
 
+		writeWithPrintWriter (evaluation2);
+		
 	}
 
 	private static void writeWithBuffered(String chaine) {
@@ -54,6 +54,22 @@ public class TestWrite {
 			}
 		}
 	}
+	
+	
+	private static void writeWithPrintWriter (String chaine ) {
+		
+		try (FileWriter writer = new FileWriter(EVAL_FILENAME, true)){
+			
+			PrintWriter printWriter = new PrintWriter(writer);
+			printWriter.print(chaine);
+		    
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	    
+	    
+	}
+	
 
 	private static void writeWithNIO(String chaine) {
 		Path path = Paths.get(EVAL_FILENAME);
