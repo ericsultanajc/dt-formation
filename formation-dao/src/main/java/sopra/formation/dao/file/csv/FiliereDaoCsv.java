@@ -7,6 +7,13 @@ import sopra.formation.model.Filiere;
 
 public class FiliereDaoCsv implements IFiliereDao {
 
+	private final String fileName;
+	private final String separator = ";";
+
+	public FiliereDaoCsv(String fileName) {
+		super();
+		this.fileName = fileName;
+	}
 	@Override
 	public List<Filiere> findAll() {
 		// TODO Auto-generated method stub

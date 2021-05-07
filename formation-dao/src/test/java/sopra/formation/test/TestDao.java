@@ -14,6 +14,7 @@ import sopra.formation.dao.file.csv.StagiaireDaoCsv;
 import sopra.formation.model.Adresse;
 import sopra.formation.model.Civilite;
 import sopra.formation.model.Evaluation;
+import sopra.formation.model.Filiere;
 import sopra.formation.model.NiveauEtude;
 import sopra.formation.model.Personne;
 import sopra.formation.model.Stagiaire;
@@ -77,7 +78,12 @@ public class TestDao {
 		((Stagiaire) manon).setDtNaissance(sdf.parse("01/01/1996"));
 		((Stagiaire) manon).setNiveauEtude(NiveauEtude.BAC_5);
 		
+		Filiere filiereManon = new Filiere("laFiliereDeManon");
+		manon.setFiliere(filiereManon);
+		
 		stagiaireDao.create(manon);
+		
+		
 	}
 
 }
