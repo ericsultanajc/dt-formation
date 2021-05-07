@@ -1,8 +1,21 @@
 package sopra.formation.dao.file.csv;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 import sopra.formation.dao.IMatiereDao;
+import sopra.formation.model.Matiere;
+import sopra.formation.model.Matiere;
+import sopra.formation.model.Matiere;
+import sopra.formation.model.Matiere;
+import sopra.formation.model.Matiere;
+import sopra.formation.model.Formateur;
+import sopra.formation.model.Matiere;
+import sopra.formation.model.UE;
 import sopra.formation.model.Matiere;
 
 public class MatiereDaoCsv implements IMatiereDao {
@@ -15,24 +28,135 @@ public class MatiereDaoCsv implements IMatiereDao {
 	}
 
 	public List<Matiere> findAll() {
-		return null;
+		return read();
 	}
 
 	public Matiere findById(Long id) {
-		
+
+		List<Matiere> matieres = read();
+
+		for (Matiere matiere : matieres) {
+			if (matiere.getId() == id) {
+				return matiere;
+			}
+		}
+
 		return null;
 	}
 
 	public void create(Matiere obj) {
+		List<Matiere> matieres = read();
+
+		Long maxId = 0L;
+		for (Matiere mat : matieres) {
+			if (maxId < mat.getId()) {
+				maxId = mat.getId();
+			}
+		}
+
+		obj.setId(++maxId);
+
+		matieres.add(obj);
+
+		write(matieres);
 	}
 
 	public void update(Matiere obj) {
+		List<Matiere> matieres = read();
+
+		int index = 0;
+		boolean find = false;
+
+		for (Matiere mat : matieres) { 
+			if (mat.getId() == obj.getId()) {
+				find = true;
+				break;
+			}
+
+			index++;
+		}
+		
+		if (find) {
+			matieres.set(index, obj);
+
+			write(matieres);
+		}
 	}
 
 	public void delete(Matiere obj) {
 		deleteById(obj.getId());
 	}
-	
+
 	public void deleteById(Long id) {
+		List<Matiere> matieres = read();
+		
+		int index = 0;
+		boolean find = false;
+
+		for (Matiere mat : matieres) {
+			if (mat.getId() == id) {
+				find = true;
+				break;
+			}
+
+			index++;
+		}
+		
+		if (find) {
+			matieres.remove(index);
+
+			write(matieres);
+		}
+	}
+
+	private List<Matiere> read() {
+		List<Matiere> matieres = new ArrayList<Matiere>();
+
+		Path path = Paths.get(this.fileName);
+
+		try {
+			List<String> lines = Files.readAllLines(path);
+
+			for (String line : lines) {
+				String[] items = line.split(this.separator);
+
+				Long id = Long.valueOf(items[0]);
+				String nom = items[1];
+				Integer duree = Integer.valueOf(items[2]);
+
+				Matiere matiere = new Matiere(id, nom, duree);
+
+				matieres.add(matiere);
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return matieres;
+	}
+	
+	private void write(List<Matiere> matieres) {
+		List<String> lines = new ArrayList<String>();
+
+		for (Matiere evaluation : matieres) {
+			StringBuilder line = new StringBuilder();
+			line.append(evaluation.getId());
+			line.append(this.separator);
+			line.append(evaluation.getNom());
+			line.append(this.separator);
+			line.append(evaluation.getDuree());
+
+			lines.add(line.toString());
+		}
+
+		Path path = Paths.get(this.fileName);
+
+		try {
+			Files.write(path, lines);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 }
