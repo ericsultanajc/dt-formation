@@ -173,4 +173,28 @@ public class MatiereDaoCsv implements IMatiereDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	private void write(List<Matiere> matieres) {
+		List<String> lines = new ArrayList<String>();
+
+		for (Matiere matiere : matieres) {
+			StringBuilder line = new StringBuilder();
+			line.append(matiere.getId());
+			line.append(this.separator);
+			line.append(matiere.getNom());
+			line.append(this.separator);
+			line.append(matiere.getDuree());
+
+			lines.add(line.toString());
+		}
+
+		Path path = Paths.get(this.fileName);
+
+		try {
+			Files.write(path, lines, StandardCharsets.UTF_8, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.CREATE);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
 }
