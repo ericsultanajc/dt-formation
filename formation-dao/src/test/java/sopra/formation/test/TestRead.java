@@ -1,7 +1,9 @@
 package sopra.formation.test;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -77,30 +79,5 @@ public class TestRead {
 
 		return lines;
 	}
-	
-	
-
-	private static void readWithScanner() throws FileNotFoundException {
-		
-		    File file = new File(EVAL_FILENAME);
-
-		    try {
-		    	
-		        Scanner sc = new Scanner(file);
-
-		        while (sc.hasNextLine()) {
-		        	
-		            String i = sc.nextLine();
-		            System.out.println(i);
-		            
-		        }
-		        
-		        sc.close();
-		    } 
-		    
-		    catch (FileNotFoundException e) {
-		        e.printStackTrace();
-		    }
-		 }
 		
 }
