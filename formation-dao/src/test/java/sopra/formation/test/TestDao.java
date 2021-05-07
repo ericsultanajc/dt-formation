@@ -25,7 +25,7 @@ public class TestDao {
 	public static void main(String[] args) {
 		IEvaluationDao evaluationDao = new EvaluationDaoCsv("evaluations.txt");
 		IMatiereDao matiereDao = new MatiereDaoCsv("matieres.txt");
-		IStagiaire stagiaireDao = new StagiaireDaoCsv("stagiaires.txt");
+		IStagiaireDao stagiaireDao = new StagiaireDaoCsv("stagiaires.txt");
 		
 		
 		List<Evaluation> evaluations = evaluationDao.findAll();
