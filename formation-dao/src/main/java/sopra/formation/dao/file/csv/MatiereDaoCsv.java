@@ -1,9 +1,11 @@
 package sopra.formation.dao.file.csv;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +34,6 @@ public class MatiereDaoCsv implements IMatiereDao {
 	}
 
 	public Matiere findById(Long id) {
-
 		List<Matiere> matieres = read();
 
 		for (Matiere matiere : matieres) {
@@ -48,9 +49,9 @@ public class MatiereDaoCsv implements IMatiereDao {
 		List<Matiere> matieres = read();
 
 		Long maxId = 0L;
-		for (Matiere mat : matieres) {
-			if (maxId < mat.getId()) {
-				maxId = mat.getId();
+		for (Matiere matiere : matieres) {
+			if (maxId < matiere.getId()) {
+				maxId = matiere.getId();
 			}
 		}
 
@@ -67,15 +68,15 @@ public class MatiereDaoCsv implements IMatiereDao {
 		int index = 0;
 		boolean find = false;
 
-		for (Matiere mat : matieres) { 
-			if (mat.getId() == obj.getId()) {
+		for (Matiere matiere : matieres) {
+			if (matiere.getId() == obj.getId()) {
 				find = true;
 				break;
 			}
 
 			index++;
 		}
-		
+
 		if (find) {
 			matieres.set(index, obj);
 
@@ -89,19 +90,19 @@ public class MatiereDaoCsv implements IMatiereDao {
 
 	public void deleteById(Long id) {
 		List<Matiere> matieres = read();
-		
+
 		int index = 0;
 		boolean find = false;
 
-		for (Matiere mat : matieres) {
-			if (mat.getId() == id) {
+		for (Matiere matiere : matieres) {
+			if (matiere.getId() == id) {
 				find = true;
 				break;
 			}
 
 			index++;
 		}
-		
+
 		if (find) {
 			matieres.remove(index);
 
@@ -114,38 +115,40 @@ public class MatiereDaoCsv implements IMatiereDao {
 
 		Path path = Paths.get(this.fileName);
 
-		try {
-			List<String> lines = Files.readAllLines(path);
+		if (path.toFile().exists()) {
+			try {
+				List<String> lines = Files.readAllLines(path);
 
-			for (String line : lines) {
-				String[] items = line.split(this.separator);
+				for (String line : lines) {
+					String[] items = line.split(this.separator);
 
-				Long id = Long.valueOf(items[0]);
-				String nom = items[1];
-				Integer duree = Integer.valueOf(items[2]);
+					Long id = Long.valueOf(items[0]);
+					String nom = items[1];
+					Integer duree = Integer.valueOf(items[2]);
 
-				Matiere matiere = new Matiere(id, nom, duree);
+					Matiere matiere = new Matiere(id, nom, duree);
 
-				matieres.add(matiere);
+					matieres.add(matiere);
+				}
+
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
 
 		return matieres;
 	}
-	
+
 	private void write(List<Matiere> matieres) {
 		List<String> lines = new ArrayList<String>();
 
-		for (Matiere evaluation : matieres) {
+		for (Matiere matiere : matieres) {
 			StringBuilder line = new StringBuilder();
-			line.append(evaluation.getId());
+			line.append(matiere.getId());
 			line.append(this.separator);
-			line.append(evaluation.getNom());
+			line.append(matiere.getNom());
 			line.append(this.separator);
-			line.append(evaluation.getDuree());
+			line.append(matiere.getDuree());
 
 			lines.add(line.toString());
 		}
@@ -153,7 +156,7 @@ public class MatiereDaoCsv implements IMatiereDao {
 		Path path = Paths.get(this.fileName);
 
 		try {
-			Files.write(path, lines);
+			Files.write(path, lines, StandardCharsets.UTF_8, StandardOpenOption.TRUNCATE_EXISTING);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
