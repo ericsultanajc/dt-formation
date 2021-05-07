@@ -13,7 +13,8 @@ import java.nio.file.StandardOpenOption;
 
 public class TestWrite {
 
-	private static final String EVAL_FILENAME = "evaluations.txt";
+	//private static final String EVAL_FILENAME = "evaluations.txt";
+	private static final String EVAL_FILENAME = "stagiaires.txt";
 
 	public static void main(String[] args) throws IOException {
 		String evaluation1 = "1;15;18;Très bon élément";

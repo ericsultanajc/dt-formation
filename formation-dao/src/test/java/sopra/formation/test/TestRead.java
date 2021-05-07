@@ -15,8 +15,9 @@ import java.util.Scanner;
 
 public class TestRead {
 
-	private static final String EVAL_FILENAME = "evaluations.txt";
-
+	//private static final String EVAL_FILENAME = "evaluations.txt";
+	private static final String EVAL_FILENAME = "stagiaires.txt";
+	
 	public static void main(String[] args) throws FileNotFoundException {
 
 		for (String line : readWithBufferedReader()) {

@@ -7,41 +7,39 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import sopra.formation.dao.IMatiereDao;
-import sopra.formation.model.Matiere;
+import sopra.formation.dao.ISalleDao;
+import sopra.formation.model.Salle;
 
-public class MatiereDaoCsv implements IMatiereDao {
+public class SalleDaoCsv implements ISalleDao {
 	private final String fileName;
 	private final String separator = ";";
 
-	public MatiereDaoCsv(String fileName) {
+	public SalleDaoCsv(String fileName) {
 		super();
 		this.fileName = fileName;
 	}
 
-	public List<Matiere> findAll() {
+	public List<Salle> findAll() {
 		return read();
 	}
 
-	public Matiere findById(Long id) {
-		
-		List<Matiere> matieres = read();
+	public Salle findById(Long id) {
+		List<Salle> salles = read();
 
-		for (Matiere matiere : matieres) {
-			if (matiere.getId() == id) {
-				return matiere;
+		for (Salle salle : salles) {
+			if (salle.getId() == id) {
+				return salle;
 			}
 		}
 
 		return null;
 	}
 
-	public void create(Matiere obj) {
-		
-		List<Matiere> matieres = read();
+	public void create(Salle obj) {
+		List<Salle> salles = read();
 
 		Long maxId = 0L;
-		for (Matiere eval : matieres) {
+		for (Salle eval : salles) {
 			if (maxId < eval.getId()) {
 				maxId = eval.getId();
 			}
@@ -49,19 +47,18 @@ public class MatiereDaoCsv implements IMatiereDao {
 
 		obj.setId(++maxId);
 
-		matieres.add(obj);
+		salles.add(obj);
 
-		write(matieres);
+		write(salles);
 	}
 
-	public void update(Matiere obj) {
-		
-		List<Matiere> matieres = read();
+	public void update(Salle obj) {
+		List<Salle> salles = read();
 
 		int index = 0;
 		boolean find = false;
 
-		for (Matiere eval : matieres) {
+		for (Salle eval : salles) {
 			if (eval.getId() == obj.getId()) {
 				find = true;
 				break;
@@ -71,24 +68,23 @@ public class MatiereDaoCsv implements IMatiereDao {
 		}
 		
 		if (find) {
-			matieres.set(index, obj);
+			salles.set(index, obj);
 
-			write(matieres);
+			write(salles);
 		}
 	}
 
-	public void delete(Matiere obj) {
+	public void delete(Salle obj) {
 		deleteById(obj.getId());
 	}
 	
 	public void deleteById(Long id) {
-		
-		List<Matiere> matieres = read();
+		List<Salle> salles = read();
 		
 		int index = 0;
 		boolean find = false;
 
-		for (Matiere eval : matieres) {
+		for (Salle eval : salles) {
 			if (eval.getId() == id) {
 				find = true;
 				break;
@@ -98,15 +94,15 @@ public class MatiereDaoCsv implements IMatiereDao {
 		}
 		
 		if (find) {
-			matieres.remove(index);
+			salles.remove(index);
 
-			write(matieres);
+			write(salles);
 		}
 	}
 	
-	private List<Matiere> read() {
+	private List<Salle> read() {
 		
-		List<Matiere> matieres = new ArrayList<Matiere>();
+		List<Salle> salles = new ArrayList<Salle>();
 
 		Path path = Paths.get(this.fileName);
 
@@ -118,31 +114,33 @@ public class MatiereDaoCsv implements IMatiereDao {
 
 				Long id = Long.valueOf(items[0]);
 				String nom = items[1];
-				Integer duree = Integer.valueOf(items[2]);
+				Integer capacite = Integer.valueOf(items[2]);
+				Boolean videoProjecteur = Boolean.valueOf(items[3]);
 
-				Matiere matiere = new Matiere(id, nom, duree);
+				Salle salle = new Salle(id, nom, capacite, videoProjecteur);
 
-				matieres.add(matiere);
+				salles.add(salle);
 			}
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
-		return matieres;
+		return salles;
 	}
 	
-	private void write(List<Matiere> matieres) {
-		
+	private void write(List<Salle> salles) {
 		List<String> lines = new ArrayList<String>();
 
-		for (Matiere matiere : matieres) {
+		for (Salle salle : salles) {
 			StringBuilder line = new StringBuilder();
-			line.append(matiere.getId());
+			line.append(salle.getId());
 			line.append(this.separator);
-			line.append(matiere.getNom());
+			line.append(salle.getNom());
 			line.append(this.separator);
-			line.append(matiere.getDuree());
+			line.append(salle.getCapacite());
+			line.append(this.separator);
+			line.append(salle.getVideoProjecteur());
 
 			lines.add(line.toString());
 		}
