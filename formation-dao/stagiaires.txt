@@ -1,3 +1,2 @@
-1;MLLE;DUMONT;Léa;lea.dumont@gmail.com;25/12/1995;BAC_8;5 avenue villemejan;Résidence Diderot;33600;PESSAC;
-2;MLLE;DUMONT;Léa;lea.dumont@gmail.com;25/12/1995;BAC_8;5 avenue villemejan;Résidence Diderot;33600;PESSAC;
-3;MME;SERAIN;Manon;serain.manon@yahoo.com;01/01/1996;BAC_5;;;;;
+1;MLLE;Milecamps;Camille;c.milecamps@net;0602;05/04/1996;BAC_5
+2;M;Pottier;Victor;v.pottier@fr;0608;25/04/1995;BAC_3

@@ -77,7 +77,7 @@ public class TestRead {
 		return lines;
 	}
 	
-	private static List<String> readWithScanner(){
+	private static List<String> readWithScanner2(){
 		List<String> lines = new ArrayList<String>();
 		try
 	    {
