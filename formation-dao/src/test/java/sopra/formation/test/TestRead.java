@@ -26,7 +26,7 @@ public class TestRead {
 		//System.out.println(line);
 		//}
 		
-		readWithScanner()
+		readWithScanner();
 				
 	}
 	
@@ -75,25 +75,6 @@ public class TestRead {
 	}
 	
 	
-	private static void readWithScanner() throws IOException {
-		
-		FileInputStream inputStream = new FileInputStream(EVAL_FILENAME);	
-		try {
-		Scanner sc = new Scanner(inputStream);
-		//String line = null;
-	  	    
-	    while (sc.hasNextLine()) {
-	   	   
-	    String i = sc.nextLine();
-	    System.out.println(i);
-	    }	    	    
-	    catch (FileNotFoundException e) {
-	    	e.printStackTrace();
-	    }
-					
-	}
-
-
 	private static void While(boolean b) {
 		// TODO Auto-generated method stub
 		

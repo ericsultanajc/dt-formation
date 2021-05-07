@@ -23,11 +23,23 @@ public class Filiere {
 		super();
 		this.promotion = promotion;
 	}
-
+	
 	public Filiere(Long id, String promotion) {
 		super();
 		this.id = id;
 		this.promotion = promotion;
+	}
+	
+	
+
+	public Filiere(String intitule, String promotion, Date dtDebut, Integer duree, Dispositif dispositif) {
+		super();
+		
+		this.intitule = intitule;
+		this.promotion = promotion;
+		this.dtDebut = dtDebut;
+		this.duree = duree;
+		this.dispositif = dispositif;
 	}
 
 	public Long getId() {

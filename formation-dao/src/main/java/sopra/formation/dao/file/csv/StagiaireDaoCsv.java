@@ -155,7 +155,7 @@ public class StagiaireDaoCsv implements IStagiaireDao {
 					String codePostal = items[9];
 					String ville = items[10];
 					Long idEvaluation = !items[11].isBlank() ? Long.valueOf(items[11]) : null;
-					Long idFiliere = !items[12].isBlank() ? Long.valueOf(items[12]) : null;
+					Long idFiliere = !items [12].isBlank() ? Long.valueOf(items[12]) : null;
 
 					Stagiaire stagiaire = new Stagiaire(id, email);
 					stagiaire.setCivilite(civilite);
@@ -173,7 +173,7 @@ public class StagiaireDaoCsv implements IStagiaireDao {
 						stagiaire.setEvaluation(evaluation);
 					}
 					
-					if(idFiliere != null) {
+					if (idFiliere != null) {
 						Filiere filiere = Application.getInstance().getFiliereDao().findById(idFiliere);
 						stagiaire.setFiliere(filiere);
 					}
@@ -216,14 +216,12 @@ public class StagiaireDaoCsv implements IStagiaireDao {
 			}
 			if (stagiaire.getEvaluation() != null && stagiaire.getEvaluation().getId() != null) {
 				sb.append(stagiaire.getEvaluation().getId()).append(this.separator);
-			} else {
+			}
+			else {
 				sb.append(this.separator);
 			}
 			
-			if(stagiaire.getFiliere() != null) {
-				if(stagiaire.getFiliere().getId() == null) {
-					throw new RuntimeException("La filière na pas été crée");
-				}
+			if (stagiaire.getFiliere() != null && stagiaire.getFiliere().getId() != null) {
 				sb.append(stagiaire.getFiliere().getId());
 			}
 

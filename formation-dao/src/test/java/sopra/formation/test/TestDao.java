@@ -27,23 +27,7 @@ public class TestDao {
 		IMatiereDao matiereDao = Application.getInstance().getMatiereDao();
 		IFiliereDao filiereDao = Application.getInstance().getFiliereDao();
 
-		List <Stagiaire> stagiaires = stagiaireDao.findAll();
-		Stagiaire stagiaire = new Stagiaire(5,"MME", "Perey", "Flo", "xxx.ffg@gmail.com", "0557930018", , 10/10/1996, "BAC3");
-		stagiaireDao.create(stagiaire);
-		stagiaireDao.update(stagiaire);
-		stagiaireDao.delete(stagiaire);
-		
-		List <Matiere> matieres = matiereDao.findAll();
-		
-		for (Matiere matiere : matieres) {
-			System.out.println(matiere);
-		}
-		
-		Matiere matiere = new Matiere("geo",20);
-		matiereDao.create(matiere);
-		matiereDao.update(matiere);
-		matiereDao.delete(matiere);
-		
+				
 		List<Evaluation> evaluations = evaluationDao.findAll();
 		
 		for (Evaluation evaluation : evaluations) {
@@ -55,6 +39,11 @@ public class TestDao {
 		Evaluation evaluation = new Evaluation(14, 12, "Peut mieux faire");
 
 		evaluationDao.create(evaluation);
+		
+		Filiere filiere = new Filiere("scientifiques","2020",sdf.parse("03/09/2019"),20,Dispositif.POEI);
+
+		evaluationDao.create(evaluation);
+		filiereDao.create(filiere);
 //
 //		evaluation.setComportemental(18);
 //		evaluation.setTechnique(15);
@@ -82,6 +71,7 @@ public class TestDao {
 		lea.setAdresse(adrLea);
 		
 		lea.setEvaluation(evaluation);
+		lea.setFiliere(filiere);
 		
 		
 		stagiaireDao.create(lea);
@@ -96,17 +86,16 @@ public class TestDao {
 		
 		stagiaireDao.create(manon);
 		
-		Filiere dreamTeam = new Filiere("DREAM TEAM");
-		dreamTeam.setIntitule("JAVA SPRING ANGULAR");
-		dreamTeam.setDtDebut(sdf.parse("13/04/2021"));
-		dreamTeam.setDuree(57);
-		dreamTeam.setDispositif(Dispositif.POEI);
+//		Filiere fil1 = new Filiere();
+//		fil1.setIntitule("Scientifiques");
+//		fil1.setPromotion("2020");
+//		fil1.setDtDebut(sdf.parse("03/09/2019"));
+//		fil1.setDuree(20);
+//		fil1.setDispositif(Dispositif.POEI);
+//		
+//		lea.setFiliere(fil1);
+//		stagiaireDao.update(lea);
 		
-		filiereDao.create(dreamTeam);
-
-		manon.setFiliere(dreamTeam);
-		
-		stagiaireDao.update(manon);
 	}
 
 }

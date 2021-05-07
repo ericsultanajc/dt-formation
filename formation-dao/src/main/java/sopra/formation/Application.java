@@ -2,14 +2,12 @@ package sopra.formation;
 
 import sopra.formation.dao.IEvaluationDao;
 import sopra.formation.dao.IFiliereDao;
-import sopra.formation.dao.IFormateurDao;
 import sopra.formation.dao.IMatiereDao;
 import sopra.formation.dao.ISalleDao;
 import sopra.formation.dao.IStagiaireDao;
 import sopra.formation.dao.IUEDao;
 import sopra.formation.dao.file.csv.EvaluationDaoCsv;
 import sopra.formation.dao.file.csv.FiliereDaoCsv;
-import sopra.formation.dao.file.csv.FormateurDaoCsv;
 import sopra.formation.dao.file.csv.MatiereDaoCsv;
 import sopra.formation.dao.file.csv.SalleDaoCsv;
 import sopra.formation.dao.file.csv.StagiaireDaoCsv;
@@ -24,7 +22,8 @@ public class Application {
 	private final IMatiereDao matiereDao = new MatiereDaoCsv("matieres.txt");
 	private final ISalleDao salleDao = new SalleDaoCsv("salles.txt");
 	private final IStagiaireDao stagiaireDao = new StagiaireDaoCsv("stagiaires.txt");
-	private final IUEDao ueDao = new UEDaoCsv("ues.txt");
+	private final IMatiereDao matiereDao = new MatiereDaoCsv("matieres.txt");
+	private final IFiliereDao filiereDao = new FiliereDaoCsv ("filieres.txt");
 
 	private Application() {
 
@@ -53,17 +52,9 @@ public class Application {
 	public IMatiereDao getMatiereDao() {
 		return matiereDao;
 	}
-
-	public ISalleDao getSalleDao() {
-		return salleDao;
+	
+	public IFiliereDao getFiliereDao() {
+		return filiereDao;
 	}
-
-	public IStagiaireDao getStagiaireDao() {
-		return stagiaireDao;
-	}
-
-	public IUEDao getUeDao() {
-		return ueDao;
-	}
-
+	
 }
