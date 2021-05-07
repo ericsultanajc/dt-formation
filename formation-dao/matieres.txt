@@ -1,0 +1,4 @@
+1;Algo;30
+2;Comportement;5
+3;SQL;30
+5;SQL;30
