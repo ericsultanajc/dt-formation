@@ -6,7 +6,7 @@ import java.util.List;
 import sopra.formation.Application;
 import sopra.formation.dao.IEvaluationDao;
 import sopra.formation.dao.IMatiereDao;
-import sopra.formation.dao.IStagiaire;
+import sopra.formation.dao.IStagiaireDao;
 import sopra.formation.dao.file.csv.EvaluationDaoCsv;
 import sopra.formation.dao.file.csv.MatiereDaoCsv;
 import sopra.formation.dao.file.csv.StagiaireDaoCsv;
