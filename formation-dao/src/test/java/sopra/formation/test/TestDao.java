@@ -6,16 +6,15 @@ import java.util.List;
 
 import sopra.formation.Application;
 import sopra.formation.dao.IEvaluationDao;
+import sopra.formation.dao.IFiliereDao;
 import sopra.formation.dao.IMatiereDao;
 import sopra.formation.dao.IStagiaireDao;
-import sopra.formation.dao.file.csv.EvaluationDaoCsv;
-import sopra.formation.dao.file.csv.MatiereDaoCsv;
-import sopra.formation.dao.file.csv.StagiaireDaoCsv;
 import sopra.formation.model.Adresse;
 import sopra.formation.model.Civilite;
+import sopra.formation.model.Dispositif;
 import sopra.formation.model.Evaluation;
+import sopra.formation.model.Filiere;
 import sopra.formation.model.NiveauEtude;
-import sopra.formation.model.Personne;
 import sopra.formation.model.Stagiaire;
 
 import sopra.formation.model.Civilite;
@@ -30,6 +29,7 @@ public class TestDao {
 		IEvaluationDao evaluationDao = Application.getInstance().getEvaluationDao();
 		IStagiaireDao stagiaireDao = Application.getInstance().getStagiaireDao();
 		IMatiereDao matiereDao = Application.getInstance().getMatiereDao();
+		IFiliereDao filiereDao = Application.getInstance().getFiliereDao();
 
 		List<Evaluation> evaluations = evaluationDao.findAll();
 		
@@ -85,6 +85,18 @@ public class TestDao {
 		((Stagiaire) manon).setNiveauEtude(NiveauEtude.BAC_5);
 		
 		stagiaireDao.create(manon);
+		
+		Filiere dreamTeam = new Filiere("DREAM TEAM");
+		dreamTeam.setIntitule("JAVA SPRING ANGULAR");
+		dreamTeam.setDtDebut(sdf.parse("13/04/2021"));
+		dreamTeam.setDuree(57);
+		dreamTeam.setDispositif(Dispositif.POEI);
+		
+		filiereDao.create(dreamTeam);
+
+		manon.setFiliere(dreamTeam);
+		
+		stagiaireDao.update(manon);
 	}
 	
 	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
