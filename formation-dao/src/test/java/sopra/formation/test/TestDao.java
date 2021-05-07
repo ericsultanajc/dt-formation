@@ -6,6 +6,7 @@ import java.util.List;
 
 import sopra.formation.Application;
 import sopra.formation.dao.IEvaluationDao;
+import sopra.formation.dao.IFiliereDao;
 import sopra.formation.dao.IMatiereDao;
 import sopra.formation.dao.IStagiaireDao;
 import sopra.formation.dao.file.csv.EvaluationDaoCsv;
@@ -14,6 +15,8 @@ import sopra.formation.dao.file.csv.StagiaireDaoCsv;
 import sopra.formation.model.Adresse;
 import sopra.formation.model.Civilite;
 import sopra.formation.model.Evaluation;
+import sopra.formation.model.Filiere;
+import sopra.formation.model.Matiere;
 import sopra.formation.model.NiveauEtude;
 import sopra.formation.model.Personne;
 import sopra.formation.model.Stagiaire;
@@ -26,16 +29,19 @@ public class TestDao {
 		IEvaluationDao evaluationDao = Application.getInstance().getEvaluationDao();
 		IStagiaireDao stagiaireDao = Application.getInstance().getStagiaireDao();
 		IMatiereDao matiereDao = Application.getInstance().getMatiereDao();
+		IFiliereDao filiereDao = Application.getInstance().getFiliereDao();
 
 		
 		List<Evaluation> evaluations = evaluationDao.findAll();
+		List<Filiere> filieres = filiereDao.findAll();
+		
 
 		for (Evaluation evaluation : evaluations) {
 			System.out.println(evaluation);
 		}
 		
 		
-		List<Matiere> matieres=matiereDAO.findAll();
+		List<Matiere> matieres=matiereDao.findAll();
 		
 		for (Matiere matiere : matieres) {
 			System.out.println(matieres);
@@ -49,13 +55,13 @@ public class TestDao {
 
 		System.out.println(evaluationDao.findById(5L));
 		
-		System.out.println(matiereDAO.findById(1L));
+		System.out.println(matiereDao.findById(1L));
 
 		Evaluation evaluation = new Evaluation(14, 12, "Peut mieux faire");
 		Matiere matiere = new Matiere(3L,"SQL", 30);
 
 		evaluationDao.create(evaluation);
-//
+
 //		evaluation.setComportemental(18);
 //		evaluation.setTechnique(15);
 //		evaluation.setCommentaires("Grosse amélioration");
@@ -96,5 +102,7 @@ public class TestDao {
 		
 		stagiaireDao.create(manon);
 	}
+	
+	
 
 }

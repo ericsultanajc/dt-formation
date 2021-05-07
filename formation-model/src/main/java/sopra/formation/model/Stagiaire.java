@@ -19,6 +19,9 @@ public class Stagiaire extends Personne {
 	public Stagiaire(Long id, String email) {
 		super(id, email);
 	}
+	
+	
+	
 
 	public Date getDtNaissance() {
 		return dtNaissance;
