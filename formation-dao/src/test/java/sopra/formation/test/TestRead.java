@@ -49,8 +49,13 @@ public class TestRead {
 			
             }
 		} catch (FileNotFoundException e) {
+			e.printStackTrace();
 			
-
+		}
+			return lines;
+	}
+			private static List<String> readWithb() {
+				List<String> lines = new ArrayList<String>();
 		try (BufferedReader br = new BufferedReader(new FileReader(EVAL_FILENAME))) {
 			String line = null;
 			while ((line = br.readLine()) != null) {
