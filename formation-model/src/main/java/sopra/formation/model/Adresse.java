@@ -6,6 +6,8 @@ public class Adresse {
 	private String complement;
 	private String codePostal;
 	private String ville;
+	
+
 	public Adresse() {
 		super();
 	}

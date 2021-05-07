@@ -16,7 +16,7 @@ public class Evaluation {
 		super();
 		this.comportemental = comportemental;
 		this.technique = technique;
-		this.commentaires = commentaires ;
+		this.commentaires = commentaires;
 	}
 
 	
@@ -60,6 +60,12 @@ public class Evaluation {
 
 	public void setCommentaires(String commentaires) {
 		this.commentaires = commentaires;
+	}
+
+	@Override
+	public String toString() {
+		return "Evaluation [id=" + id + ", comportemental=" + comportemental + ", technique=" + technique
+				+ ", commentaires=" + commentaires + "]";
 	}
 
 }
