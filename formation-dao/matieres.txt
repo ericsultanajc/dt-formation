@@ -1,0 +1,4 @@
+5;français;10
+1;histoire;35
+4;math;60
+6;geo;20
