@@ -1,0 +1,15 @@
+1;dessin;10
+2;francais;5
+3;maths;12
+4;francais;5
+5;maths;12
+6;anglais;3
+7;techno;1
+8;sport;4
+9;maths;12
+10;anglais;3
+11;techno;1
+12;francais;5
+13;maths;12
+14;anglais;3
+15;techno;1

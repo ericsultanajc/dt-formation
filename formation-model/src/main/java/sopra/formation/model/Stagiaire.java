@@ -8,8 +8,16 @@ public class Stagiaire extends Personne {
 	private Filiere filiere;
 	private Evaluation evaluation;
 
-	public Stagiaire() {
-		super();
+	public Stagiaire(Long id, Civilite civilite, String nom, String prenom, String email, String telephone, java.sql.Date dtNaissance2, NiveauEtude niveauEtude2) {
+		super(id, civilite, nom, prenom, email, telephone);
+		this.dtNaissance=dtNaissance2;
+		this.niveauEtude=niveauEtude2;
+	}
+	
+	public Stagiaire(Civilite civilite, String nom, String prenom, String email, String telephone, Date dtNaissance2, NiveauEtude niveauEtude2) {
+		super(civilite, nom, prenom, email, telephone);
+		this.dtNaissance=dtNaissance2;
+		this.niveauEtude=niveauEtude2;
 	}
 
 	public Stagiaire(String email) {
@@ -19,6 +27,7 @@ public class Stagiaire extends Personne {
 	public Stagiaire(Long id, String email) {
 		super(id, email);
 	}
+	
 
 	public Date getDtNaissance() {
 		return dtNaissance;
