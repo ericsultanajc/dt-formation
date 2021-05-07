@@ -11,6 +11,10 @@ public class Stagiaire extends Personne {
 	public Stagiaire() {
 		super();
 	}
+	
+	public Stagiaire(String email) {
+		super(email);
+	}
 
 	public Stagiaire(Civilite civilite, String nom, String prenom, String email, String telephone, Date dtNaissance, NiveauEtude niveauEtude) {
 		super(civilite, nom, prenom, email, telephone);
@@ -59,7 +63,7 @@ public class Stagiaire extends Personne {
 	@Override
 	public String toString() {
 		return "Stagiaire [dtNaissance=" + dtNaissance + ", niveauEtude=" + niveauEtude + ", evaluation=" + evaluation
-				+ ", " + super.toString() + "]";
+				+ ", " + super.toString() + " filiere=" + filiere + "]";
 	}
 
 }

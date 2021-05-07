@@ -111,11 +111,7 @@ public class FiliereDaoCsv implements IFiliereDao {
 			write(filieres);
 		}
 	}
-	
-	private void write(List<Filiere> filieres) {
-		List<String> lines = new ArrayList<String>();
-		
-		for(Filiere filiere : filieres) {
+
 
 	private List<Filiere> read() {
 		List<Filiere> filieres = new ArrayList<Filiere>();

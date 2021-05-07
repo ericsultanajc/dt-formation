@@ -13,6 +13,10 @@ public abstract class Personne {
 		super();
 	}
 	
+	public Personne(String email) {
+		this.email = email;
+	}
+	
 	public Personne(Civilite civilite, String nom, String prenom, String email, String telephone) {
 		super();
 		this.civilite = civilite;
