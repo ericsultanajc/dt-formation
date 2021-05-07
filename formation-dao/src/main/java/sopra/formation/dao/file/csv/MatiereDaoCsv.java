@@ -1,11 +1,9 @@
 package sopra.formation.dao.file.csv;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,6 +50,7 @@ public class MatiereDaoCsv implements IMatiereDao {
 		matieres.add(obj);
 
 		write(matieres);
+		
 	}
 
 	public void update(Matiere obj) {
@@ -107,28 +106,27 @@ public class MatiereDaoCsv implements IMatiereDao {
 
 		Path path = Paths.get(this.fileName);
 
-		if (path.toFile().exists()) {
-			try {
-				List<String> lines = Files.readAllLines(path);
+		try {
+			List<String> lines = Files.readAllLines(path);
 
-				for (String line : lines) {
-					String[] items = line.split(this.separator);
+			for (String line : lines) {
+				String[] items = line.split(this.separator);
 
-					Long id = Long.valueOf(items[0]);
-					String nom = items[1];
-					Integer duree = Integer.valueOf(items[2]);
+				Long id = Long.valueOf(items[0]);
+				String nom = items[1];
+				Integer duree = Integer.valueOf(items[2]);
 
-					Matiere matiere = new Matiere(id, nom, duree);
+				Matiere matiere = new Matiere(id, nom, duree);
 
-					matieres.add(matiere);
-				}
-
-			} catch (IOException e) {
-				e.printStackTrace();
+				matieres.add(matiere);
 			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 
 		return matieres;
+
 	}
 
 	private void write(List<Matiere> matieres) {
@@ -148,7 +146,7 @@ public class MatiereDaoCsv implements IMatiereDao {
 		Path path = Paths.get(this.fileName);
 
 		try {
-			Files.write(path, lines, StandardCharsets.UTF_8, StandardOpenOption.TRUNCATE_EXISTING);
+			Files.write(path, lines);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

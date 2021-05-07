@@ -14,4 +14,6 @@ public interface IDao<T,PK> {
 	public void delete(T obj);
 
 	public void deleteById(PK id);
+	
+	
 }

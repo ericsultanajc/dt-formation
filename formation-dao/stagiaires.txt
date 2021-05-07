@@ -1,3 +1,7 @@
+<<<<<<< Updated upstream
 1;MLLE;DUMONT;Léa;lea.dumont@gmail.com;25/12/1995;BAC_8;5 avenue villemejan;Résidence Diderot;33600;PESSAC;
 2;MLLE;DUMONT;Léa;lea.dumont@gmail.com;25/12/1995;BAC_8;5 avenue villemejan;Résidence Diderot;33600;PESSAC;
 3;MME;SERAIN;Manon;serain.manon@yahoo.com;01/01/1996;BAC_5;;;;;
+=======
+1;M;jojo;lapin;blabla@popo;060504030201;Fri May 07 11:54:40 CEST 2021;BAC;null;16
+>>>>>>> Stashed changes

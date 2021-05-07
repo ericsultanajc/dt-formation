@@ -1,34 +1,35 @@
 package sopra.formation.test;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import sopra.formation.Application;
 import sopra.formation.dao.IEvaluationDao;
 import sopra.formation.dao.IMatiereDao;
-import sopra.formation.dao.IStagiaireDao;
+import sopra.formation.dao.IStagiaire;
 import sopra.formation.dao.file.csv.EvaluationDaoCsv;
 import sopra.formation.dao.file.csv.MatiereDaoCsv;
 import sopra.formation.dao.file.csv.StagiaireDaoCsv;
-import sopra.formation.model.Adresse;
 import sopra.formation.model.Civilite;
 import sopra.formation.model.Evaluation;
+import sopra.formation.model.Filiere;
+import sopra.formation.model.Matiere;
 import sopra.formation.model.NiveauEtude;
-import sopra.formation.model.Personne;
 import sopra.formation.model.Stagiaire;
 
 public class TestDao {
 
-	public static void main(String[] args) throws ParseException {
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		IEvaluationDao evaluationDao = new EvaluationDaoCsv("evaluations.txt");
+		IMatiereDao matiereDao = new MatiereDaoCsv("matieres.txt");
+		IStagiaire stagiaireDao = new StagiaireDaoCsv("stagiaires.txt");
 		
-		IEvaluationDao evaluationDao = Application.getInstance().getEvaluationDao();
-		IStagiaireDao stagiaireDao = Application.getInstance().getStagiaireDao();
-		IMatiereDao matiereDao = Application.getInstance().getMatiereDao();
-
+		
 		List<Evaluation> evaluations = evaluationDao.findAll();
-
+		
 		for (Evaluation evaluation : evaluations) {
 			System.out.println(evaluation);
 		}
@@ -36,7 +37,7 @@ public class TestDao {
 		System.out.println(evaluationDao.findById(5L));
 
 		Evaluation evaluation = new Evaluation(14, 12, "Peut mieux faire");
-
+		
 		evaluationDao.create(evaluation);
 //
 //		evaluation.setComportemental(18);
@@ -57,27 +58,18 @@ public class TestDao {
 
 		Adresse adrLea = new Adresse();
 
-		adrLea.setRue("5 avenue villemejan");
-		adrLea.setComplement("Résidence Diderot");
-		adrLea.setCodePostal("33600");
-		adrLea.setVille("PESSAC");
+		evaluationDao.delete(evaluation);
+		
+		
+		Matiere matiere = new Matiere("Java", 250);
 
-		lea.setAdresse(adrLea);
+		matiereDao.create(matiere);
 		
-		lea.setEvaluation(evaluation);
+		Filiere filiere = new Filiere();
+		Stagiaire stagiaire = new Stagiaire(12L, Civilite.valueOf("M"), "jojo", "lapin", "blabla@popo", "060504030201", new Date(), NiveauEtude.valueOf("BAC"), filiere, evaluation);
 		
-		
-		stagiaireDao.create(lea);
-
-		Stagiaire manon = new Stagiaire("serain.manon@yahoo.com");
-		manon.setCivilite(Civilite.MME);
-		manon.setNom("SERAIN");
-		manon.setPrenom("Manon");
-		manon.setTelephone("0645457845");
-		((Stagiaire) manon).setDtNaissance(sdf.parse("01/01/1996"));
-		((Stagiaire) manon).setNiveauEtude(NiveauEtude.BAC_5);
-		
-		stagiaireDao.create(manon);
+		stagiaireDao.create(stagiaire);
+	
 	}
 
 }
