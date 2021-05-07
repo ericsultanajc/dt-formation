@@ -211,7 +211,7 @@ public class StagiaireDaoCsv implements IStagiaireDao {
 				sb.append(this.separator);
 			}
 			if (stagiaire.getEvaluation() != null && stagiaire.getEvaluation().getId() != null) {
-				sb.append(stagiaire.getEvaluation().getId());
+				sb.append(stagiaire.getEvaluation().getId() );
 			}
 
 			String line = sb.toString();
