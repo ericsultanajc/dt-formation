@@ -6,6 +6,7 @@ import java.util.List;
 
 import sopra.formation.Application;
 import sopra.formation.dao.IEvaluationDao;
+import sopra.formation.dao.IFiliereDao;
 import sopra.formation.dao.IMatiereDao;
 import sopra.formation.dao.IStagiaireDao;
 import sopra.formation.dao.file.csv.EvaluationDaoCsv;
@@ -14,6 +15,8 @@ import sopra.formation.dao.file.csv.StagiaireDaoCsv;
 import sopra.formation.model.Adresse;
 import sopra.formation.model.Civilite;
 import sopra.formation.model.Evaluation;
+import sopra.formation.model.Filiere;
+import sopra.formation.model.Matiere;
 import sopra.formation.model.NiveauEtude;
 import sopra.formation.model.Personne;
 import sopra.formation.model.Stagiaire;
@@ -26,10 +29,12 @@ public class TestDao {
 		IEvaluationDao evaluationDao = Application.getInstance().getEvaluationDao();
 		IStagiaireDao stagiaireDao = Application.getInstance().getStagiaireDao();
 		IMatiereDao matiereDao = Application.getInstance().getMatiereDao();
+		IFiliereDao filiereDao = Application.getInstance().getFiliereDao();
 
 		List<Evaluation> evaluations = evaluationDao.findAll();
 		List<Matiere> matieres = matiereDao.findAll();
 		List<Stagiaire> stagiaires = stagiaireDao.findAll();
+		List<Filiere> filieres = filiereDao.findAll();
 
 		for (Evaluation evaluation : evaluations) {
 			System.out.println(evaluation);
@@ -42,6 +47,11 @@ public class TestDao {
 		for (Stagiaire stagiaire : stagiaires) {
 			System.out.println(stagiaire);
 		}
+		
+		for (Filiere filiere : filieres) {
+			System.out.println(filiere);
+		}
+
 
 		System.out.println(evaluationDao.findById(5L));
 
@@ -50,6 +60,8 @@ public class TestDao {
 		Matiere matiere1 = new Matiere("maths", 12);
 		Matiere matiere2 = new Matiere("anglais", 3);
 		Matiere matiere3 = new Matiere("techno", 1);
+		
+		Filiere filiere = new Filiere("2021");
 		
 		//signature de stagiaire : (Long id, Civilite civilite, String nom, String prenom, String email, String telephone, Date dtNaissance, NiveauEtude niveau Etude)
 		Stagiaire stagiaire1 = new Stagiaire(Civilite.MLLE, "PECQUE", "Aubeline", "aubeline.pecque@hotmail.com", "0609985235", sdf.parse("16/09/1992"), NiveauEtude.BAC_5);
@@ -96,6 +108,7 @@ public class TestDao {
 		((Stagiaire) manon).setNiveauEtude(NiveauEtude.BAC_5);
 		
 		stagiaireDao.create(manon);
+		
 	}
 
 }

@@ -13,7 +13,10 @@ public abstract class Personne {
 		super();
 	}
 	
-
+	public Personne(String email) {
+		super();
+		this.email = email;
+	}
 
 	public Personne(Civilite civilite, String nom, String prenom, String email, String telephone) {
 		super();
@@ -38,10 +41,7 @@ public abstract class Personne {
 
 
 
-	public Personne(String email) {
-		super();
-		this.email = email;
-	}
+
 
 	public Personne(Long id, String email) {
 		super();
