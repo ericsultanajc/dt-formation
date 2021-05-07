@@ -17,13 +17,7 @@ import sopra.formation.model.Dispositif;
 import sopra.formation.model.Filiere;
 
 public class FiliereDaoCsv implements IFiliereDao {
-	private final String fileName;
-	private final String separator = ";";
 
-	public FiliereDaoCsv(String fileName) {
-		super();
-		this.fileName = fileName;
-	}
 
 
 	private final String fileName;
