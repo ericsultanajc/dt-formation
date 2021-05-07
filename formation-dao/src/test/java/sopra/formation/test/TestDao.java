@@ -14,6 +14,7 @@ import sopra.formation.dao.file.csv.EvaluationDaoCsv;
 import sopra.formation.dao.file.csv.MatiereDaoCsv;
 import sopra.formation.dao.file.csv.SalleDaoCsv;
 import sopra.formation.dao.file.csv.StagiaireDaoCsv;
+import sopra.formation.model.Adresse;
 import sopra.formation.model.Civilite;
 import sopra.formation.model.Evaluation;
 import sopra.formation.model.Matiere;
@@ -28,6 +29,8 @@ public class TestDao {
 		IMatiereDao matiereDao = new MatiereDaoCsv("matieres.txt");
 		ISalleDao salleDao = new SalleDaoCsv("salles.txt");
 		IStagiaireDao stagiaireDao = new StagiaireDaoCsv("stagiaires.txt");
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
 		List<Evaluation> evaluations = evaluationDao.findAll();
 
@@ -54,7 +57,11 @@ public class TestDao {
 		lea.setNom("DUMONT");
 		lea.setPrenom("Léa");
 		lea.setTelephone("0606060606");
-		lea.setDtNaissance(sdf.parse("25/12/1995"));
+		try {
+			lea.setDtNaissance(sdf.parse("25/12/1995"));
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
 		lea.setNiveauEtude(NiveauEtude.BAC_8);
 
 		Adresse adrLea = new Adresse();
@@ -109,7 +116,7 @@ public class TestDao {
 
 		System.out.println(stagiaireDao.findById(6L));
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		
 
 		Stagiaire stagiaire = new Stagiaire("ld@gmail.com");
 		stagiaire.setCivilite(Civilite.MLLE);
