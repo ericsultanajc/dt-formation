@@ -10,6 +10,11 @@ public class Stagiaire extends Personne {
 
 	public Stagiaire() {
 		super();
+		
+	}
+	public Stagiaire(Long id, Civilite civilite, String nom, String prenom, String email, String telephone,
+			Date dtNaissance2, NiveauEtude niveauEtude2) {
+	
 	}
 
 	public Stagiaire(String email) {
@@ -19,6 +24,10 @@ public class Stagiaire extends Personne {
 	public Stagiaire(Long id, String email) {
 		super(id, email);
 	}
+
+	
+
+	
 
 	public Date getDtNaissance() {
 		return dtNaissance;

@@ -1,0 +1,3 @@
+1;algo;5
+2;Maven;15
+3;Maven;15
