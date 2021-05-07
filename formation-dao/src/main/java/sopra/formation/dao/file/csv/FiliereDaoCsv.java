@@ -20,95 +20,43 @@ public class FiliereDaoCsv implements IFiliereDao {
 
 	private final String fileName;
 	private final String separator = ";";
-	private final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-
+	
 	public FiliereDaoCsv(String fileName) {
 		super();
 		this.fileName = fileName;
 	}
-
-	@Override
+	
 	public List<Filiere> findAll() {
 		return read();
 	}
 
-	@Override
+
 	public Filiere findById(Long id) {
-		List<Filiere> filieres = read();
-
-		for (Filiere filiere : filieres) {
-			if (filiere.getId() == id) {
-				return filiere;
-			}
-		}
-
+		
 		return null;
 	}
 
 	@Override
 	public void create(Filiere obj) {
-		List<Filiere> filieres = read();
-
-		Long max = 0L;
-		for (Filiere filiere : filieres) {
-			if (filiere.getId() > max) {
-				max = filiere.getId();
-			}
-		}
-
-		obj.setId(++max);
-
-		filieres.add(obj);
-
-		write(filieres);
+		
+		
 	}
 
 	@Override
 	public void update(Filiere obj) {
-		List<Filiere> filieres = read();
-
-		boolean found = false;
-		int position;
-		for (position = 0; position < filieres.size(); position++) {
-			Filiere filiere = filieres.get(position);
-
-			if (filiere.getId() == obj.getId()) {
-				found = true;
-				break;
-			}
-		}
-
-		if (found) {
-			filieres.set(position, obj);
-
-			write(filieres);
-		}
+		
+		
 	}
 
 	public void delete(Filiere obj) {
-		deleteById(obj.getId());
+		
+		
 	}
 
 	@Override
 	public void deleteById(Long id) {
-		List<Filiere> filieres = read();
-
-		boolean found = false;
-		int position;
-		for (position = 0; position < filieres.size(); position++) {
-			Filiere filiere = filieres.get(position);
-
-			if (filiere.getId() == id) {
-				found = true;
-				break;
-			}
-		}
-
-		if (found == true) {
-			filieres.remove(position);
-
-			write(filieres);
-		}
+		
+		
 	}
 
 	private List<Filiere> read() {

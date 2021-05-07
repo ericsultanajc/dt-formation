@@ -150,12 +150,15 @@ public class StagiaireDaoCsv implements IStagiaireDao {
 						e.printStackTrace();
 					}
 					NiveauEtude niveauEtude = items[6].length() > 0 ? NiveauEtude.valueOf(items[6]) : null;
+					
 					String rue = items[7];
 					String complement = items[8];
 					String codePostal = items[9];
 					String ville = items[10];
 					Long idEvaluation = !items[11].isBlank() ? Long.valueOf(items[11]) : null;
-
+					
+					Long idFiliere = !items[12].isBlank() ? Long.valueOf(items[12]) : null;
+					
 					Stagiaire stagiaire = new Stagiaire();
 					stagiaire.setId(id);
 					stagiaire.setCivilite(civilite);
@@ -172,6 +175,10 @@ public class StagiaireDaoCsv implements IStagiaireDao {
 					if (idEvaluation != null) {
 						Evaluation evaluation = Application.getInstance().getEvaluationDao().findById(idEvaluation);
 						stagiaire.setEvaluation(evaluation);
+					}
+					
+					if (idFiliere != null) {
+						
 					}
 
 					stagiaires.add(stagiaire);
