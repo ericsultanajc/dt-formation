@@ -1,0 +1,3 @@
+0;Maths;10
+2;Informatique;12
+10;Optique;5
