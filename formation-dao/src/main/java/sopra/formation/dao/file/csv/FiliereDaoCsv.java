@@ -1,10 +1,13 @@
 package sopra.formation.dao.file.csv;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -15,150 +18,98 @@ import sopra.formation.model.Dispositif;
 import sopra.formation.model.Filiere;
 
 public class FiliereDaoCsv implements IFiliereDao {
-	
+
 	private final String fileName;
 	private final String separator = ";";
-	
+	private final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
 	public FiliereDaoCsv(String fileName) {
 		super();
-		this.fileName = fileName; 
+		this.fileName = fileName;
 	}
-	
+
 	@Override
 	public List<Filiere> findAll() {
-		try {
-			return read();
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		return null;
+		return read();
 	}
 
 	@Override
 	public Filiere findById(Long id) {
-		try {
-			List<Filiere> filieres = read();
-			
-			for(Filiere filiere : filieres) {
-				if(filiere.getId() == id) {
-					return filiere;
-				}
+		List<Filiere> filieres = read();
+
+		for (Filiere filiere : filieres) {
+			if (filiere.getId() == id) {
+				return filiere;
 			}
-		} catch (ParseException e) {
-			e.printStackTrace();
 		}
+
 		return null;
 	}
 
 	@Override
 	public void create(Filiere obj) {
-		try {
-			List<Filiere> filieres = read();
-			
-			Long maxId = 0L;
-			for(Filiere filiere : filieres) {
-				if(maxId < filiere.getId()) {
-					maxId = filiere.getId();
-				}
+		List<Filiere> filieres = read();
+
+		Long max = 0L;
+		for (Filiere filiere : filieres) {
+			if (filiere.getId() > max) {
+				max = filiere.getId();
 			}
-			
-			obj.setId(++maxId);
-			
-			filieres.add(obj);
-			
-			write(filieres);
 		}
-		catch(ParseException e) {
-			e.printStackTrace();
-		}
+
+		obj.setId(++max);
+
+		filieres.add(obj);
+
+		write(filieres);
 	}
 
 	@Override
 	public void update(Filiere obj) {
-		try {
-			List<Filiere> filieres = read();
-			
-			int index = 0;
-			boolean find = false;
-			
-			for (Filiere filiere : filieres) {
-				if (filiere.getId() == obj.getId()) {
-					find = true;
-					break;
-				}
+		List<Filiere> filieres = read();
 
-				index++;
-			}
-			
-			if(find) {
-				filieres.set(index, obj);
-				write(filieres);
+		boolean found = false;
+		int position;
+		for (position = 0; position < filieres.size(); position++) {
+			Filiere filiere = filieres.get(position);
+
+			if (filiere.getId() == obj.getId()) {
+				found = true;
+				break;
 			}
 		}
-		catch(ParseException e) {
-			e.printStackTrace();;
-		}		
+
+		if (found) {
+			filieres.set(position, obj);
+
+			write(filieres);
+		}
 	}
 
-	@Override
 	public void delete(Filiere obj) {
 		deleteById(obj.getId());
 	}
 
 	@Override
 	public void deleteById(Long id) {
-		try {
-			List<Filiere> filieres = read();
-			
-			int index = 0;
-			boolean find = false;
-			for(Filiere filiere : filieres) {
-				if(filiere.getId() == id) {
-					find = true;
-					break;
-				}
-				
-				index++;
-			}
-			
-			if(find) {
-				filieres.remove(index);
-				
-				write(filieres);
+		List<Filiere> filieres = read();
+
+		boolean found = false;
+		int position;
+		for (position = 0; position < filieres.size(); position++) {
+			Filiere filiere = filieres.get(position);
+
+			if (filiere.getId() == id) {
+				found = true;
+				break;
 			}
 		}
-		catch(ParseException e) {
-			e.printStackTrace();;
+
+		if (found == true) {
+			filieres.remove(position);
+
+			write(filieres);
 		}
-	}
-	
-	private List<Filiere> read() throws ParseException {
-		List<Filiere> filieres = new ArrayList<Filiere>();
-		
-		Path path = Paths.get(this.fileName);
-		
-		try {
-			List<String> lines = Files.readAllLines(path);
-			
-			for(String line : lines) {
-				String[] items = line.split(this.separator);
-				
-				Long id = Long.valueOf(items[0]);
-				String intitule = String.valueOf(items[1]);
-				String promotion = String.valueOf(items[2]);
-				Date dtDebut = (Date)IDao.sdf.parse(items[3]);
-				Integer duree = Integer.valueOf(items[4]);
-				Dispositif dispositif = Dispositif.valueOf(items[5]);
-				
-				Filiere filiere = new Filiere(id, intitule, promotion, dtDebut, duree, dispositif);
-				
-				filieres.add(filiere);
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		return filieres;
 	}
 	
 	private void write(List<Filiere> filieres) {
@@ -166,26 +117,78 @@ public class FiliereDaoCsv implements IFiliereDao {
 		
 		for(Filiere filiere : filieres) {
 
-			StringBuilder line = new StringBuilder();
-			line.append(filiere.getId());
-			line.append(this.separator);
-			line.append(filiere.getIntitule());
-			line.append(this.separator);
-			line.append(filiere.getPromotion());
-			line.append(this.separator);
-			line.append(IDao.sdf.format(filiere.getDtDebut()));
-			line.append(this.separator);
-			line.append(filiere.getDuree());
-			line.append(this.separator);
-			line.append(filiere.getDispositif());
-			
-			lines.add(line.toString());
-		}
-		
+	private List<Filiere> read() {
+		List<Filiere> filieres = new ArrayList<Filiere>();
+
 		Path path = Paths.get(this.fileName);
-		
+
+		if (path.toFile().exists()) {
+			try {
+				List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
+
+				for (String line : lines) {
+					String[] items = line.split(this.separator, -1);
+
+					Long id = Long.valueOf(items[0]);
+					String intitule = items[1];
+					String promotion = items[2];
+					Date dtDebut = null;
+					try {
+						dtDebut = sdf.parse(items[3]);
+					} catch (ParseException e) {
+						e.printStackTrace();
+					}
+					Integer duree = !items[4].isBlank() ? Integer.valueOf(items[4]) : null;
+					Dispositif dispositif = !items[5].isBlank() ? Dispositif.valueOf(items[5]) : null;
+//					Long idReferent = !items[6].isBlank() ? Long.valueOf(items[6]) : null;
+
+					Filiere filiere = new Filiere();
+					filiere.setId(id);
+					filiere.setIntitule(intitule);
+					filiere.setPromotion(promotion);
+					filiere.setDtDebut(dtDebut);
+					filiere.setDuree(duree);
+					filiere.setDispositif(dispositif);
+
+//					if (idReferent != null) {
+//						Formateur formateur = Application.getInstance().getFormateurDao().find(idReferent);
+//
+//						filiere.setReferent(formateur);
+//					}
+
+					filieres.add(filiere);
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return filieres;
+	}
+
+	private void write(List<Filiere> filieres) {
+		Path path = Paths.get(this.fileName);
+
+		List<String> lines = new ArrayList<String>();
+		for (Filiere filiere : filieres) {
+			StringBuilder sb = new StringBuilder();
+
+			sb.append(filiere.getId()).append(this.separator);
+			sb.append(filiere.getIntitule()).append(this.separator);
+			sb.append(filiere.getPromotion()).append(this.separator);
+			sb.append(sdf.format(filiere.getDtDebut())).append(this.separator);
+			sb.append(filiere.getDuree()).append(this.separator);
+			sb.append(filiere.getDispositif()).append(this.separator);
+
+//			if (filiere.getReferent() != null && filiere.getReferent().getId() != null) {
+//				sb.append(filiere.getReferent().getId());
+//			}
+
+			lines.add(sb.toString());
+		}
+
 		try {
-			Files.write(path, lines);
+			Files.write(path, lines, StandardCharsets.UTF_8, StandardOpenOption.TRUNCATE_EXISTING);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

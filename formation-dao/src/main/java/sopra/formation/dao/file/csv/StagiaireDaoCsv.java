@@ -1,25 +1,31 @@
 package sopra.formation.dao.file.csv;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import sopra.formation.dao.IDao;
+import sopra.formation.Application;
+import sopra.formation.dao.IEvaluationDao;
 import sopra.formation.dao.IStagiaireDao;
+import sopra.formation.model.Adresse;
 import sopra.formation.model.Civilite;
+import sopra.formation.model.Evaluation;
 import sopra.formation.model.NiveauEtude;
 import sopra.formation.model.Stagiaire;
 
 public class StagiaireDaoCsv implements IStagiaireDao {
-	
 	private final String fileName;
 	private final String separator = ";";
-	
+	private final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
 	public StagiaireDaoCsv(String fileName) {
 		super();
 		this.fileName = fileName;
@@ -27,78 +33,69 @@ public class StagiaireDaoCsv implements IStagiaireDao {
 
 	@Override
 	public List<Stagiaire> findAll() {
-		try {
-			return read();
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		return null;
+		List<Stagiaire> stagiaires = read();
+		return stagiaires;
 	}
 
 	@Override
 	public Stagiaire findById(Long id) {
-		try {
-			List<Stagiaire> stagiaires = read();
-			
-			for(Stagiaire stagiaire : stagiaires) {
-				if(stagiaire.getId() == id) {
-					return stagiaire;
-				}
+		List<Stagiaire> stagiaires = read();
+
+		for (Stagiaire stagiaire : stagiaires) {
+			if (stagiaire.getId() == id) {
+				return stagiaire;
 			}
-		} catch (ParseException e) {
-			e.printStackTrace();
 		}
+
 		return null;
 	}
 
 	@Override
 	public void create(Stagiaire obj) {
-		try {
-			List<Stagiaire> stagiaires = read();
-			
-			Long maxId = 0L;
-			for(Stagiaire stagiaire : stagiaires) {
-				if(maxId < stagiaire.getId()) {
-					maxId = stagiaire.getId();
-				}
+		List<Stagiaire> stagiaires = read();
+
+		Long max = 0L;
+		for (Stagiaire stagiaire : stagiaires) {
+			if (stagiaire.getId() > max) {
+				max = stagiaire.getId();
 			}
-			
-			obj.setId(++maxId);
-			
-			stagiaires.add(obj);
-			
-			write(stagiaires);
 		}
-		catch(ParseException e) {
-			e.printStackTrace();
-		}
+
+//		Equivalence du foreach avec un for classique
+//		for (int i = 0; i < stagiaires.size(); i++) {
+//			Stagiaire stagiaire = stagiaires.get(i);
+//			if (stagiaire.getId() > max) {
+//				max = stagiaire.getId();
+//			}
+//		}
+
+		obj.setId(++max);
+
+		stagiaires.add(obj);
+
+		write(stagiaires);
 	}
 
 	@Override
 	public void update(Stagiaire obj) {
-		try {
-			List<Stagiaire> stagiaires = read();
-			
-			int index = 0;
-			boolean find = false;
-			
-			for (Stagiaire stagiaire : stagiaires) {
-				if (stagiaire.getId() == obj.getId()) {
-					find = true;
-					break;
-				}
+		List<Stagiaire> stagiaires = read();
 
-				index++;
-			}
-			
-			if(find) {
-				stagiaires.set(index, obj);
-				write(stagiaires);
+		boolean found = false;
+		int position;
+		for (position = 0; position < stagiaires.size(); position++) {
+			Stagiaire stagiaire = stagiaires.get(position);
+
+			if (stagiaire.getId() == obj.getId()) {
+				found = true;
+				break;
 			}
 		}
-		catch(ParseException e) {
-			e.printStackTrace();;
-		}	
+
+		if (found) {
+			stagiaires.set(position, obj);
+
+			write(stagiaires);
+		}
 	}
 
 	@Override
@@ -108,95 +105,126 @@ public class StagiaireDaoCsv implements IStagiaireDao {
 
 	@Override
 	public void deleteById(Long id) {
-		try {
-			List<Stagiaire> stagiaires = read();
-			
-			int index = 0;
-			boolean find = false;
-			for(Stagiaire stagiaire : stagiaires) {
-				if(stagiaire.getId() == id) {
-					find = true;
-					break;
-				}
-				
-				index++;
-			}
-			
-			if(find) {
-				stagiaires.remove(index);
-				
-				write(stagiaires);
+		List<Stagiaire> stagiaires = read();
+
+		boolean found = false;
+		int position;
+		for (position = 0; position < stagiaires.size(); position++) {
+			Stagiaire stagiaire = stagiaires.get(position);
+
+			if (stagiaire.getId() == id) {
+				found = true;
+				break;
 			}
 		}
-		catch(ParseException e) {
-			e.printStackTrace();;
+
+		if (found == true) {
+			stagiaires.remove(position);
+
+			write(stagiaires);
 		}
 	}
-	
-	private List<Stagiaire> read() throws ParseException {
+
+	private List<Stagiaire> read() {
 		List<Stagiaire> stagiaires = new ArrayList<Stagiaire>();
 
 		Path path = Paths.get(this.fileName);
 
-		try {
-			List<String> lines = Files.readAllLines(path);
+		if (path.toFile().exists()) {
 
-			for (String line : lines) {
-				
-				String[] items = line.split(this.separator);
+			try {
+				List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
 
-				Long id = Long.valueOf(items[0]);
-				Civilite civilite = Civilite.valueOf(items[1]);
-				String nom = String.valueOf(items[2]);
-				String prenom = String.valueOf(items[3]);
-				String email = String.valueOf(items[4]);
-				String telephone = String.valueOf(items[5]);
-				Date dtNaissance = (Date)IDao.sdf.parse(items[6]);
-				NiveauEtude niveauEtude = NiveauEtude.valueOf(items[7]);
+				for (String line : lines) {
+					String[] items = line.split(this.separator, -1);
 
-				Stagiaire stagiaire = new Stagiaire(id, civilite, nom, prenom, email, telephone, dtNaissance, niveauEtude);
-				
-				stagiaires.add(stagiaire);
+					Long id = Long.valueOf(items[0]);
+					Civilite civilite = items[1].length() > 0 ? Civilite.valueOf(items[1]) : null;
+					String nom = items[2];
+					String prenom = items[3];
+					String email = items[4];
+					Date dtNaissance = null;
+					try {
+						dtNaissance = sdf.parse(items[5]);
+					} catch (ParseException e) {
+						e.printStackTrace();
+					}
+					NiveauEtude niveauEtude = items[6].length() > 0 ? NiveauEtude.valueOf(items[6]) : null;
+					String rue = items[7];
+					String complement = items[8];
+					String codePostal = items[9];
+					String ville = items[10];
+					Long idEvaluation = !items[11].isBlank() ? Long.valueOf(items[11]) : null;
+
+					Stagiaire stagiaire = new Stagiaire();
+					stagiaire.setId(id);
+					stagiaire.setCivilite(civilite);
+					stagiaire.setNom(nom);
+					stagiaire.setPrenom(prenom);
+					stagiaire.setEmail(email);
+					stagiaire.setDtNaissance(dtNaissance);
+					stagiaire.setNiveauEtude(niveauEtude);
+
+					Adresse adresse = new Adresse(rue, complement, codePostal, ville);
+
+					stagiaire.setAdresse(adresse);
+
+					if (idEvaluation != null) {
+						Evaluation evaluation = Application.getInstance().getEvaluationDao().findById(idEvaluation);
+						stagiaire.setEvaluation(evaluation);
+					}
+
+					stagiaires.add(stagiaire);
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
 
 		return stagiaires;
 	}
-	
+
 	private void write(List<Stagiaire> stagiaires) {
-		List<String> lines = new ArrayList<String>();
-		
-		for(Stagiaire stagiaire : stagiaires) {
-			
-			StringBuilder line = new StringBuilder();
-			line.append(stagiaire.getId());
-			line.append(this.separator);
-			line.append(stagiaire.getCivilite());
-			line.append(this.separator);
-			line.append(stagiaire.getNom());
-			line.append(this.separator);
-			line.append(stagiaire.getPrenom());
-			line.append(this.separator);
-			line.append(stagiaire.getEmail());
-			line.append(this.separator);
-			line.append(stagiaire.getTelephone());
-			line.append(this.separator);
-			line.append(IDao.sdf.format(stagiaire.getDtNaissance()));
-			line.append(this.separator);
-			line.append(stagiaire.getNiveauEtude());
-			
-			lines.add(line.toString());
-		}
-		
 		Path path = Paths.get(this.fileName);
-		
+
+		List<String> lines = new ArrayList<String>();
+
+		for (Stagiaire stagiaire : stagiaires) {
+			StringBuilder sb = new StringBuilder();
+
+			sb.append(stagiaire.getId()).append(this.separator);
+			sb.append(stagiaire.getCivilite()).append(this.separator);
+			sb.append(stagiaire.getNom()).append(this.separator);
+			sb.append(stagiaire.getPrenom()).append(this.separator);
+			sb.append(stagiaire.getEmail()).append(this.separator);
+			sb.append(sdf.format(stagiaire.getDtNaissance())).append(this.separator);
+			sb.append(stagiaire.getNiveauEtude()).append(this.separator);
+			if (stagiaire.getAdresse() != null) {
+				sb.append(stagiaire.getAdresse().getRue()).append(this.separator);
+				sb.append(stagiaire.getAdresse().getComplement()).append(this.separator);
+				sb.append(stagiaire.getAdresse().getCodePostal()).append(this.separator);
+				sb.append(stagiaire.getAdresse().getVille()).append(this.separator);
+			} else {
+				sb.append(this.separator);
+				sb.append(this.separator);
+				sb.append(this.separator);
+				sb.append(this.separator);
+			}
+			if (stagiaire.getEvaluation() != null && stagiaire.getEvaluation().getId() != null) {
+				sb.append(stagiaire.getEvaluation().getId());
+			}
+
+			String line = sb.toString();
+
+			lines.add(line);
+		}
+
 		try {
-			Files.write(path, lines);
+			Files.write(path, lines, StandardCharsets.UTF_8, StandardOpenOption.CREATE,
+					StandardOpenOption.TRUNCATE_EXISTING);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
+
 }
