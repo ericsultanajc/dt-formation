@@ -156,12 +156,10 @@ public class StagiaireDaoCsv implements IStagiaireDao {
 					String ville = items[10];
 					Long idEvaluation = !items[11].isBlank() ? Long.valueOf(items[11]) : null;
 
-					Stagiaire stagiaire = new Stagiaire();
-					stagiaire.setId(id);
+					Stagiaire stagiaire = new Stagiaire(id, email);
 					stagiaire.setCivilite(civilite);
 					stagiaire.setNom(nom);
 					stagiaire.setPrenom(prenom);
-					stagiaire.setEmail(email);
 					stagiaire.setDtNaissance(dtNaissance);
 					stagiaire.setNiveauEtude(niveauEtude);
 
@@ -211,7 +209,7 @@ public class StagiaireDaoCsv implements IStagiaireDao {
 				sb.append(this.separator);
 			}
 			if (stagiaire.getEvaluation() != null && stagiaire.getEvaluation().getId() != null) {
-				sb.append(stagiaire.getEvaluation().getId());
+				sb.append(stagiaire.getEvaluation().getId() );
 			}
 
 			String line = sb.toString();
