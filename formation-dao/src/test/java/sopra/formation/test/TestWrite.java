@@ -18,7 +18,6 @@ public class TestWrite {
 		String evaluation1 = "1;15;18;Très bon élément";
 
 		writeWithBuffered(evaluation1);
-		writeTristan(evaluation1);
 		
 		System.out.println("##############################");
 		

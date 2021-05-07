@@ -1,0 +1,33 @@
+1;Python & R;Dream Team;15/03/2022;3;CPRO
+2;.NET;Dream Pas Team;02/09/2021;4;PROA
+4;C++;Mucho Banana;15/03/2022;6;CPRO
+5;Python & R;Dream Team;15/03/2022;3;CPRO
+6;.NET;Dream Pas Team;02/09/2021;4;PROA
+8;C++;Mucho Banana;15/03/2022;6;CPRO
+9;Python & R;Dream Team;15/03/2022;3;CPRO
+10;.NET;Dream Pas Team;02/09/2021;4;PROA
+12;C++;Mucho Banana;15/03/2022;6;CPRO
+13;Python & R;Dream Team;15/03/2022;3;CPRO
+14;.NET;Dream Pas Team;02/09/2021;4;PROA
+16;C++;Mucho Banana;15/03/2022;6;CPRO
+17;Python & R;Dream Team;15/03/2022;3;CPRO
+18;.NET;Dream Pas Team;02/09/2021;4;PROA
+20;C++;Mucho Banana;15/03/2022;6;CPRO
+21;Python & R;Dream Team;15/03/2022;3;CPRO
+22;.NET;Dream Pas Team;02/09/2021;4;PROA
+24;C++;Mucho Banana;15/03/2022;6;CPRO
+25;Python & R;Dream Team;15/03/2022;3;CPRO
+26;.NET;Dream Pas Team;02/09/2021;4;PROA
+28;C++;Mucho Banana;15/03/2022;6;CPRO
+29;Python & R;Dream Team;15/03/2022;3;CPRO
+30;.NET;Dream Pas Team;02/09/2021;4;PROA
+32;C++;Mucho Banana;15/03/2022;6;CPRO
+33;Python & R;Dream Team;15/03/2022;3;CPRO
+34;.NET;Dream Pas Team;02/09/2021;4;PROA
+36;C++;Mucho Banana;15/03/2022;6;CPRO
+37;Python & R;Dream Team;15/03/2022;3;CPRO
+38;.NET;Dream Pas Team;02/09/2021;4;PROA
+40;C++;Mucho Banana;15/03/2022;6;CPRO
+41;Python & R;Dream Team;15/03/2022;3;CPRO
+42;.NET;Dream Pas Team;02/09/2021;4;PROA
+44;C++;Mucho Banana;15/03/2022;6;CPRO
