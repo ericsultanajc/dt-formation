@@ -99,30 +99,4 @@ public class TestDao {
 		stagiaireDao.update(manon);
 	}
 	
-	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-	
-	System.out.println(stagiaireDao.findById(1L));
-	Stagiaire stagiaire = new Stagiaire();
-
-	stagiaireDao.create(stagiaire);
-	
-	
-	stagiaire.setCivilite(Civilite.M);
-	stagiaire.setNom("dupond");
-	stagiaire.setPrenom("Roger");
-	stagiaire.setEmail("blabla");
-	stagiaire.setTelephone("15");
-	try {
-		stagiaire.setDtNaissance(dateFormat.parse("15/12/1998"));
-	} catch (ParseException e) {
-		
-		e.printStackTrace();
-	}
-	stagiaire.setNiveauEtude(NiveauEtude.BAC_8);
-	
-
-	stagiaireDao.update(stagiaire);
-
-	//stagiaireDao.delete(stagiaire);
-}
 }
