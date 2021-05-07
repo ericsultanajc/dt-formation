@@ -9,12 +9,16 @@ import sopra.formation.dao.IEvaluationDao;
 import sopra.formation.dao.IFiliereDao;
 import sopra.formation.dao.IMatiereDao;
 import sopra.formation.dao.IStagiaireDao;
+import sopra.formation.dao.file.csv.EvaluationDaoCsv;
+import sopra.formation.dao.file.csv.MatiereDaoCsv;
+import sopra.formation.dao.file.csv.StagiaireDaoCsv;
 import sopra.formation.model.Adresse;
 import sopra.formation.model.Civilite;
 import sopra.formation.model.Dispositif;
 import sopra.formation.model.Evaluation;
 import sopra.formation.model.Filiere;
 import sopra.formation.model.NiveauEtude;
+import sopra.formation.model.Personne;
 import sopra.formation.model.Stagiaire;
 
 public class TestDao {
@@ -66,19 +70,9 @@ public class TestDao {
 		
 		lea.setEvaluation(evaluation);
 		
-		Filiere filiere = new Filiere();
-		filiere.setIntitule("Java JEE");
-		filiere.setPromotion("2021");
-		filiere.setDtDebut(sdf.parse("13/04/2021"));
-		filiere.setDuree(59);
-		filiere.setDispositif(Dispositif.POEI);
-		
-		filiereDao.create(filiere);
-		
-		lea.setFiliere(filiere);
 		
 		stagiaireDao.create(lea);
-
+		
 		Stagiaire manon = new Stagiaire("serain.manon@yahoo.com");
 		manon.setCivilite(Civilite.MME);
 		manon.setNom("SERAIN");
@@ -87,19 +81,23 @@ public class TestDao {
 		((Stagiaire) manon).setDtNaissance(sdf.parse("01/01/1996"));
 		((Stagiaire) manon).setNiveauEtude(NiveauEtude.BAC_5);
 		
+		Filiere filiereManon = new Filiere("laFiliereDeManon");
+		filiereManon.setDtDebut(sdf.parse("13/04/2021"));
+		filiereManon.setDuree(3);
+		filiereManon.setIntitule("Formation JEE");
+		filiereManon.setDispositif(Dispositif.POEI);
+		
+		filiereDao.create(filiereManon);
+		manon.setFiliere(filiereManon);
+		
 		stagiaireDao.create(manon);
 		
-		Filiere dreamTeam = new Filiere("DREAM TEAM");
-		dreamTeam.setIntitule("JAVA SPRING ANGULAR");
-		dreamTeam.setDtDebut(sdf.parse("13/04/2021"));
-		dreamTeam.setDuree(57);
-		dreamTeam.setDispositif(Dispositif.POEI);
-		
-		filiereDao.create(dreamTeam);
+//		Filiere dreamTeam = new Filiere("DREAM TEAM");
+//		dreamTeam.setIntitule("JAVA SPRING ANGULAR");
+//		dreamTeam.setDtDebut(sdf.parse("13/04/2021"));
+//		dreamTeam.setDuree(57);
+//		dreamTeam.setDispositif(Dispositif.POEI);
 
-		manon.setFiliere(dreamTeam);
-		
-		stagiaireDao.update(manon);
 	}
 
 }
