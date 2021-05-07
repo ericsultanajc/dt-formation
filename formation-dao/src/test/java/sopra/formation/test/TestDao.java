@@ -6,6 +6,7 @@ import java.util.List;
 
 import sopra.formation.Application;
 import sopra.formation.dao.IEvaluationDao;
+import sopra.formation.dao.IFiliereDao;
 import sopra.formation.dao.IMatiereDao;
 import sopra.formation.dao.IStagiaireDao;
 import sopra.formation.dao.file.csv.EvaluationDaoCsv;
@@ -13,7 +14,9 @@ import sopra.formation.dao.file.csv.MatiereDaoCsv;
 import sopra.formation.dao.file.csv.StagiaireDaoCsv;
 import sopra.formation.model.Adresse;
 import sopra.formation.model.Civilite;
+import sopra.formation.model.Dispositif;
 import sopra.formation.model.Evaluation;
+import sopra.formation.model.Filiere;
 import sopra.formation.model.NiveauEtude;
 import sopra.formation.model.Personne;
 import sopra.formation.model.Stagiaire;
@@ -26,6 +29,7 @@ public class TestDao {
 		IEvaluationDao evaluationDao = Application.getInstance().getEvaluationDao();
 		IStagiaireDao stagiaireDao = Application.getInstance().getStagiaireDao();
 		IMatiereDao matiereDao = Application.getInstance().getMatiereDao();
+		IFiliereDao filiereDao = Application.getInstance().getFiliereDao();
 
 		List<Evaluation> evaluations = evaluationDao.findAll();
 
@@ -66,6 +70,16 @@ public class TestDao {
 		
 		lea.setEvaluation(evaluation);
 		
+		Filiere filiere = new Filiere();
+		filiere.setIntitule("Java JEE");
+		filiere.setPromotion("2021");
+		filiere.setDtDebut(sdf.parse("13/04/2021"));
+		filiere.setDuree(59);
+		filiere.setDispositif(Dispositif.POEI);
+		
+		filiereDao.create(filiere);
+		
+		lea.setFiliere(filiere);
 		
 		stagiaireDao.create(lea);
 
