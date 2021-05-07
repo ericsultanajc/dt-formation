@@ -103,24 +103,26 @@ public class MatiereDaoCsv implements IMatiereDao {
 		List<Matiere> matieres = new ArrayList<Matiere>();
 
 		Path path = Paths.get(this.fileName);
+		
+		if(path.toFile().exists()) {
+			try {
+				List<String> lines = Files.readAllLines(path);
 
-		try {
-			List<String> lines = Files.readAllLines(path);
+				for (String line : lines) {
+					String[] items = line.split(this.separator);
 
-			for (String line : lines) {
-				String[] items = line.split(this.separator);
+					Long id = Long.valueOf(items[0]);
+					String nom = String.valueOf(items[1]);
+					Integer duree = Integer.valueOf(items[2]);
 
-				Long id = Long.valueOf(items[0]);
-				String nom = String.valueOf(items[1]);
-				Integer duree = Integer.valueOf(items[2]);
+					Matiere matiere = new Matiere(id, nom, duree);
 
-				Matiere matiere = new Matiere(id, nom, duree);
+					matieres.add(matiere);
+				}
 
-				matieres.add(matiere);
-			}
-
-		} catch (IOException e) {
-			e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}	
 		}
 
 		return matieres;

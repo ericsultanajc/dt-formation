@@ -5,11 +5,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import sopra.formation.dao.IDao;
 import sopra.formation.dao.IFiliereDao;
 import sopra.formation.model.Dispositif;
 import sopra.formation.model.Filiere;
@@ -18,7 +18,6 @@ public class FiliereDaoCsv implements IFiliereDao {
 	
 	private final String fileName;
 	private final String separator = ";";
-	private final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 	
 	public FiliereDaoCsv(String fileName) {
 		super();
@@ -147,11 +146,7 @@ public class FiliereDaoCsv implements IFiliereDao {
 				Long id = Long.valueOf(items[0]);
 				String intitule = String.valueOf(items[1]);
 				String promotion = String.valueOf(items[2]);
-				
-				//SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-				Date dtDebut;
-				dtDebut = (Date)this.sdf.parse(items[3]);
-				
+				Date dtDebut = (Date)IDao.sdf.parse(items[3]);
 				Integer duree = Integer.valueOf(items[4]);
 				Dispositif dispositif = Dispositif.valueOf(items[5]);
 				
@@ -170,9 +165,7 @@ public class FiliereDaoCsv implements IFiliereDao {
 		List<String> lines = new ArrayList<String>();
 		
 		for(Filiere filiere : filieres) {
-			//SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-			String dtDebut = this.sdf.format(filiere.getDtDebut());
-			
+
 			StringBuilder line = new StringBuilder();
 			line.append(filiere.getId());
 			line.append(this.separator);
@@ -180,7 +173,7 @@ public class FiliereDaoCsv implements IFiliereDao {
 			line.append(this.separator);
 			line.append(filiere.getPromotion());
 			line.append(this.separator);
-			line.append(dtDebut);
+			line.append(IDao.sdf.format(filiere.getDtDebut()));
 			line.append(this.separator);
 			line.append(filiere.getDuree());
 			line.append(this.separator);

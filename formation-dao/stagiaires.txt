@@ -1,0 +1,4 @@
+1;M;Poul;Tristan;tristan.poul@hotmail.fr;0665590784;15/03/1995;BAC_5
+2;MME;Dupond;Alice;alice.dupond@gmail.com;0785850674;19/08/1993;BAC_3
+3;MLLE;GIRARD;Jeanne;jeanne.girard@gmail.com;0612233445;05/12/1999;BAC_8
+4;MLLE;Caoudj;Fatima;hello@fgh.fr;094893;13/04/2021;BAC_8

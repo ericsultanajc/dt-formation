@@ -2,19 +2,28 @@ package sopra.formation.test;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
 import sopra.formation.dao.IEvaluationDao;
 import sopra.formation.dao.IFiliereDao;
 import sopra.formation.dao.IMatiereDao;
+import sopra.formation.dao.ISalleDao;
+import sopra.formation.dao.IStagiaireDao;
 import sopra.formation.dao.file.csv.EvaluationDaoCsv;
 import sopra.formation.dao.file.csv.FiliereDaoCsv;
 import sopra.formation.dao.file.csv.MatiereDaoCsv;
+import sopra.formation.dao.file.csv.SalleDaoCsv;
+import sopra.formation.dao.file.csv.StagiaireDaoCsv;
+import sopra.formation.model.Civilite;
 import sopra.formation.model.Dispositif;
 import sopra.formation.model.Evaluation;
 import sopra.formation.model.Filiere;
 import sopra.formation.model.Matiere;
+import sopra.formation.model.NiveauEtude;
+import sopra.formation.model.Salle;
+import sopra.formation.model.Stagiaire;
 
 public class TestDao {
 
@@ -110,8 +119,38 @@ public class TestDao {
 		// TEST PERSONNE ////////////////////////////////////////////////////////////////////////
 		
 		// TEST SALLE ///////////////////////////////////////////////////////////////////////////
+		ISalleDao salleDao = new SalleDaoCsv("salles.txt");
+		
+		List<Salle> salles = salleDao.findAll();
+
+		for (Salle salle : salles) {
+			System.out.println(salle);
+		}
+		
+		Salle salle2 = salleDao.findById(2L);
+		System.out.println(salle2);
+		
 		
 		// TEST STAGIAIRE ///////////////////////////////////////////////////////////////////////
+		IStagiaireDao stagiaireDao = new StagiaireDaoCsv("stagiaires.txt");
+		
+		List<Stagiaire> stagiaires = stagiaireDao.findAll();
+		
+		System.out.println(Arrays.toString(stagiaires.toArray()));
+		
+		Stagiaire stagiaire2 = stagiaireDao.findById(2L);
+		System.out.println(stagiaire2);
+		
+		Stagiaire stagiaire4 = new Stagiaire();
+		try {
+			date1 = (Date)sdf.parse("13/04/2021");
+			stagiaire4 = new Stagiaire(Civilite.MLLE, "Caoudj", "Fatima", "hello@fgh.fr", "094893", date1, NiveauEtude.BAC_8);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		stagiaireDao.create(stagiaire4);
+		stagiaireDao.delete(stagiaire4);
 		
 		// TEST UE //////////////////////////////////////////////////////////////////////////////
 	}
