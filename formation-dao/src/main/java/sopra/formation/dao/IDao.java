@@ -2,8 +2,8 @@ package sopra.formation.dao;
 
 import java.util.List;
 
-public interface IDao<T,PK> {
-	public List<T> findAll();
+public interface IDao<T,PK> {		//T et PL sont génériques : ont peut les remplacer dans 
+	public List<T> findAll();		//les classes filles pour changer les types 
 
 	public T findById(PK id);
 
