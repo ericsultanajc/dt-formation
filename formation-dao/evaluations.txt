@@ -8,3 +8,5 @@
 15;18;15;Grosse amélioration
 16;14;12;Peut mieux faire
 17;14;12;Peut mieux faire
+18;14;12;Peut mieux faire
+19;14;12;Peut mieux faire
