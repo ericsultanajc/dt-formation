@@ -77,15 +77,4 @@ public class TestRead {
 		return lines;
 	}
 	
-	private static List<String> readWithNIO() {
-	    Path path = Paths.get(EVAL_FILENAME);
-	    List<String> read = new ArrayList<String>();
-	    try {
-			read = Files.readAllLines(path);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	    return read;
-	}
-	
 }
