@@ -6,7 +6,7 @@ import java.util.List;
 public class Matiere {
 	private Long id;
 	private String nom;
-	private Integer matiere;
+	private Integer duree;
 	private List<Formateur> Formateurs = new ArrayList<>();
 	private List<UE> ues = new ArrayList<>();
 
@@ -16,10 +16,19 @@ public class Matiere {
 	
 	
 
-	public Matiere(String nom, Integer matiere) {
+	public Matiere(Long id, String noms, Integer duree) {
+		super();
+		this.id = id;
+		this.nom = nom;
+		this.duree=duree;
+	}
+
+
+
+	public Matiere(String nom, Integer duree) {
 		super();
 		this.nom = nom;
-		this.matiere = matiere;
+		this.duree = duree;
 	}
 
 
@@ -64,12 +73,18 @@ public class Matiere {
 		this.nom = nom;
 	}
 
-	public Integer getMatiere() {
-		return matiere;
+
+
+	public Integer getDuree() {
+		return duree;
 	}
 
-	public void setMatiere(Integer matiere) {
-		this.matiere = matiere;
+
+
+	public void setDuree(Integer duree) {
+		this.duree = duree;
 	}
+	
+	
 
 }

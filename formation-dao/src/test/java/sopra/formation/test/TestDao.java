@@ -52,7 +52,7 @@ public class TestDao {
 		lea.setNom("DUMONT");
 		lea.setPrenom("Léa");
 		lea.setTelephone("0606060606");
-		lea.setDtNaissance(sdf.parse("25/12/1995"));
+		lea.setDtnaissance(sdf.parse("25/12/1995"));
 		lea.setNiveauEtude(NiveauEtude.BAC_8);
 
 		Adresse adrLea = new Adresse();
@@ -64,7 +64,7 @@ public class TestDao {
 
 		lea.setAdresse(adrLea);
 		
-		lea.setEvaluation(evaluation);
+		lea.setEval(evaluation);
 		
 		
 		stagiaireDao.create(lea);
@@ -74,7 +74,7 @@ public class TestDao {
 		manon.setNom("SERAIN");
 		manon.setPrenom("Manon");
 		manon.setTelephone("0645457845");
-		((Stagiaire) manon).setDtNaissance(sdf.parse("01/01/1996"));
+		((Stagiaire) manon).setDtnaissance(sdf.parse("01/01/1996"));
 		((Stagiaire) manon).setNiveauEtude(NiveauEtude.BAC_5);
 		
 		stagiaireDao.create(manon);

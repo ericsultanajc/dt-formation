@@ -161,8 +161,8 @@ public class StagiaireDaoCsv implements IStagiaireDao {
 					stagiaire.setCivilite(civilite);
 					stagiaire.setNom(nom);
 					stagiaire.setPrenom(prenom);
-					stagiaire.setEmail(email);
-					stagiaire.setDtNaissance(dtNaissance);
+					stagiaire.setMail(email);
+					stagiaire.setDtnaissance(dtNaissance);
 					stagiaire.setNiveauEtude(niveauEtude);
 
 					Adresse adresse = new Adresse(rue, complement, codePostal, ville);
@@ -171,7 +171,7 @@ public class StagiaireDaoCsv implements IStagiaireDao {
 
 					if (idEvaluation != null) {
 						Evaluation evaluation = Application.getInstance().getEvaluationDao().findById(idEvaluation);
-						stagiaire.setEvaluation(evaluation);
+						stagiaire.setEval(evaluation);
 					}
 
 					stagiaires.add(stagiaire);
@@ -196,8 +196,8 @@ public class StagiaireDaoCsv implements IStagiaireDao {
 			sb.append(stagiaire.getCivilite()).append(this.separator);
 			sb.append(stagiaire.getNom()).append(this.separator);
 			sb.append(stagiaire.getPrenom()).append(this.separator);
-			sb.append(stagiaire.getEmail()).append(this.separator);
-			sb.append(sdf.format(stagiaire.getDtNaissance())).append(this.separator);
+			sb.append(stagiaire.getMail()).append(this.separator);
+			sb.append(sdf.format(stagiaire.getDtnaissance())).append(this.separator);
 			sb.append(stagiaire.getNiveauEtude()).append(this.separator);
 			if (stagiaire.getAdresse() != null) {
 				sb.append(stagiaire.getAdresse().getRue()).append(this.separator);
@@ -210,8 +210,8 @@ public class StagiaireDaoCsv implements IStagiaireDao {
 				sb.append(this.separator);
 				sb.append(this.separator);
 			}
-			if (stagiaire.getEvaluation() != null && stagiaire.getEvaluation().getId() != null) {
-				sb.append(stagiaire.getEvaluation().getId());
+			if (stagiaire.getEval() != null && stagiaire.getEval().getId() != null) {
+				sb.append(stagiaire.getEval().getId());
 			}
 
 			String line = sb.toString();

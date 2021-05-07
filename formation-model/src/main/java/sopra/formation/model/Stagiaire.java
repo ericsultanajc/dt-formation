@@ -20,6 +20,11 @@ public class Stagiaire extends Personne {
 	public Stagiaire() {
 		super();
 	 }
+	
+	public Stagiaire(String mail) {
+		super(mail);
+	 }
+	
 	 
 	 
 	public Stagiaire(Civilite civilite, String nom, String prenom, String email, String tel,Date dtnaissance, NiveauEtude niveauEtude) {
