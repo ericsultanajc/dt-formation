@@ -4,57 +4,92 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import sopra.formation.Application;
+import sopra.formation.dao.IEvaluationDao;
+import sopra.formation.dao.IFiliereDao;
+import sopra.formation.dao.IMatiereDao;
 import sopra.formation.dao.IStagiaireDao;
-import sopra.formation.dao.file.csv.StagiaireDaoCsv;
+import sopra.formation.model.Adresse;
 import sopra.formation.model.Civilite;
+import sopra.formation.model.Dispositif;
+import sopra.formation.model.Evaluation;
+import sopra.formation.model.Filiere;
 import sopra.formation.model.NiveauEtude;
 import sopra.formation.model.Stagiaire;
-
-//import sopra.formation.dao.IEvaluationDao;
-//import sopra.formation.dao.file.csv.EvaluationDaoCsv;
-//import sopra.formation.model.Evaluation;
-//import sopra.formation.dao.IMatiereDao;
-//import sopra.formation.dao.file.csv.MatiereDaoCsv;
-//import sopra.formation.model.Matiere;
 
 public class TestDao {
 
 	public static void main(String[] args) throws ParseException {
-		//		IEvaluationDao evaluationDao = new EvaluationDaoCsv("evaluations.txt");
-		//
-		//		List<Evaluation> evaluations = evaluationDao.findAll();
-		//		
-		//		IMatiereDao matiereDao = new MatiereDaoCsv("matieres.txt");
-		//
-		//		List<Matiere> matieres = matiereDao.findAll();		
-
-		IStagiaireDao stagiaireDao = new StagiaireDaoCsv("stagiaires.txt");
-		List<Stagiaire> stagiaires = stagiaireDao.findAll();	
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		
-		
-		System.out.println(stagiaireDao.findById(1L));
-		System.out.println("----------------------------------------");
+		IEvaluationDao evaluationDao = Application.getInstance().getEvaluationDao();
+		IStagiaireDao stagiaireDao = Application.getInstance().getStagiaireDao();
+		IMatiereDao matiereDao = Application.getInstance().getMatiereDao();
+		IFiliereDao filiereDao = Application.getInstance().getFiliereDao();
 
-		
-		SimpleDateFormat sdf= new SimpleDateFormat("dd/MM/yyyy");
-		Stagiaire stagiaire = new Stagiaire(5L,"h.martin@fr");
+		List<Evaluation> evaluations = evaluationDao.findAll();
 
-		stagiaireDao.create(stagiaire);
-
-		stagiaire.setCivilite(Civilite.MME);
-		stagiaire.setNom("BLONDEAU");	
-		stagiaire.setPrenom("Ginette");
-		stagiaire.setTelephone("0241");
-		stagiaire.setDtNaissance(sdf.parse("12/12/2020"));
-		stagiaire.setNiveauEtude(NiveauEtude.BAC);
-
-		stagiaireDao.update(stagiaire);
-
-////		stagiaireDao.delete(stagiaire);
-
-		for (Stagiaire stag : stagiaires) {
-			System.out.println(stag);
+		for (Evaluation evaluation : evaluations) {
+			System.out.println(evaluation);
 		}
+
+		System.out.println(evaluationDao.findById(5L));
+
+		Evaluation evaluation = new Evaluation(14, 12, "Peut mieux faire");
+
+		evaluationDao.create(evaluation);
+//
+//		evaluation.setComportemental(18);
+//		evaluation.setTechnique(15);
+//		evaluation.setCommentaires("Grosse amélioration");
+//
+//		evaluationDao.update(evaluation);
+
+//		evaluationDao.delete(evaluation);
+		
+		Stagiaire lea = new Stagiaire("lea.dumont@gmail.com");
+		lea.setCivilite(Civilite.MLLE);
+		lea.setNom("DUMONT");
+		lea.setPrenom("Léa");
+		lea.setTelephone("0606060606");
+		lea.setDtNaissance(sdf.parse("25/12/1995"));
+		lea.setNiveauEtude(NiveauEtude.BAC_8);
+
+		Adresse adrLea = new Adresse();
+
+		adrLea.setRue("5 avenue villemejan");
+		adrLea.setComplement("Résidence Diderot");
+		adrLea.setCodePostal("33600");
+		adrLea.setVille("PESSAC");
+
+		lea.setAdresse(adrLea);
+		
+		lea.setEvaluation(evaluation);
+		
+		
+		stagiaireDao.create(lea);
+
+		Stagiaire manon = new Stagiaire("serain.manon@yahoo.com");
+		manon.setCivilite(Civilite.MME);
+		manon.setNom("SERAIN");
+		manon.setPrenom("Manon");
+		manon.setTelephone("0645457845");
+		((Stagiaire) manon).setDtNaissance(sdf.parse("01/01/1996"));
+		((Stagiaire) manon).setNiveauEtude(NiveauEtude.BAC_5);
+		
+		stagiaireDao.create(manon);
+		
+		Filiere dreamTeam = new Filiere("DREAM TEAM");
+		dreamTeam.setIntitule("JAVA SPRING ANGULAR");
+		dreamTeam.setDtDebut(sdf.parse("13/04/2021"));
+		dreamTeam.setDuree(57);
+		dreamTeam.setDispositif(Dispositif.POEI);
+		
+		filiereDao.create(dreamTeam);
+
+		manon.setFiliere(dreamTeam);
+		
+		stagiaireDao.update(manon);
 	}
 
 }
