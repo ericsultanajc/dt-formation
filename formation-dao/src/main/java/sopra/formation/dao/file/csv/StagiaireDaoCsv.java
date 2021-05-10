@@ -17,6 +17,7 @@ import sopra.formation.dao.IStagiaireDao;
 import sopra.formation.model.Adresse;
 import sopra.formation.model.Civilite;
 import sopra.formation.model.Evaluation;
+import sopra.formation.model.Filiere;
 import sopra.formation.model.NiveauEtude;
 import sopra.formation.model.Stagiaire;
 
@@ -154,6 +155,7 @@ public class StagiaireDaoCsv implements IStagiaireDao {
 					String codePostal = items[9];
 					String ville = items[10];
 					Long idEvaluation = !items[11].isBlank() ? Long.valueOf(items[11]) : null;
+					Long idFiliere = !items[12].isBlank() ? Long.valueOf(items[12]) : null;
 
 					Stagiaire stagiaire = new Stagiaire(id, email);
 					stagiaire.setCivilite(civilite);
@@ -169,6 +171,11 @@ public class StagiaireDaoCsv implements IStagiaireDao {
 					if (idEvaluation != null) {
 						Evaluation evaluation = Application.getInstance().getEvaluationDao().findById(idEvaluation);
 						stagiaire.setEvaluation(evaluation);
+					}
+					
+					if(idFiliere != null) {
+						Filiere filiere = Application.getInstance().getFiliereDao().findById(idFiliere);
+						stagiaire.setFiliere(filiere);
 					}
 
 					stagiaires.add(stagiaire);
@@ -208,7 +215,16 @@ public class StagiaireDaoCsv implements IStagiaireDao {
 				sb.append(this.separator);
 			}
 			if (stagiaire.getEvaluation() != null && stagiaire.getEvaluation().getId() != null) {
-				sb.append(stagiaire.getEvaluation().getId() );
+				sb.append(stagiaire.getEvaluation().getId()).append(this.separator);
+			} else {
+				sb.append(this.separator);
+			}
+			
+			if(stagiaire.getFiliere() != null) {
+				if(stagiaire.getFiliere().getId() == null) {
+					throw new RuntimeException("La filière na pas été crée");
+				}
+				sb.append(stagiaire.getFiliere().getId());
 			}
 
 			String line = sb.toString();
