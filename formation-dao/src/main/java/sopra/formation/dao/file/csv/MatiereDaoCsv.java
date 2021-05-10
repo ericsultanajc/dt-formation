@@ -1,11 +1,11 @@
 package sopra.formation.dao.file.csv;
 
 import java.io.IOException;
-
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,32 +86,6 @@ public class MatiereDaoCsv implements IMatiereDao {
 		matieres.add(obj);
 
 		write(matieres);
-	}
-	
-	//0000000000000000000000000000000000000000000000000000000000
-	
-	private void write(List<Matiere> matieres) {
-		List<String> lines = new ArrayList<String>();
-
-		for (Matiere matiere : matieres) {
-			StringBuilder line = new StringBuilder();
-			line.append(matiere.getId());
-			line.append(this.separator);
-			line.append(matiere.getNom());
-			line.append(this.separator);
-			line.append(matiere.getDuree());
-
-			lines.add(line.toString());
-		}
-
-		Path path = Paths.get(this.fileName);
-
-		try {
-			Files.write(path, lines);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
 	}
 	
 	//0000000000000000000000000000000000000000000000000000000000

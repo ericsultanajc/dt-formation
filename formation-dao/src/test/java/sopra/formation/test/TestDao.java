@@ -8,13 +8,17 @@ import sopra.formation.Application;
 import sopra.formation.dao.IEvaluationDao;
 import sopra.formation.dao.IFiliereDao;
 import sopra.formation.dao.IMatiereDao;
+import sopra.formation.dao.ISalleDao;
 import sopra.formation.dao.IStagiaireDao;
+import sopra.formation.dao.sql.MatiereDaoSql;
 import sopra.formation.model.Adresse;
 import sopra.formation.model.Civilite;
 import sopra.formation.model.Dispositif;
 import sopra.formation.model.Evaluation;
 import sopra.formation.model.Filiere;
+import sopra.formation.model.Matiere;
 import sopra.formation.model.NiveauEtude;
+import sopra.formation.model.Salle;
 import sopra.formation.model.Stagiaire;
 
 public class TestDao {
@@ -27,11 +31,13 @@ public class TestDao {
 		IStagiaireDao stagiaireDao = Application.getInstance().getStagiaireDao();
 		IMatiereDao matiereDao = Application.getInstance().getMatiereDao();
 		IFiliereDao filiereDao = Application.getInstance().getFiliereDao();
+		ISalleDao salleDao = Application.getInstance().getSalleDao();
 
 		List<Evaluation> evaluations = evaluationDao.findAll();
 		List<Matiere> matieres = matiereDao.findAll();
 		List<Stagiaire> stagiaires = stagiaireDao.findAll();
 		List<Filiere> filieres = filiereDao.findAll();
+		List<Salle> salles = salleDao.findAll();
 
 		for (Evaluation evaluation : evaluations) {
 			System.out.println(evaluation);
@@ -47,6 +53,10 @@ public class TestDao {
 		
 		for (Filiere filiere : filieres) {
 			System.out.println(filiere);
+		}
+		
+		for (Salle salle : salles) {
+			System.out.println(salle);
 		}
 
 
@@ -75,6 +85,29 @@ public class TestDao {
 		evaluationDao.update(evaluation);
 
 		evaluationDao.delete(evaluation);
+		
+		matiereDao.create(matiere);
+		matiereDao.create(matiere1);
+		matiereDao.create(matiere2);
+		matiereDao.create(matiere3);
+		
+		Salle salle1 = new Salle("Salle 32", 25, true);
+		Salle salle2 = new Salle("Salle 33", 30, false);
+		Salle salle3 = new Salle("Salle 34", 27, true);
+		
+		Adresse adresse1 = new Adresse("1 rue des champs", "", "33000", "Bordeaux");
+		Adresse adresse2 = new Adresse("2 impasse toto", "", "33540", "Bordeaux ext");
+		Adresse adresse3 = new Adresse("3 impasse tata", "", "32475", "Bordeaux int");
+		
+		salle1.setAdr(adresse1);
+		salle2.setAdr(adresse2);
+		salle3.setAdr(adresse3);
+		
+		salleDao.create(salle1);
+		salleDao.create(salle2);
+		salleDao.create(salle3);
+		
+
 		
 //		Stagiaire lea = new Stagiaire("lea.dumont@gmail.com");
 //		lea.setCivilite(Civilite.MLLE);

@@ -29,6 +29,8 @@ public class Salle {
 		this.capacite = capacite;
 		this.videoProjecteur = videoProjecteur;
 	}
+	
+	
 
 	public Long getId() {
 		return id;
