@@ -1,6 +1,8 @@
 package sopra.formation.model;
 
-public class Evaluation {
+import java.io.Serializable;
+
+public class Evaluation implements Serializable {
 	private Long id;
 	private Integer comportemental;
 	private Integer technique;
