@@ -1,7 +1,9 @@
 
 package sopra.formation.model;
 
-public class Adresse {
+import java.io.Serializable;
+
+public class Adresse implements Serializable {
 	private Long id;
 	private String rue;
 	private String complement;
