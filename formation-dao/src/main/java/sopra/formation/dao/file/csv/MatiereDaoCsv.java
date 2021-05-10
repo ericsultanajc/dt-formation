@@ -13,7 +13,6 @@ import sopra.formation.dao.IMatiereDao;
 import sopra.formation.model.Matiere;
 
 public class MatiereDaoCsv implements IMatiereDao {
-	
 	private final String fileName;
 	private final String separator = ";";
 
@@ -26,33 +25,6 @@ public class MatiereDaoCsv implements IMatiereDao {
 		return read();
 	}
 
-	private List<Matiere> read() {
-		List<Matiere> matieres = new ArrayList<Matiere>();
-
-		Path path = Paths.get(this.fileName);
-
-		try {
-			List<String> lines = Files.readAllLines(path);
-
-			for (String line : lines) {
-				String[] items = line.split(this.separator);
-
-				Long id = Long.valueOf(items[0]);
-				String nom = String.valueOf(items[1]);
-				Integer duree = Integer.valueOf(items[2]);
-				
-				Matiere matiere = new Matiere(id, nom, duree);
-
-				matieres.add(matiere);
-			}
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		return matieres;
-	}
-	
 	public Matiere findById(Long id) {
 		List<Matiere> matieres = read();
 
@@ -63,29 +35,6 @@ public class MatiereDaoCsv implements IMatiereDao {
 		}
 
 		return null;
-	}
-	
-	private void write(List<Matiere> matieres) {
-		List<String> lines = new ArrayList<String>();
-
-		for (Matiere matiere : matieres) {
-			StringBuilder line = new StringBuilder();
-			line.append(matiere.getId());
-			line.append(this.separator);
-			line.append(matiere.getNom());
-			line.append(this.separator);
-			line.append(matiere.getDuree());
-			lines.add(line.toString());
-		}
-
-		Path path = Paths.get(this.fileName);
-
-		try {
-			Files.write(path, lines);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
 	}
 
 	public void create(Matiere obj) {
@@ -151,5 +100,58 @@ public class MatiereDaoCsv implements IMatiereDao {
 
 			write(matieres);
 		}
+	}
+
+	private List<Matiere> read() {
+		List<Matiere> matieres = new ArrayList<Matiere>();
+
+		Path path = Paths.get(this.fileName);
+
+		if (path.toFile().exists()) {
+			try {
+				List<String> lines = Files.readAllLines(path);
+
+				for (String line : lines) {
+					String[] items = line.split(this.separator);
+
+					Long id = Long.valueOf(items[0]);
+					String nom = items[1];
+					Integer duree = Integer.valueOf(items[2]);
+
+					Matiere matiere = new Matiere(id, nom, duree);
+
+					matieres.add(matiere);
+				}
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return matieres;
+	}
+
+	private void write(List<Matiere> matieres) {
+		List<String> lines = new ArrayList<String>();
+
+		for (Matiere matiere : matieres) {
+			StringBuilder line = new StringBuilder();
+			line.append(matiere.getId());
+			line.append(this.separator);
+			line.append(matiere.getNom());
+			line.append(this.separator);
+			line.append(matiere.getDuree());
+
+			lines.add(line.toString());
+		}
+
+		Path path = Paths.get(this.fileName);
+
+		try {
+			Files.write(path, lines, StandardCharsets.UTF_8, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.CREATE);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 }

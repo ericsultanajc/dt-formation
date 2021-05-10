@@ -13,11 +13,11 @@ import java.util.Date;
 import java.util.List;
 
 import sopra.formation.Application;
-import sopra.formation.dao.IEvaluationDao;
 import sopra.formation.dao.IStagiaireDao;
 import sopra.formation.model.Adresse;
 import sopra.formation.model.Civilite;
 import sopra.formation.model.Evaluation;
+import sopra.formation.model.Filiere;
 import sopra.formation.model.NiveauEtude;
 import sopra.formation.model.Stagiaire;
 
@@ -150,14 +150,15 @@ public class StagiaireDaoCsv implements IStagiaireDao {
 						e.printStackTrace();
 					}
 					NiveauEtude niveauEtude = items[6].length() > 0 ? NiveauEtude.valueOf(items[6]) : null;
-					
 					String rue = items[7];
 					String complement = items[8];
 					String codePostal = items[9];
 					String ville = items[10];
 					Long idEvaluation = !items[11].isBlank() ? Long.valueOf(items[11]) : null;
+					Long idFiliere = !items[12].isBlank() ? Long.valueOf(items[12]) : null;
 
-					Stagiaire stagiaire = new Stagiaire(id, email);
+					Stagiaire stagiaire = new Stagiaire(email);
+					stagiaire.setId(id);
 					stagiaire.setCivilite(civilite);
 					stagiaire.setNom(nom);
 					stagiaire.setPrenom(prenom);
@@ -173,8 +174,9 @@ public class StagiaireDaoCsv implements IStagiaireDao {
 						stagiaire.setEvaluation(evaluation);
 					}
 					
-					if (idFiliere != null) {
-						
+					if(idFiliere != null) {
+						Filiere filiere = Application.getInstance().getFiliereDao().findById(idFiliere);
+						stagiaire.setFiliere(filiere);
 					}
 
 					stagiaires.add(stagiaire);
@@ -214,7 +216,16 @@ public class StagiaireDaoCsv implements IStagiaireDao {
 				sb.append(this.separator);
 			}
 			if (stagiaire.getEvaluation() != null && stagiaire.getEvaluation().getId() != null) {
-				sb.append(stagiaire.getEvaluation().getId() );
+				sb.append(stagiaire.getEvaluation().getId()).append(this.separator);
+			} else {
+				sb.append(this.separator);
+			}
+			
+			if(stagiaire.getFiliere() != null) {
+				if(stagiaire.getFiliere().getId() == null) {
+					throw new RuntimeException("La filière na pas été crée");
+				}
+				sb.append(stagiaire.getFiliere().getId());
 			}
 
 			String line = sb.toString();
