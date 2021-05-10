@@ -1,10 +1,11 @@
 package sopra.formation.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Filiere {
+public class Filiere implements Serializable {
 	private Long id;
 	private String intitule;
 	private String promotion;
