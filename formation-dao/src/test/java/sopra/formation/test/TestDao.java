@@ -14,6 +14,7 @@ import sopra.formation.model.Civilite;
 import sopra.formation.model.Dispositif;
 import sopra.formation.model.Evaluation;
 import sopra.formation.model.Filiere;
+import sopra.formation.model.Matiere;
 import sopra.formation.model.NiveauEtude;
 import sopra.formation.model.Stagiaire;
 

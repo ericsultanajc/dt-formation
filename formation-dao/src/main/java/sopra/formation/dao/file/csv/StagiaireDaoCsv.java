@@ -168,7 +168,7 @@ public class StagiaireDaoCsv implements IStagiaireDao {
 					
 					stagiaire.setAdresse(adresse);
 
-					if (idEvaluation != null) {
+					if(idEvaluation != null) {
 						Evaluation evaluation = Application.getInstance().getEvaluationDao().findById(idEvaluation);
 						stagiaire.setEvaluation(evaluation);
 					}
