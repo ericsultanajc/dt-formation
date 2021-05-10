@@ -12,9 +12,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import sopra.formation.Application;
 import sopra.formation.dao.IFiliereDao;
 import sopra.formation.model.Dispositif;
 import sopra.formation.model.Filiere;
+import sopra.formation.model.Formateur;
 
 public class FiliereDaoCsv implements IFiliereDao {
 
@@ -134,7 +136,7 @@ public class FiliereDaoCsv implements IFiliereDao {
 					}
 					Integer duree = !items[4].isBlank() ? Integer.valueOf(items[4]) : null;
 					Dispositif dispositif = !items[5].isBlank() ? Dispositif.valueOf(items[5]) : null;
-//					Long idReferent = !items[6].isBlank() ? Long.valueOf(items[6]) : null;
+					Long idReferent = !items[6].isBlank() ? Long.valueOf(items[6]) : null;
 
 					Filiere filiere = new Filiere();
 					filiere.setId(id);
@@ -144,11 +146,11 @@ public class FiliereDaoCsv implements IFiliereDao {
 					filiere.setDuree(duree);
 					filiere.setDispositif(dispositif);
 
-//					if (idReferent != null) {
-//						Formateur formateur = Application.getInstance().getFormateurDao().find(idReferent);
-//
-//						filiere.setReferent(formateur);
-//					}
+					if (idReferent != null) {
+						Formateur formateur = Application.getInstance().getFormateurDao().findById(idReferent);
+
+						filiere.setReferent(formateur);
+					}
 
 					filieres.add(filiere);
 				}
@@ -174,15 +176,15 @@ public class FiliereDaoCsv implements IFiliereDao {
 			sb.append(filiere.getDuree()).append(this.separator);
 			sb.append(filiere.getDispositif()).append(this.separator);
 
-//			if (filiere.getReferent() != null && filiere.getReferent().getId() != null) {
-//				sb.append(filiere.getReferent().getId());
-//			}
+			if (filiere.getReferent() != null && filiere.getReferent().getId() != null) {
+				sb.append(filiere.getReferent().getId());
+			}
 
 			lines.add(sb.toString());
 		}
 
 		try {
-			Files.write(path, lines, StandardCharsets.UTF_8, StandardOpenOption.TRUNCATE_EXISTING,StandardOpenOption.CREATE);
+			Files.write(path, lines, StandardCharsets.UTF_8, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.CREATE);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

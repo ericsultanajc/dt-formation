@@ -156,7 +156,7 @@ public class MatiereDaoCsv implements IMatiereDao {
 		Path path = Paths.get(this.fileName);
 
 		try {
-			Files.write(path, lines, StandardCharsets.UTF_8, StandardOpenOption.TRUNCATE_EXISTING);
+			Files.write(path, lines, StandardCharsets.UTF_8, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.CREATE);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
