@@ -75,8 +75,5 @@ public class Application {
 		return ueDao;
 	}
 	
-	public Connection getConnection() throws SQLException {
-		return DriverManager.getConnection("jdbc:mysql://localhost:3306/formation", "root", "admin");
-	}
 
 }

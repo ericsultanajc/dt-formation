@@ -147,8 +147,7 @@ public class FiliereDaoCsv implements IFiliereDao {
 					filiere.setDispositif(dispositif);
 
 					if (idReferent != null) {
-						Formateur formateur = Application.getInstance().getFormateurDao().findById(idReferent);
-
+						Formateur formateur = Application.getInstance().getFormateurDao().find(idReferent);
 						filiere.setReferent(formateur);
 					}
 
@@ -184,7 +183,7 @@ public class FiliereDaoCsv implements IFiliereDao {
 		}
 
 		try {
-			Files.write(path, lines, StandardCharsets.UTF_8, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.CREATE);
+			Files.write(path, lines, StandardCharsets.UTF_8, StandardOpenOption.TRUNCATE_EXISTING);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
