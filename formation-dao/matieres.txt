@@ -2,3 +2,6 @@
 2;Comportement;5
 3;SQL;30
 5;SQL;30
+6;maths;6
+7;svt;5
+8;anglais;2

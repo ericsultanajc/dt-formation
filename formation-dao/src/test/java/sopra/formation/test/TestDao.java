@@ -30,35 +30,35 @@ public class TestDao {
 		IFiliereDao filiereDao = Application.getInstance().getFiliereDao();
 
 		
-		List<Evaluation> evaluations = evaluationDao.findAll();
-		List<Filiere> filieres = filiereDao.findAll();
-		
-
-		for (Evaluation evaluation : evaluations) {
-			System.out.println(evaluation);
-		}
-		
-		
-		List<Matiere> matieres=matiereDao.findAll();
-		
-		for (Matiere matiere : matieres) {
-			System.out.println(matieres);
-		}
-		
-		List<Stagiaire> stagiaires=stagiaireDao.findAll();
-		
-		for (Matiere matiere : matieres) {
-			System.out.println(matieres);
-		}
-
-		System.out.println(evaluationDao.findById(5L));
-		
-		System.out.println(matiereDao.findById(1L));
-
-		Evaluation evaluation = new Evaluation(14, 12, "Peut mieux faire");
-		Matiere matiere = new Matiere(3L,"SQL", 30);
-
-		evaluationDao.create(evaluation);
+//		List<Evaluation> evaluations = evaluationDao.findAll();
+//		List<Filiere> filieres = filiereDao.findAll();
+//		
+//
+//		for (Evaluation evaluation : evaluations) {
+//			System.out.println(evaluation);
+//		}
+//		
+//		
+//		List<Matiere> matieres=matiereDao.findAll();
+//		
+//		for (Matiere matiere : matieres) {
+//			System.out.println(matieres);
+//		}
+//		
+//		List<Stagiaire> stagiaires=stagiaireDao.findAll();
+//		
+//		for (Matiere matiere : matieres) {
+//			System.out.println(matieres);
+//		}
+//
+//		System.out.println(evaluationDao.findById(5L));
+//		
+//		System.out.println(matiereDao.findById(1L));
+//
+//		Evaluation evaluation = new Evaluation(14, 12, "Peut mieux faire");
+//		Matiere matiere = new Matiere(3L,"SQL", 30);
+//
+//		evaluationDao.create(evaluation);
 
 //		evaluation.setComportemental(18);
 //		evaluation.setTechnique(15);
@@ -70,13 +70,13 @@ public class TestDao {
 		
 		
 
-		evaluation.setComportemental(18);
-		evaluation.setTechnique(15);
-		evaluation.setCommentaires("Grosse amélioration");
-
-		evaluationDao.update(evaluation);
-
-		evaluationDao.delete(evaluation);
+//		evaluation.setComportemental(18);
+//		evaluation.setTechnique(15);
+//		evaluation.setCommentaires("Grosse amélioration");
+//
+//		evaluationDao.update(evaluation);
+//
+//		evaluationDao.delete(evaluation);
 		
 //		Stagiaire lea = new Stagiaire("lea.dumont@gmail.com");
 //		lea.setCivilite(Civilite.MLLE);
@@ -123,6 +123,25 @@ public class TestDao {
 //		filiereDao.create(dreamTeam);
 //		
 //		stagiaireDao.update(manon);
+		
+		
+		
+		Matiere math = new Matiere();
+		Matiere svt = new Matiere();
+		Matiere anglais = new Matiere();
+		
+		matiereDao.create(math);
+		math.setNom("math");
+		math.setDuree(6);
+		
+		matiereDao.create(svt);
+		math.setNom("svt");
+		math.setDuree(5);
+		
+		matiereDao.create(anglais);
+		math.setNom("anglais");
+		math.setDuree(2);
+		
 	}
 	
 	
