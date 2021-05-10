@@ -6,6 +6,7 @@ import java.util.List;
 
 import sopra.formation.Application;
 import sopra.formation.dao.IEvaluationDao;
+import sopra.formation.dao.IFiliereDao;
 import sopra.formation.dao.IMatiereDao;
 import sopra.formation.dao.IStagiaireDao;
 import sopra.formation.dao.file.csv.EvaluationDaoCsv;
@@ -13,6 +14,7 @@ import sopra.formation.dao.file.csv.MatiereDaoCsv;
 import sopra.formation.dao.file.csv.StagiaireDaoCsv;
 import sopra.formation.model.Adresse;
 import sopra.formation.model.Civilite;
+import sopra.formation.model.Dispositif;
 import sopra.formation.model.Evaluation;
 import sopra.formation.model.Filiere;
 import sopra.formation.model.NiveauEtude;
@@ -27,6 +29,7 @@ public class TestDao {
 		IEvaluationDao evaluationDao = Application.getInstance().getEvaluationDao();
 		IStagiaireDao stagiaireDao = Application.getInstance().getStagiaireDao();
 		IMatiereDao matiereDao = Application.getInstance().getMatiereDao();
+		IFiliereDao filiereDao = Application.getInstance().getFiliereDao();
 
 		List<Evaluation> evaluations = evaluationDao.findAll();
 
@@ -79,6 +82,12 @@ public class TestDao {
 		((Stagiaire) manon).setNiveauEtude(NiveauEtude.BAC_5);
 		
 		Filiere filiereManon = new Filiere("laFiliereDeManon");
+		filiereManon.setDtDebut(sdf.parse("13/04/2021"));
+		filiereManon.setDuree(3);
+		filiereManon.setIntitule("Formation JEE");
+		filiereManon.setDispositif(Dispositif.POEI);
+		
+		filiereDao.create(filiereManon);
 		manon.setFiliere(filiereManon);
 		
 		stagiaireDao.create(manon);

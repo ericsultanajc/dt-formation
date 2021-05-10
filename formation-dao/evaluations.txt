@@ -11,3 +11,16 @@
 18;14;12;Peut mieux faire
 19;14;12;Peut mieux faire
 20;14;12;Peut mieux faire
+21;14;12;Peut mieux faire
+22;14;12;Peut mieux faire
+23;14;12;Peut mieux faire
+24;14;12;Peut mieux faire
+25;14;12;Peut mieux faire
+26;14;12;Peut mieux faire
+27;14;12;Peut mieux faire
+28;14;12;Peut mieux faire
+29;14;12;Peut mieux faire
+30;14;12;Peut mieux faire
+31;14;12;Peut mieux faire
+32;14;12;Peut mieux faire
+33;14;12;Peut mieux faire
