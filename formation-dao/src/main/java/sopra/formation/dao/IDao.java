@@ -4,15 +4,15 @@ import java.text.ParseException;
 import java.util.List;
 
 public interface IDao<T,PK> {
-	public List<T> findAll() throws ParseException;
+	public List<T> findAll();
 
-	public T findById(PK id) throws ParseException;
+	public T findById(PK id);
 
-	public void create(T obj) throws ParseException;
+	public void create(T obj);
 
-	public void update(T obj) throws ParseException;
+	public void update(T obj);
 
-	public void delete(T obj) throws ParseException;
+	public void delete(T obj);
 
-	public void deleteById(PK id) throws ParseException;
+	public void deleteById(PK id);
 }
