@@ -157,7 +157,7 @@ public class StagiaireDaoCsv implements IStagiaireDao {
 					Long idEvaluation = !items[11].isBlank() ? Long.valueOf(items[11]) : null;
 					Long idFiliere = !items[12].isBlank() ? Long.valueOf(items[12]) : null;
 
-					Stagiaire stagiaire = new Stagiaire(id, email);
+					Stagiaire stagiaire = new Stagiaire(id, nom, prenom, dtNaissance, email);
 					stagiaire.setCivilite(civilite);
 					stagiaire.setNom(nom);
 					stagiaire.setPrenom(prenom);

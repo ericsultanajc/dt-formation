@@ -28,11 +28,6 @@ public class TestDao {
 		IStagiaireDao stagiaireDao = Application.getInstance().getStagiaireDao();
 		IMatiereDao matiereDao = Application.getInstance().getMatiereDao();
 		IFiliereDao filiereDao = Application.getInstance().getFiliereDao();
-
-		adrLea.setRue("5 avenue villemejan");
-		adrLea.setComplement("Résidence Diderot");
-		adrLea.setCodePostal("33600");
-		adrLea.setVille("PESSAC");
 		
 		Stagiaire lea = new Stagiaire("lea.dumont@gmail.com");
 		lea.setCivilite(Civilite.MLLE);
@@ -43,8 +38,7 @@ public class TestDao {
 		lea.setNiveauEtude(NiveauEtude.BAC_8);
 		lea.setEvaluation(evaluationDao.findById(1L));
 		lea.setFiliere(filiereDao.findById(1L));
-		lea.setAdresse(adrLea);
-		
+
 		stagiaireDao.create(lea);
 		stagiaireDao.deleteById(1L);
 		
@@ -97,14 +91,7 @@ public class TestDao {
 //		
 //		stagiaireDao.create(lea);
 
-		adrLea.setRue("5 avenue villemejan");
-		adrLea.setComplement("Résidence Diderot");
-		adrLea.setCodePostal("33600");
-		adrLea.setVille("PESSAC");
 
-		lea.setAdresse(adrLea);
-		
-		lea.setEvaluation(evaluation);
 		
 		
 		stagiaireDao.create(lea);

@@ -8,7 +8,7 @@ public class Stagiaire extends Personne {
 	private Filiere filiere;
 	private Evaluation evaluation;
 
-	public Stagiaire() {
+	public Stagiaire(Long id, String nom, String prenom, Date dtNaissance2, String email) {
 		super();
 	}
 	

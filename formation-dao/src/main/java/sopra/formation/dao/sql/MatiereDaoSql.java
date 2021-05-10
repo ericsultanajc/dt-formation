@@ -1,20 +1,19 @@
 package sopra.formation.dao.sql;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
 import sopra.formation.Application;
-import sopra.formation.dao.IEvaluationDao;
-import sopra.formation.model.Evaluation;
+import sopra.formation.dao.IMatiereDao;
+import sopra.formation.model.Matiere;
 
-public class EvaluationDaoSql implements IEvaluationDao {
+public class MatiereDaoSql implements IMatiereDao {
 
 	@Override
-	public List<Evaluation> findAll() {
+	public List<Matiere> findAll() {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -51,25 +50,25 @@ public class EvaluationDaoSql implements IEvaluationDao {
 	}
 
 	@Override
-	public Evaluation findById(Long id) {
+	public Matiere findById(Long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void create(Evaluation obj) {
+	public void create(Matiere obj) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void update(Evaluation obj) {
+	public void update(Matiere obj) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void delete(Evaluation obj) {
+	public void delete(Matiere obj) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -78,12 +77,6 @@ public class EvaluationDaoSql implements IEvaluationDao {
 	public void deleteById(Long id) {
 		// TODO Auto-generated method stub
 		
-	}
-
-	@Override
-	public List<Evaluation> findAllByTechnique(Integer technique) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

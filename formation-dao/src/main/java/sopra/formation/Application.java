@@ -1,5 +1,9 @@
 package sopra.formation;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 import sopra.formation.dao.IEvaluationDao;
 import sopra.formation.dao.IFiliereDao;
 import sopra.formation.dao.IFormateurDao;
@@ -27,7 +31,11 @@ public class Application {
 	private final IUEDao ueDao = new UEDaoCsv("ues.txt");
 
 	private Application() {
-
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static Application getInstance() {
@@ -64,6 +72,10 @@ public class Application {
 
 	public IUEDao getUeDao() {
 		return ueDao;
+	}
+	
+	public Connection getConnection() throws SQLException {
+		return DriverManager.getConnection("jdbc:mysql://localhost:3306/formation", "root", "admin");
 	}
 
 }
