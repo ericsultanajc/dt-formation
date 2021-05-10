@@ -20,6 +20,21 @@
 
  	<dependencyManagement>
  		<dependencies>
+ 			<dependency>
+				<groupId>sopra.formation</groupId>
+				<artifactId>formation-dao</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+ 			<dependency>
+				<groupId>sopra.formation</groupId>
+				<artifactId>formation-model</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+ 			<dependency>
+			    <groupId>mysql</groupId>
+			    <artifactId>mysql-connector-java</artifactId>
+			    <version>8.0.24</version>
+			</dependency>
 			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>

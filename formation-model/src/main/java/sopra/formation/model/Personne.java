@@ -1,6 +1,8 @@
 package sopra.formation.model;
 
-public abstract class Personne {
+import java.io.Serializable;
+
+public abstract class Personne implements Serializable {
 	private Long id;
 	private Civilite civilite;
 	private String nom;

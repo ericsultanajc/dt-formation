@@ -22,6 +22,7 @@ import sopra.formation.model.Stagiaire;
 public class TestDao {
 
 	public static void main(String[] args) throws ParseException {
+	
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		
 		IEvaluationDao evaluationDao = Application.getInstance().getEvaluationDao();
@@ -58,19 +59,20 @@ public class TestDao {
 
 		
 
-//		evaluationDao.create(evaluation);
-//
-//		evaluation.setComportemental(18);
-//		evaluation.setTechnique(15);
-//		evaluation.setCommentaires("Grosse amélioration");
-//
-//		evaluationDao.update(evaluation);
+		Evaluation evaluation = new Evaluation(14, 12, "Peut mieux faire");
 
-//		evaluationDao.delete(evaluation);
+		evaluationDao.create(evaluation);
 		
-//		Filiere filiere = new Filiere(".NET","Dream Team",sdf.parse("25/12/1995"),4, Dispositif.PROA);
-//		
-//		
+		
+
+		evaluation.setComportemental(18);
+		evaluation.setTechnique(15);
+		evaluation.setCommentaires("Grosse amélioration");
+
+		evaluationDao.update(evaluation);
+
+		evaluationDao.delete(evaluation);
+		
 //		Stagiaire lea = new Stagiaire("lea.dumont@gmail.com");
 //		lea.setCivilite(Civilite.MLLE);
 //		lea.setNom("DUMONT");
@@ -78,45 +80,44 @@ public class TestDao {
 //		lea.setTelephone("0606060606");
 //		lea.setDtNaissance(sdf.parse("25/12/1995"));
 //		lea.setNiveauEtude(NiveauEtude.BAC_8);
-//		
 //
-
+//		Adresse adrLea = new Adresse();
+//
+//		adrLea.setRue("5 avenue villemejan");
+//		adrLea.setComplement("Résidence Diderot");
+//		adrLea.setCodePostal("33600");
+//		adrLea.setVille("PESSAC");
 //
 //		lea.setAdresse(adrLea);
 //		
 //		lea.setEvaluation(evaluation);
 //		
-//		lea.setFiliere(filiere);
-//		
 //		
 //		stagiaireDao.create(lea);
-
-
-		
-		
-		stagiaireDao.create(lea);
-
-		Stagiaire manon = new Stagiaire("serain.manon@yahoo.com");
-		manon.setCivilite(Civilite.MME);
-		manon.setNom("SERAIN");
-		manon.setPrenom("Manon");
-		manon.setTelephone("0645457845");
-		((Stagiaire) manon).setDtNaissance(sdf.parse("01/01/1996"));
-		((Stagiaire) manon).setNiveauEtude(NiveauEtude.BAC_5);
-		
-		stagiaireDao.create(manon);
-		
-		Filiere dreamTeam = new Filiere("DREAM TEAM");
-		dreamTeam.setIntitule("JAVA SPRING ANGULAR");
-		dreamTeam.setDtDebut(sdf.parse("13/04/2021"));
-		dreamTeam.setDuree(57);
-		dreamTeam.setDispositif(Dispositif.POEI);
-		
-		filiereDao.create(dreamTeam);
-
-		manon.setFiliere(dreamTeam);
-		
-		stagiaireDao.update(manon);
+//
+//		Stagiaire manon = new Stagiaire("serain.manon@yahoo.com");
+//		manon.setCivilite(Civilite.MME);
+//		manon.setNom("SERAIN");
+//		manon.setPrenom("Manon");
+//		manon.setTelephone("0645457845");
+//		((Stagiaire) manon).setDtNaissance(sdf.parse("01/01/1996"));
+//		((Stagiaire) manon).setNiveauEtude(NiveauEtude.BAC_5);
+//		
+//		stagiaireDao.create(manon);
+//		
+//		Filiere dreamTeam = new Filiere("DREAM TEAM");
+//		dreamTeam.setIntitule("JAVA SPRING ANGULAR");
+//		dreamTeam.setDtDebut(sdf.parse("13/04/2021"));
+//		dreamTeam.setDuree(57);
+//		dreamTeam.setDispositif(Dispositif.POEI);
+//		
+//		
+//
+//		manon.setFiliere(dreamTeam);
+//		
+//		filiereDao.create(dreamTeam);
+//		
+//		stagiaireDao.update(manon);
 	}
 
 }

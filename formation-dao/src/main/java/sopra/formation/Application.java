@@ -18,11 +18,12 @@ import sopra.formation.dao.file.csv.MatiereDaoCsv;
 import sopra.formation.dao.file.csv.SalleDaoCsv;
 import sopra.formation.dao.file.csv.StagiaireDaoCsv;
 import sopra.formation.dao.file.csv.UEDaoCsv;
+import sopra.formation.dao.sql.EvaluationDaoSql;
 
 public class Application {
 	private static Application instance = null;
 
-	private final IEvaluationDao evaluationDao = new EvaluationDaoCsv("evaluations.txt");
+	private final IEvaluationDao evaluationDao = new EvaluationDaoSql();
 	private final IFiliereDao filiereDao = new FiliereDaoCsv("filieres.txt");
 	private final IFormateurDao formateurDao = new FormateurDaoCsv("formateurs.txt", "competences.txt");
 	private final IMatiereDao matiereDao = new MatiereDaoCsv("matieres.txt");
