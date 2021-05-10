@@ -8,16 +8,24 @@ public class Stagiaire extends Personne {
 	private Filiere filiere;
 	private Evaluation evaluation;
 
-	public Stagiaire() {
+	public Stagiaire(Long id, String nom, String prenom, Date dtNaissance2, String email) {
 		super();
 	}
-
+	
 	public Stagiaire(String email) {
 		super(email);
 	}
 
-	public Stagiaire(Long id, String email) {
-		super(id, email);
+	public Stagiaire(Civilite civilite, String nom, String prenom, String email, String telephone, Date dtNaissance, NiveauEtude niveauEtude) {
+		super(civilite, nom, prenom, email, telephone);
+		this.dtNaissance = dtNaissance;
+		this.niveauEtude = niveauEtude;
+	}
+
+	public Stagiaire(Long id, Civilite civilite, String nom, String prenom, String email, String telephone, Date dtNaissance, NiveauEtude niveauEtude) {
+		super(id, civilite, nom, prenom, email, telephone);
+		this.dtNaissance = dtNaissance;
+		this.niveauEtude = niveauEtude;
 	}
 
 	public Date getDtNaissance() {
@@ -55,7 +63,7 @@ public class Stagiaire extends Personne {
 	@Override
 	public String toString() {
 		return "Stagiaire [dtNaissance=" + dtNaissance + ", niveauEtude=" + niveauEtude + ", evaluation=" + evaluation
-				+ ", " + super.toString() + "]";
+				+ ", " + super.toString() + " filiere=" + filiere + "]";
 	}
 
 }

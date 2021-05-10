@@ -13,6 +13,7 @@ import sopra.formation.dao.IMatiereDao;
 import sopra.formation.model.Matiere;
 
 public class MatiereDaoCsv implements IMatiereDao {
+	
 	private final String fileName;
 	private final String separator = ";";
 

@@ -1,7 +1,9 @@
 package sopra.formation.test;
 
+import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.List;
 
 import sopra.formation.Application;
@@ -27,14 +29,35 @@ public class TestDao {
 		IStagiaireDao stagiaireDao = Application.getInstance().getStagiaireDao();
 		IMatiereDao matiereDao = Application.getInstance().getMatiereDao();
 		IFiliereDao filiereDao = Application.getInstance().getFiliereDao();
+		
+		Stagiaire lea = new Stagiaire("lea.dumont@gmail.com");
+		lea.setCivilite(Civilite.MLLE);
+		lea.setNom("DUMONT");
+		lea.setPrenom("Léa");
+		lea.setTelephone("0606060606");
+		lea.setDtNaissance(sdf.parse("25/12/1995"));
+		lea.setNiveauEtude(NiveauEtude.BAC_8);
+		lea.setEvaluation(evaluationDao.findById(1L));
+		lea.setFiliere(filiereDao.findById(1L));
 
-		List<Evaluation> evaluations = evaluationDao.findAll();
-
-		for (Evaluation evaluation : evaluations) {
-			System.out.println(evaluation);
+		stagiaireDao.create(lea);
+		stagiaireDao.deleteById(1L);
+		
+		List<Stagiaire> stagiaires = stagiaireDao.findAll();
+		
+		for(Stagiaire stagiaire : stagiaires) {
+			System.out.println(stagiaire);
 		}
+				
+//		List<Evaluation> evaluations = evaluationDao.findAll();
+//
+//		for (Evaluation evaluation : evaluations) {
+//			System.out.println(evaluation);
+//		}
+//
+//		System.out.println(evaluationDao.findById(5L));
 
-		System.out.println(evaluationDao.findById(5L));
+		
 
 		Evaluation evaluation = new Evaluation(14, 12, "Peut mieux faire");
 
