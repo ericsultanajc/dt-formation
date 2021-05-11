@@ -55,7 +55,11 @@ public class FormateurDaoSql implements IFormateurDao {
 
 				Adresse adresse = new Adresse(rue, complement, codePostal, ville);
 				formateur.setAdresse(adresse);
-
+				
+				List<Matiere> competences = Application.getInstance().getMatiereDao().findAllByFormateurById(id);
+				
+				formateur.setCompetences(competences);
+				
 				formateurs.add(formateur);
 			}
 
@@ -111,6 +115,10 @@ public class FormateurDaoSql implements IFormateurDao {
 
 				Adresse adresse = new Adresse(rue, complement, codePostal, ville);
 				formateur.setAdresse(adresse);
+				
+				List<Matiere> competences = Application.getInstance().getMatiereDao().findAllByFormateurById(id);
+				
+				formateur.setCompetences(competences);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -138,8 +146,7 @@ public class FormateurDaoSql implements IFormateurDao {
 			connection = Application.getInstance().getConnection();
 
 			preparedStatement = connection.prepareStatement(
-					"INSERT INTO personne (disc, civilite, nom, prenom, email, telephone, referent, experience, rue, complement, code_postal, ville) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",
-					Statement.RETURN_GENERATED_KEYS);
+					"INSERT INTO personne (disc, civilite, nom, prenom, email, telephone, referent, experience, rue, complement, code_postal, ville) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
 
 			preparedStatement.setString(1, "Formateur");
 
@@ -191,7 +198,17 @@ public class FormateurDaoSql implements IFormateurDao {
 					obj.setId(id);
 				}
 
+				preparedStatementCompetences = connection
+						.prepareStatement("INSERT INTO competence (formateur_id, matiere_id) VALUES (?,?)");
+				
+				for (Matiere matiere : obj.getCompetences()) {
+					if (matiere.getId() != null) {
+						preparedStatementCompetences.setLong(1, obj.getId());
+						preparedStatementCompetences.setLong(2, matiere.getId());
 
+						preparedStatementCompetences.executeUpdate();
+					}
+				}
 			}
 
 		} catch (SQLException e) {
@@ -255,7 +272,27 @@ public class FormateurDaoSql implements IFormateurDao {
 
 			int rows = preparedStatement.executeUpdate();
 
-			
+			if (rows > 0) {
+				preparedStatementCompetencesDelete = connection
+						.prepareStatement("DELETE FROM competence WHERE formateur_id = ?");
+
+				preparedStatementCompetencesDelete.setLong(1, obj.getId());
+
+				preparedStatementCompetencesDelete.executeUpdate();
+
+				preparedStatementCompetences = connection
+						.prepareStatement("INSERT INTO competence (formateur_id, matiere_id) VALUES (?,?)");
+
+				
+				for (Matiere matiere : obj.getCompetences()) {
+					if (matiere.getId() != null) {
+						preparedStatementCompetences.setLong(1, obj.getId());
+						preparedStatementCompetences.setLong(2, matiere.getId());
+
+						preparedStatementCompetences.executeUpdate();
+					}
+				}
+			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
