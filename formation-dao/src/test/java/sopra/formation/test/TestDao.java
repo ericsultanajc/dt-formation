@@ -9,18 +9,14 @@ import java.util.List;
 import sopra.formation.Application;
 import sopra.formation.dao.IEvaluationDao;
 import sopra.formation.dao.IFiliereDao;
+import sopra.formation.dao.IFormateurDao;
 import sopra.formation.dao.IMatiereDao;
 import sopra.formation.dao.ISalleDao;
 import sopra.formation.dao.IStagiaireDao;
-import sopra.formation.model.Adresse;
 import sopra.formation.model.Civilite;
-import sopra.formation.model.Dispositif;
 import sopra.formation.model.Evaluation;
-import sopra.formation.model.Filiere;
+import sopra.formation.model.Formateur;
 import sopra.formation.model.Matiere;
-import sopra.formation.model.NiveauEtude;
-import sopra.formation.model.Salle;
-import sopra.formation.model.Stagiaire;
 
 public class TestDao {
 
@@ -30,6 +26,7 @@ public class TestDao {
 		
 		IEvaluationDao evaluationDao = Application.getInstance().getEvaluationDao();
 		IStagiaireDao stagiaireDao = Application.getInstance().getStagiaireDao();
+		IFormateurDao formateurDao = Application.getInstance().getFormateurDao();
 		IMatiereDao matiereDao = Application.getInstance().getMatiereDao();
 		IFiliereDao filiereDao = Application.getInstance().getFiliereDao();
 		ISalleDao salleDao = Application.getInstance().getSalleDao();
@@ -123,61 +120,33 @@ public class TestDao {
 //		
 //		stagiaireDao.update(manon);
 		
-//		Matiere m1 = new Matiere("J2EE", 3);
-//		Matiere m2 = new Matiere("COBOL", 6);
-//		Matiere m3 = new Matiere("C/C++", 12);
-//		matiereDao.create(m1);
-//		matiereDao.create(m2);
-//		matiereDao.create(m3);
+		Formateur eric = new Formateur("e.sultan@ajc-ingenierie.fr");
+		eric.setCivilite(Civilite.M);
+		eric.setNom("SULTAN");
+		eric.setPrenom("Eric");
+		eric.setTelephone("0645104506");
+		eric.setAdresse("4 rue de Corono", "", "33160", "Saint-Médard-en-Jalles");
+		eric.setReferent(true);
+		eric.setExperience(20);
+		
+		formateurDao.create(eric);
+		
+		Matiere unix = new Matiere("UNIX", 1);
+		matiereDao.create(unix);
+		
+		Matiere html = new Matiere("HTML", 2);
+		matiereDao.create(html);
+		
+		eric.addCompetence(unix);
+		eric.addCompetence(html);
+		
+		formateurDao.update(eric);
+		
+//		unix.addFormateur(eric); côté esclave non nécessaire pour la synchronisation en BDD
+//		html.addFormateur(eric);
 //		
-//		List<Matiere> matieres = matiereDao.findAll();
-//	
-//		System.out.println(Arrays.toString(matieres.toArray()));
-//		
-//		Matiere m3bis = matiereDao.findById(m3.getId());
-//	
-//		System.out.println(m3bis);
-//		
-//		m2.setNom("Python & R");
-//		m2.setDuree(1);
-//		matiereDao.update(m2);
-		
-//		matiereDao.deleteById(1L);
-//		matiereDao.deleteById(2L);
-//		matiereDao.deleteById(3L);
-//		matiereDao.deleteById(4L);
-//		
-//		Salle s1 = new Salle("B12", 45, true);
-//		// salleDao.create(s1);
-//		
-//		Adresse a1 = new Adresse("rue Georges Bonnac", "3ème étage", "33000", "Bordeaux");
-//		s1.setAdr(a1);
-//		
-//		salleDao.update(s1);
-		
-		
-		java.util.Date d = null;
-		try {
-			d = sdf.parse("15/03/1995");
-		} catch(ParseException e) {
-			e.printStackTrace();
-		}
-		
-//		Stagiaire s = new Stagiaire(Civilite.M, "Poul", "Tristan", "tristan.poul@hotmail.fr", "0665590784", d, NiveauEtude.BAC_5);
-	
-//		stagiaireDao.create(s);
-		
-//		Adresse a1 = new Adresse("rue Georges Bonnac", "3ème étage", "33000", "Bordeaux");
-//		s.setAdresse(a1);
-		
-		Stagiaire s = stagiaireDao.findById(10L);
-		System.out.println(s);
-		
-//		stagiaireDao.update(s);
-		
-//		stagiaireDao.deleteById(6L);
-//		stagiaireDao.deleteById(7L);
-//		stagiaireDao.deleteById(9L);
+//		matiereDao.update(unix);
+//		matiereDao.update(html);
 		
 	}
 
