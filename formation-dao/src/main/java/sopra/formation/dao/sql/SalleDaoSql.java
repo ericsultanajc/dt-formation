@@ -26,20 +26,21 @@ public class SalleDaoSql implements ISalleDao {
 
 		try {
 			conn = Application.getInstance().getConnection();
-			ps = conn.prepareStatement("SELECT ID, NOM, CAPACITE, VIDEO_PROJECTEUR, RUE, COMPLEMENT, CODE_POSTAL, VILLE FROM salle");
+			ps = conn.prepareStatement(
+					"SELECT id, nom, capacite, video_projecteur, rue, complement, code_postal, ville FROM salle");
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				Long id = rs.getLong("ID");
-				String nom = rs.getString("NOM");
-				Integer capacite = rs.getInt("CAPACITE");
-				Boolean videoProjec = rs.getString("VIDEO_PROJECTEUR").contentEquals("O") ? true : false;
-				String rue = rs.getString("RUE");
-				String complement = rs.getString("COMPLEMENT");
-				String codePostal = rs.getString("CODE_POSTAL");
-				String ville = rs.getString("VILLE");
+				Long id = rs.getLong("id");
+				String nom = rs.getString("nom");
+				Integer capacite = rs.getInt("capacite");
+				Boolean videoProjecteur = rs.getString("video_projecteur").contentEquals("O") ? true : false;
+				String rue = rs.getString("rue");
+				String complement = rs.getString("complement");
+				String codePostal = rs.getString("code_postal");
+				String ville = rs.getString("ville");
 
-				Salle salle = new Salle(id, nom, capacite, videoProjec);
+				Salle salle = new Salle(id, nom, capacite, videoProjecteur);
 				salle.setAdr(new Adresse(rue, complement, codePostal, ville));
 
 				salles.add(salle);
@@ -76,22 +77,23 @@ public class SalleDaoSql implements ISalleDao {
 
 		try {
 			conn = Application.getInstance().getConnection();
-			ps = conn.prepareStatement("SELECT NOM, CAPACITE, VIDEO_PROJECTEUR, RUE, COMPLEMENT, CODE_POSTAL, VILLE FROM salle WHERE ID = ?");
+			ps = conn.prepareStatement(
+					"SELECT nom, capacite, video_projecteur, rue, complement, code_postal, ville FROM salle WHERE id = ?");
 
 			ps.setLong(1, id);
 
 			rs = ps.executeQuery();
 
-			if (rs.next()) {
-				String nom = rs.getString("NOM");
-				Integer capacite = rs.getInt("CAPACITE");
-				Boolean videoProjec = rs.getString("VIDEO_PROJECTEUR").contentEquals("O") ? true : false;
-				String rue = rs.getString("RUE");
-				String complement = rs.getString("COMPLEMENT");
-				String codePostal = rs.getString("CODE_POSTAL");
-				String ville = rs.getString("VILLE");
+			while (rs.next()) {
+				String nom = rs.getString("nom");
+				Integer capacite = rs.getInt("capacite");
+				Boolean videoProjecteur = rs.getString("video_projecteur").contentEquals("O") ? true : false;
+				String rue = rs.getString("rue");
+				String complement = rs.getString("complement");
+				String codePostal = rs.getString("code_postal");
+				String ville = rs.getString("ville");
 
-				salle = new Salle(id, nom, capacite, videoProjec);
+				salle = new Salle(id, nom, capacite, videoProjecteur);
 				salle.setAdr(new Adresse(rue, complement, codePostal, ville));
 			}
 
@@ -124,14 +126,15 @@ public class SalleDaoSql implements ISalleDao {
 
 		try {
 			conn = Application.getInstance().getConnection();
-			ps = conn.prepareStatement("INSERT INTO salle (NOM, CAPACITE, VIDEO_PROJECTEUR, RUE, COMPLEMENT, CODE_POSTAL, VILLE) VALUES (?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
-						
+			ps = conn.prepareStatement(
+					"INSERT INTO salle (nom, capacite, video_projecteur, rue, complement, code_postal, ville) VALUES (?,?,?,?,?,?,?)",
+					Statement.RETURN_GENERATED_KEYS);
+
 			ps.setString(1, obj.getNom());
 			ps.setInt(2, obj.getCapacite());
-			ps.setBoolean(3, obj.getVideoProjecteur());
-
+			ps.setString(3, obj.getVideoProjecteur() ? "O" : "N");
 			
-			if (obj.getAdr() != null) {
+			if(obj.getAdr() != null) {
 				ps.setString(4, obj.getAdr().getRue());
 				ps.setString(5, obj.getAdr().getComplement());
 				ps.setString(6, obj.getAdr().getCodePostal());
@@ -142,17 +145,16 @@ public class SalleDaoSql implements ISalleDao {
 				ps.setNull(6, Types.VARCHAR);
 				ps.setNull(7, Types.VARCHAR);
 			}
-			
+
 			int rows = ps.executeUpdate();
-			
-			if(rows > 0) {
+
+			if (rows > 0) {
 				rs = ps.getGeneratedKeys();
-				if(rs.next()) {
+				if (rs.next()) {
 					Long id = rs.getLong(1);
 					obj.setId(id);
 				}
 			}
-		
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -177,30 +179,44 @@ public class SalleDaoSql implements ISalleDao {
 	public void update(Salle obj) {
 		Connection conn = null;
 		PreparedStatement ps = null;
+		ResultSet rs = null;
 
 		try {
 			conn = Application.getInstance().getConnection();
-			ps = conn.prepareStatement("UPDATE salle SET NOM = ?, CAPACITE = ?, VIDEO_PROJECTEUR = ?, RUE = ?, COMPLEMENT = ?, CODE_POSTAL = ?, VILLE = ? WHERE id = ?");
-						
+			ps = conn.prepareStatement(
+					"UPDATE salle SET nom = ?, capacite = ?, video_projecteur = ?, rue = ?, complement = ?, code_postal = ?, ville = ? WHERE id = ?");
+
 			ps.setString(1, obj.getNom());
 			ps.setInt(2, obj.getCapacite());
-			ps.setBoolean(3, obj.getVideoProjecteur());
-			ps.setString(4, obj.getAdr().getRue());
-			ps.setString(5, obj.getAdr().getComplement());
-			ps.setString(6, obj.getAdr().getCodePostal());
-			ps.setString(7, obj.getAdr().getVille());
+			ps.setString(3, obj.getVideoProjecteur() ? "O" : "N");
 			
-			int rows = ps.executeUpdate();
-			
-			if(rows != 1) {
-				// TODO renvoyer une exception
+			if(obj.getAdr() != null) {
+				ps.setString(4, obj.getAdr().getRue());
+				ps.setString(5, obj.getAdr().getComplement());
+				ps.setString(6, obj.getAdr().getCodePostal());
+				ps.setString(7, obj.getAdr().getVille());
+			} else {
+				ps.setNull(4, Types.VARCHAR);
+				ps.setNull(5, Types.VARCHAR);
+				ps.setNull(6, Types.VARCHAR);
+				ps.setNull(7, Types.VARCHAR);
 			}
-		
+			
+			ps.setLong(8, obj.getId());
+
+			int rows = ps.executeUpdate();
+
+			if (rows != 1) {
+				//TODO exception
+			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			try {
+				if (rs != null) {
+					rs.close();
+				}
 				if (ps != null) {
 					ps.close();
 				}

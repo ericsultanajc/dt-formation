@@ -18,19 +18,21 @@ public class MatiereDaoSql implements IMatiereDao {
 	public List<Matiere> findAll() {
 		List<Matiere> matieres = new ArrayList<Matiere>();
 
-		Connection conn = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
 
 		try {
-			conn = Application.getInstance().getConnection();
-			ps = conn.prepareStatement("SELECT ID, NOM, DUREE FROM matiere");
-			rs = ps.executeQuery();
+			connection = Application.getInstance().getConnection();
 
-			while (rs.next()) {
-				Long id = rs.getLong("ID");
-				String nom = rs.getString("NOM");
-				Integer duree = rs.getInt("DUREE");
+			preparedStatement = connection.prepareStatement("SELECT id, nom, duree FROM matiere");
+
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				Long id = resultSet.getLong("id");
+				String nom = resultSet.getString("nom");
+				Integer duree = resultSet.getInt("duree");
 
 				Matiere matiere = new Matiere(id, nom, duree);
 
@@ -41,42 +43,36 @@ public class MatiereDaoSql implements IMatiereDao {
 			e.printStackTrace();
 		} finally {
 			try {
-				if (rs != null) {
-					rs.close();
-				}
-				if (ps != null) {
-					ps.close();
-				}
-				if (conn != null) {
-					conn.close();
-				}
-			} catch (SQLException e) {
+				resultSet.close();
+				preparedStatement.close();
+				connection.close();
+			} catch (SQLException | NullPointerException e) {
 				e.printStackTrace();
 			}
 		}
-		
+
 		return matieres;
 	}
 
 	@Override
 	public Matiere findById(Long id) {
 		Matiere matiere = null;
-		
-		Connection conn = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
 
 		try {
-			conn = Application.getInstance().getConnection();
-			ps = conn.prepareStatement("SELECT NOM, DUREE FROM matiere WHERE ID = ?");
-			
-			ps.setLong(1, id);
-			
-			rs = ps.executeQuery();
+			connection = Application.getInstance().getConnection();
 
-			if (rs.next()) {
-				String nom = rs.getString("NOM");
-				Integer duree = rs.getInt("DUREE");
+			preparedStatement = connection.prepareStatement("SELECT nom, duree FROM matiere WHERE id = ?");
+
+			preparedStatement.setLong(1, id);
+
+			resultSet = preparedStatement.executeQuery();
+
+			if (resultSet.next()) {
+				String nom = resultSet.getString("nom");
+				Integer duree = resultSet.getInt("duree");
 
 				matiere = new Matiere(id, nom, duree);
 			}
@@ -85,61 +81,52 @@ public class MatiereDaoSql implements IMatiereDao {
 			e.printStackTrace();
 		} finally {
 			try {
-				if (rs != null) {
-					rs.close();
-				}
-				if (ps != null) {
-					ps.close();
-				}
-				if (conn != null) {
-					conn.close();
-				}
-			} catch (SQLException e) {
+				resultSet.close();
+				preparedStatement.close();
+				connection.close();
+			} catch (SQLException | NullPointerException e) {
 				e.printStackTrace();
 			}
 		}
-		
+
 		return matiere;
 	}
 
 	@Override
 	public void create(Matiere obj) {
-		Connection conn = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
 
 		try {
-			conn = Application.getInstance().getConnection();
-			ps = conn.prepareStatement("INSERT INTO matiere (NOM, DUREE) VALUES (?,?)", Statement.RETURN_GENERATED_KEYS);
-						
-			ps.setString(1, obj.getNom());
-			ps.setInt(2, obj.getDuree());
-			
-			int rows = ps.executeUpdate();
-			
-			if(rows > 0) {
-				rs = ps.getGeneratedKeys();
-				if(rs.next()) {
-					Long id = rs.getLong(1);
+			connection = Application.getInstance().getConnection();
+
+			preparedStatement = connection.prepareStatement("INSERT INTO matiere (nom, duree) VALUES (?,?)",
+					Statement.RETURN_GENERATED_KEYS);
+
+			preparedStatement.setString(1, obj.getNom());
+			preparedStatement.setInt(2, obj.getDuree());
+
+			int rows = preparedStatement.executeUpdate();
+
+			if (rows == 1) {
+				resultSet = preparedStatement.getGeneratedKeys();
+
+				if (resultSet.next()) {
+					Long id = resultSet.getLong(1);
+
 					obj.setId(id);
 				}
 			}
-		
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			try {
-				if (rs != null) {
-					rs.close();
-				}
-				if (ps != null) {
-					ps.close();
-				}
-				if (conn != null) {
-					conn.close();
-				}
-			} catch (SQLException e) {
+				resultSet.close();
+				preparedStatement.close();
+				connection.close();
+			} catch (SQLException | NullPointerException e) {
 				e.printStackTrace();
 			}
 		}
@@ -147,124 +134,60 @@ public class MatiereDaoSql implements IMatiereDao {
 
 	@Override
 	public void update(Matiere obj) {
-		Connection conn = null;
-		PreparedStatement ps = null;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
 
 		try {
-			conn = Application.getInstance().getConnection();
-			ps = conn.prepareStatement("UPDATE matiere SET NOM = ?, DUREE = ? WHERE id = ?");
-						
-			ps.setString(1, obj.getNom());
-			ps.setInt(2, obj.getDuree());
-			
-			int rows = ps.executeUpdate();
-			
-			if(rows != 1) {
-				// TODO renvoyer une exception
-			}
-		
+			connection = Application.getInstance().getConnection();
+
+			preparedStatement = connection.prepareStatement("UPDATE matiere SET nom = ?, duree = ? WHERE id = ?");
+
+			preparedStatement.setString(1, obj.getNom());
+			preparedStatement.setInt(2, obj.getDuree());
+			preparedStatement.setLong(3, obj.getId());
+
+			preparedStatement.executeUpdate();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			try {
-				if (ps != null) {
-					ps.close();
-				}
-				if (conn != null) {
-					conn.close();
-				}
-			} catch (SQLException e) {
+				preparedStatement.close();
+				connection.close();
+			} catch (SQLException | NullPointerException e) {
 				e.printStackTrace();
 			}
 		}
 	}
 
-	@Override
 	public void delete(Matiere obj) {
 		deleteById(obj.getId());
 	}
 
 	@Override
 	public void deleteById(Long id) {
-		Connection conn = null;
-		PreparedStatement ps = null;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
 
 		try {
-			conn = Application.getInstance().getConnection();
-			ps = conn.prepareStatement("DELETE FROM matiere WHERE id= ?");
-			
-			ps.setLong(1, id);
-			
-			int rows = ps.executeUpdate();
-			
-			if(rows != 1) {
-				// TODO renvoyer une exception
-			}
-		
+			connection = Application.getInstance().getConnection();
+
+			preparedStatement = connection.prepareStatement("DELETE matiere WHERE id = ?");
+
+			preparedStatement.setLong(1, id);
+
+			preparedStatement.executeUpdate();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			try {
-				if (ps != null) {
-					ps.close();
-				}
-				if (conn != null) {
-					conn.close();
-				}
-			} catch (SQLException e) {
+				preparedStatement.close();
+				connection.close();
+			} catch (SQLException | NullPointerException e) {
 				e.printStackTrace();
 			}
 		}
 	}
-
-	@Override
-	public List<Matiere> findAllByNom(String nom) {
-		List<Matiere> matieres = new ArrayList<Matiere>();
-
-		Connection conn = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			conn = Application.getInstance().getConnection();
-			
-			ps = conn.prepareStatement("SELECT ID, DUREE FROM matiere WHERE NOM = ?");
-			
-			ps.setString(1, nom);
-			
-			rs = ps.executeQuery();
-
-			while (rs.next()) {
-				Long id = rs.getLong("ID");
-				Integer duree = rs.getInt("DUREE");
-
-				Matiere matiere = new Matiere(id, nom, duree);
-
-				matieres.add(matiere);
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (rs != null) {
-					rs.close();
-				}
-				if (ps != null) {
-					ps.close();
-				}
-				if (conn != null) {
-					conn.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		
-		return matieres;
-	}
-
 
 }
