@@ -55,8 +55,7 @@ public class StagiaireDaoSql implements IStagiaireDao {
 				Long idEvaluation = resultSet.getLong("evaluation_id");
 				Long idFiliere = resultSet.getLong("filiere_id");
 
-				Stagiaire stagiaire = new Stagiaire(id, civilite, nom, prenom, email, telephone, dtNaissance,
-						niveauEtude);
+				Stagiaire stagiaire = new Stagiaire(id, email);
 
 				Adresse adresse = new Adresse(rue, complement, codePostal, ville);
 				stagiaire.setAdresse(adresse);
@@ -124,7 +123,7 @@ public class StagiaireDaoSql implements IStagiaireDao {
 				Long idEvaluation = resultSet.getLong("evaluation_id");
 				Long idFiliere = resultSet.getLong("filiere_id");
 
-				stagiaire = new Stagiaire(id, civilite, nom, prenom, email, telephone, dtNaissance, niveauEtude);
+				stagiaire = new Stagiaire(id, email);
 
 				Adresse adresse = new Adresse(rue, complement, codePostal, ville);
 				stagiaire.setAdresse(adresse);
@@ -212,7 +211,13 @@ public class StagiaireDaoSql implements IStagiaireDao {
 				preparedStatement.setNull(13, Types.INTEGER);
 			}
 
-			preparedStatement.setNull(14, Types.INTEGER);
+			if (obj.getFiliere() != null && obj.getFiliere().getId() != null) {
+				preparedStatement.setLong(14, obj.getFiliere().getId());
+			} else {
+				preparedStatement.setNull(14, Types.INTEGER);
+			}
+			
+			
 
 			int rows = preparedStatement.executeUpdate();
 
@@ -288,8 +293,13 @@ public class StagiaireDaoSql implements IStagiaireDao {
 			} else {
 				preparedStatement.setNull(12, Types.INTEGER);
 			}
-
-			preparedStatement.setNull(13, Types.INTEGER);
+			
+			if (obj.getFiliere() != null && obj.getFiliere().getId() != null) {
+				preparedStatement.setLong(13, obj.getFiliere().getId());
+			} else {
+				preparedStatement.setNull(13, Types.INTEGER);
+			}
+			
 
 			preparedStatement.setString(14, "Stagiaire");
 			preparedStatement.setLong(15, obj.getId());
