@@ -15,6 +15,7 @@ import sopra.formation.dao.IFormateurDao;
 import sopra.formation.model.Adresse;
 import sopra.formation.model.Civilite;
 import sopra.formation.model.Formateur;
+import sopra.formation.model.Matiere;
 
 public class FormateurDaoSql implements IFormateurDao {
 
@@ -25,6 +26,8 @@ public class FormateurDaoSql implements IFormateurDao {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
+		PreparedStatement preparedStatementB = null;
+		ResultSet resultSetB = null;
 
 		try {
 			connection = Application.getInstance().getConnection();
@@ -51,9 +54,23 @@ public class FormateurDaoSql implements IFormateurDao {
 				String ville = resultSet.getString("ville");
 
 				Formateur formateur = new Formateur(id, civilite, nom, prenom, email, telephone, referent, experience);
+				
+				List<Matiere> competences = new ArrayList<Matiere>();
+				
+				preparedStatementB = connection.prepareStatement("SELECT matiere_id from competence where formateur_id=?");
+				preparedStatementB.setLong(1,id);
+				resultSetB = preparedStatementB.executeQuery();
+				while(resultSetB.next()) {
+					Matiere matiere = new Matiere();
+					matiere.setId(resultSetB.getLong("matiere_id"));
+					competences.add(matiere);
+				}
 
 				Adresse adresse = new Adresse(rue, complement, codePostal, ville);
 				formateur.setAdresse(adresse);
+				formateur.setCompetences(competences);
+				
+				
 
 				formateurs.add(formateur);
 			}
