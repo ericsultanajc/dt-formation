@@ -122,7 +122,7 @@ public class SalleDaoSql implements ISalleDao {
 						
 			ps.setString(1, obj.getNom());
 			ps.setInt(2, obj.getCapacite());
-			ps.setBoolean(3, obj.getVideoProjecteur());
+			ps.setString(3, obj.getVideoProjecteur()? "O" : "N");
 			ps.setString(4, obj.getAdr().getRue());
 			ps.setString(5, obj.getAdr().getComplement());
 			ps.setString(6, obj.getAdr().getCodePostal());
@@ -168,11 +168,11 @@ public class SalleDaoSql implements ISalleDao {
 
 		try {
 			conn = Application.getInstance().getConnection();
-			ps = conn.prepareStatement("UPDATE salle SET nom = ?, capacite = ?, videoProjecteur = ?, rue = ?, complement = ?, code_postal = ?, ville = ? WHERE id = ?");
+			ps = conn.prepareStatement("UPDATE salle SET nom = ?, capacite = ?, video_projecteur = ?, rue = ?, complement = ?, code_postal = ?, ville = ? WHERE id = ?");
 						
 			ps.setString(1, obj.getNom());
 			ps.setInt(2, obj.getCapacite());
-			ps.setString(3, obj.getVideoProjecteur().toString());
+			ps.setString(3, obj.getVideoProjecteur()?"O" : "N");
 			ps.setString(4, obj.getAdr().getRue());
 			ps.setString(5, obj.getAdr().getComplement());
 			ps.setString(6, obj.getAdr().getCodePostal());
