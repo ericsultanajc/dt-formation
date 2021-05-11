@@ -11,19 +11,16 @@ import java.util.Date;
 import java.util.List;
 
 import sopra.formation.Application;
-import sopra.formation.dao.IStagiaireDao;
+import sopra.formation.dao.IFormateurDao;
 import sopra.formation.model.Adresse;
 import sopra.formation.model.Civilite;
-import sopra.formation.model.Evaluation;
-import sopra.formation.model.Filiere;
-import sopra.formation.model.NiveauEtude;
-import sopra.formation.model.Stagiaire;
+import sopra.formation.model.Formateur;
 
-public class StagiaireDaoSql implements IStagiaireDao {
+public class FormateurDaoSql implements IFormateurDao {
 
 	@Override
-	public List<Stagiaire> findAll() {
-		List<Stagiaire> stagiaires = new ArrayList<Stagiaire>();
+	public List<Formateur> findAll() {
+		List<Formateur> formateurs = new ArrayList<Formateur>();
 
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -33,9 +30,9 @@ public class StagiaireDaoSql implements IStagiaireDao {
 			connection = Application.getInstance().getConnection();
 
 			preparedStatement = connection.prepareStatement(
-					"SELECT id, civilite, nom, prenom, email, telephone, dt_naissance, niveau_etude, rue, complement, code_postal, ville, evaluation_id, filiere_id FROM personne WHERE disc = ?");
+					"SELECT id, civilite, nom, prenom, email, telephone, referent, experience, rue, complement, code_postal, ville FROM personne WHERE disc = ?");
 
-			preparedStatement.setString(1, "Stagiaire");
+			preparedStatement.setString(1, "Formateur");
 
 			resultSet = preparedStatement.executeQuery();
 
@@ -46,34 +43,19 @@ public class StagiaireDaoSql implements IStagiaireDao {
 				String prenom = resultSet.getString("prenom");
 				String email = resultSet.getString("email");
 				String telephone = resultSet.getString("telephone");
-				Date dtNaissance = resultSet.getDate("dt_naissance");
-				NiveauEtude niveauEtude = NiveauEtude.valueOf(resultSet.getString("niveau_etude"));
+				Boolean referent = resultSet.getString("referent").contentEquals("O") ? true : false;
+				Integer experience = resultSet.getInt("experience");
 				String rue = resultSet.getString("rue");
 				String complement = resultSet.getString("complement");
 				String codePostal = resultSet.getString("code_postal");
 				String ville = resultSet.getString("ville");
-				Long idEvaluation = resultSet.getLong("evaluation_id");
-				Long idFiliere = resultSet.getLong("filiere_id");
 
-				Stagiaire stagiaire = new Stagiaire(id, civilite, nom, prenom, email, telephone, dtNaissance,
-						niveauEtude);
+				Formateur formateur = new Formateur(id, civilite, nom, prenom, email, telephone, referent, experience);
 
 				Adresse adresse = new Adresse(rue, complement, codePostal, ville);
-				stagiaire.setAdresse(adresse);
+				formateur.setAdresse(adresse);
 
-				if (idEvaluation != null) {
-					Evaluation evaluation = Application.getInstance().getEvaluationDao().findById(idEvaluation);
-
-					stagiaire.setEvaluation(evaluation);
-				}
-
-				if (idFiliere != null) {
-					Filiere filiere = Application.getInstance().getFiliereDao().findById(idFiliere);
-
-					stagiaire.setFiliere(filiere);
-				}
-
-				stagiaires.add(stagiaire);
+				formateurs.add(formateur);
 			}
 
 		} catch (SQLException e) {
@@ -88,12 +70,12 @@ public class StagiaireDaoSql implements IStagiaireDao {
 			}
 		}
 
-		return stagiaires;
+		return formateurs;
 	}
 
 	@Override
-	public Stagiaire findById(Long id) {
-		Stagiaire stagiaire = null;
+	public Formateur findById(Long id) {
+		Formateur formateur = null;
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -102,9 +84,9 @@ public class StagiaireDaoSql implements IStagiaireDao {
 			connection = Application.getInstance().getConnection();
 
 			preparedStatement = connection.prepareStatement(
-					"SELECT civilite, nom, prenom, email, telephone, dt_naissance, niveau_etude, rue, complement, code_postal, ville, evaluation_id, filiere_id FROM personne WHERE disc = ? AND id = ?");
+					"SELECT civilite, nom, prenom, email, telephone, referent, experience, rue, complement, code_postal, ville FROM personne WHERE disc = ? AND id = ?");
 
-			preparedStatement.setString(1, "Stagiaire");
+			preparedStatement.setString(1, "Formateur");
 			preparedStatement.setLong(2, id);
 
 			resultSet = preparedStatement.executeQuery();
@@ -115,31 +97,17 @@ public class StagiaireDaoSql implements IStagiaireDao {
 				String prenom = resultSet.getString("prenom");
 				String email = resultSet.getString("email");
 				String telephone = resultSet.getString("telephone");
-				Date dtNaissance = resultSet.getDate("dt_naissance");
-				NiveauEtude niveauEtude = NiveauEtude.valueOf(resultSet.getString("niveau_etude"));
+				Boolean referent = resultSet.getString("referent").contentEquals("O") ? true : false;
+				Integer experience = resultSet.getInt("experience");
 				String rue = resultSet.getString("rue");
 				String complement = resultSet.getString("complement");
 				String codePostal = resultSet.getString("code_postal");
 				String ville = resultSet.getString("ville");
-				Long idEvaluation = resultSet.getLong("evaluation_id");
-				Long idFiliere = resultSet.getLong("filiere_id");
 
-				stagiaire = new Stagiaire(id, civilite, nom, prenom, email, telephone, dtNaissance, niveauEtude);
+				formateur = new Formateur(id, civilite, nom, prenom, email, telephone, referent, experience);
 
 				Adresse adresse = new Adresse(rue, complement, codePostal, ville);
-				stagiaire.setAdresse(adresse);
-
-				if (idEvaluation != null) {
-					Evaluation evaluation = Application.getInstance().getEvaluationDao().findById(idEvaluation);
-
-					stagiaire.setEvaluation(evaluation);
-				}
-
-				if (idFiliere != null) {
-					Filiere filiere = Application.getInstance().getFiliereDao().findById(idFiliere);
-
-					stagiaire.setFiliere(filiere);
-				}
+				formateur.setAdresse(adresse);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -153,24 +121,24 @@ public class StagiaireDaoSql implements IStagiaireDao {
 			}
 		}
 
-		return stagiaire;
+		return formateur;
 	}
 
 	@Override
-	public void create(Stagiaire obj) {
-//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	public void create(Formateur obj) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
+		PreparedStatement preparedStatementCompetences = null;
 		ResultSet resultSet = null;
 
 		try {
 			connection = Application.getInstance().getConnection();
 
 			preparedStatement = connection.prepareStatement(
-					"INSERT INTO personne (disc, civilite, nom, prenom, email, telephone, dt_naissance, niveau_etude, rue, complement, code_postal, ville, evaluation_id, filiere_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+					"INSERT INTO personne (disc, civilite, nom, prenom, email, telephone, referent, experience, rue, complement, code_postal, ville) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",
 					Statement.RETURN_GENERATED_KEYS);
 
-			preparedStatement.setString(1, "Stagiaire");
+			preparedStatement.setString(1, "Formateur");
 
 			if (obj.getCivilite() != null) {
 				preparedStatement.setString(2, obj.getCivilite().toString());
@@ -182,16 +150,11 @@ public class StagiaireDaoSql implements IStagiaireDao {
 			preparedStatement.setString(4, obj.getPrenom());
 			preparedStatement.setString(5, obj.getEmail());
 			preparedStatement.setString(6, obj.getTelephone());
-			if (obj.getDtNaissance() != null) {
-				preparedStatement.setDate(7, new java.sql.Date(obj.getDtNaissance().getTime()));
-//				preparedStatement.setDate(7, java.sql.Date.valueOf(sdf.format(obj.getDtNaissance()))); via String => yyyy-MM-dd
+			preparedStatement.setString(7, obj.getReferent() ? "O" : "N");
+			if (obj.getExperience() != null) {
+				preparedStatement.setInt(8, obj.getExperience());
 			} else {
-				preparedStatement.setNull(7, Types.DATE);
-			}
-			if (obj.getNiveauEtude() != null) {
-				preparedStatement.setString(8, obj.getNiveauEtude().toString());
-			} else {
-				preparedStatement.setNull(8, Types.VARCHAR);
+				preparedStatement.setNull(8, Types.INTEGER);
 			}
 
 			if (obj.getAdresse() != null) {
@@ -206,14 +169,6 @@ public class StagiaireDaoSql implements IStagiaireDao {
 				preparedStatement.setNull(12, Types.VARCHAR);
 			}
 
-			if (obj.getEvaluation() != null && obj.getEvaluation().getId() != null) {
-				preparedStatement.setLong(13, obj.getEvaluation().getId());
-			} else {
-				preparedStatement.setNull(13, Types.INTEGER);
-			}
-
-			preparedStatement.setNull(14, Types.INTEGER);
-
 			int rows = preparedStatement.executeUpdate();
 
 			if (rows == 1) {
@@ -224,12 +179,15 @@ public class StagiaireDaoSql implements IStagiaireDao {
 
 					obj.setId(id);
 				}
+
+
 			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			try {
+				preparedStatementCompetences.close();
 				resultSet.close();
 				preparedStatement.close();
 				connection.close();
@@ -240,15 +198,17 @@ public class StagiaireDaoSql implements IStagiaireDao {
 	}
 
 	@Override
-	public void update(Stagiaire obj) {
+	public void update(Formateur obj) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
+		PreparedStatement preparedStatementCompetences = null;
+		PreparedStatement preparedStatementCompetencesDelete = null;
 
 		try {
 			connection = Application.getInstance().getConnection();
 
 			preparedStatement = connection.prepareStatement(
-					"UPDATE personne SET civilite = ?, nom = ?, prenom = ?, email = ?, telephone = ?, dt_naissance = ?, niveau_etude = ?, rue = ?, complement = ?, code_postal = ?, ville = ?, evaluation_id = ?, filiere_id = ? WHERE disc = ? AND id = ?");
+					"UPDATE personne SET civilite = ?, nom = ?, prenom = ?, email = ?, telephone = ?, referent = ?, experience = ?, rue = ?, complement = ?, code_postal = ?, ville = ? WHERE disc = ? AND id = ?");
 
 			if (obj.getCivilite() != null) {
 				preparedStatement.setString(1, obj.getCivilite().toString());
@@ -260,16 +220,12 @@ public class StagiaireDaoSql implements IStagiaireDao {
 			preparedStatement.setString(3, obj.getPrenom());
 			preparedStatement.setString(4, obj.getEmail());
 			preparedStatement.setString(5, obj.getTelephone());
-			if (obj.getDtNaissance() != null) {
-				preparedStatement.setDate(6, new java.sql.Date(obj.getDtNaissance().getTime()));
-			} else {
-				preparedStatement.setNull(6, Types.DATE);
-			}
-			if (obj.getNiveauEtude() != null) {
-				preparedStatement.setString(7, obj.getNiveauEtude().toString());
-			} else {
-				preparedStatement.setNull(7, Types.VARCHAR);
-			}
+			preparedStatement.setString(6, obj.getReferent() ? "O" : "N");
+			preparedStatement.setInt(7, obj.getExperience());
+
+			Date dtNaissance = new Date();
+
+			preparedStatement.setDate(8, new java.sql.Date(dtNaissance.getTime()));
 
 			if (obj.getAdresse() != null) {
 				preparedStatement.setString(8, obj.getAdresse().getRue());
@@ -283,22 +239,19 @@ public class StagiaireDaoSql implements IStagiaireDao {
 				preparedStatement.setNull(11, Types.VARCHAR);
 			}
 
-			if (obj.getEvaluation() != null && obj.getEvaluation().getId() != null) {
-				preparedStatement.setLong(12, obj.getEvaluation().getId());
-			} else {
-				preparedStatement.setNull(12, Types.INTEGER);
-			}
+			preparedStatement.setString(12, "Formateur");
+			preparedStatement.setLong(13, obj.getId());
 
-			preparedStatement.setNull(13, Types.INTEGER);
+			int rows = preparedStatement.executeUpdate();
 
-			preparedStatement.setString(14, "Stagiaire");
-			preparedStatement.setLong(15, obj.getId());
+			
 
-			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			try {
+				preparedStatementCompetencesDelete.close();
+				preparedStatementCompetences.close();
 				preparedStatement.close();
 				connection.close();
 			} catch (SQLException | NullPointerException e) {
@@ -308,8 +261,9 @@ public class StagiaireDaoSql implements IStagiaireDao {
 	}
 
 	@Override
-	public void delete(Stagiaire obj) {
+	public void delete(Formateur obj) {
 		deleteById(obj.getId());
+
 	}
 
 	@Override
@@ -322,7 +276,7 @@ public class StagiaireDaoSql implements IStagiaireDao {
 
 			preparedStatement = connection.prepareStatement("DELETE personne WHERE disc = ? AND id = ?");
 
-			preparedStatement.setString(1, "Stagiaire");
+			preparedStatement.setString(1, "Formateur");
 			preparedStatement.setLong(2, id);
 
 			preparedStatement.executeUpdate();
