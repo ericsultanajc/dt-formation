@@ -7,18 +7,14 @@ import java.util.List;
 import sopra.formation.Application;
 import sopra.formation.dao.IEvaluationDao;
 import sopra.formation.dao.IFiliereDao;
+import sopra.formation.dao.IFormateurDao;
 import sopra.formation.dao.IMatiereDao;
 import sopra.formation.dao.ISalleDao;
 import sopra.formation.dao.IStagiaireDao;
-import sopra.formation.model.Adresse;
 import sopra.formation.model.Civilite;
-import sopra.formation.model.Dispositif;
 import sopra.formation.model.Evaluation;
-import sopra.formation.model.Filiere;
+import sopra.formation.model.Formateur;
 import sopra.formation.model.Matiere;
-import sopra.formation.model.NiveauEtude;
-import sopra.formation.model.Salle;
-import sopra.formation.model.Stagiaire;
 
 public class TestDao {
 
@@ -28,6 +24,7 @@ public class TestDao {
 		
 		IEvaluationDao evaluationDao = Application.getInstance().getEvaluationDao();
 		IStagiaireDao stagiaireDao = Application.getInstance().getStagiaireDao();
+		IFormateurDao formateurDao = Application.getInstance().getFormateurDao();
 		IMatiereDao matiereDao = Application.getInstance().getMatiereDao();
 		IFiliereDao filiereDao = Application.getInstance().getFiliereDao();
 		ISalleDao salleDao = Application.getInstance().getSalleDao();
@@ -127,60 +124,33 @@ public class TestDao {
 //		
 //		stagiaireDao.update(manon);
 		
+		Formateur eric = new Formateur("e.sultan@ajc-ingenierie.fr");
+		eric.setCivilite(Civilite.M);
+		eric.setNom("SULTAN");
+		eric.setPrenom("Eric");
+		eric.setTelephone("0645104506");
+		eric.setAdresse("4 rue de Corono", "", "33160", "Saint-Médard-en-Jalles");
+		eric.setReferent(true);
+		eric.setExperience(20);
 		
+		formateurDao.create(eric);
 		
-//		Matiere math = new Matiere();
-//		Matiere svt = new Matiere();
-//		Matiere anglais = new Matiere();
+		Matiere unix = new Matiere("UNIX", 1);
+		matiereDao.create(unix);
+		
+		Matiere html = new Matiere("HTML", 2);
+		matiereDao.create(html);
+		
+		eric.addCompetence(unix);
+		eric.addCompetence(html);
+		
+		formateurDao.update(eric);
+		
+//		unix.addFormateur(eric); côté esclave non nécessaire pour la synchronisation en BDD
+//		html.addFormateur(eric);
 //		
-//		
-//		math.setNom("math");
-//		math.setDuree(6);
-//		matiereDao.create(math);
-//		
-//		
-//		svt.setNom("svt");
-//		svt.setDuree(5);
-//		matiereDao.create(svt);
-//		
-//		
-//		anglais.setNom("anglais");
-//		anglais.setDuree(2);
-//		matiereDao.create(anglais);
-		
-		
-		
-		Salle s1 = new Salle();
-		Salle s2 = new Salle();
-		Salle s3 = new Salle();
-		
-		Adresse adrS1=new Adresse();
-		
-		s1.setNom("Pyhtagoe");
-		s1.setCapacite(25);
-		s1.setVideoProjecteur(true);
-		adrS1.setRue("Pythagore");
-		adrS1.setComplement("2");
-		adrS1.setCodePostal("33000");
-		adrS1.setVille("Bordeaux");
-		s1.setAdr(adrS1);
-		
-		salleDao.create(s1);
-		
-		
-//		Adresse adrS2=new Adresse("Wilson", "4", "13001", "Marseille");
-//		
-//		s2.setNom("Thales");
-//		s2.setCapacite(25);
-//		s2.setVideoProjecteur(true);
-//		s2.setAdr(adrS2);
-//		
-//		salleDao.create(s2);
-		
-		s1.setCapacite(30);
-		salleDao.update(s1);
-		
-		
+//		matiereDao.update(unix);
+//		matiereDao.update(html);
 		
 	}
 	
