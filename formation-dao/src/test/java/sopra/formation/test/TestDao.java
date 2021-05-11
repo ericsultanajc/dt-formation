@@ -14,9 +14,13 @@ import sopra.formation.dao.IMatiereDao;
 import sopra.formation.dao.ISalleDao;
 import sopra.formation.dao.IStagiaireDao;
 import sopra.formation.model.Civilite;
+import sopra.formation.model.Dispositif;
 import sopra.formation.model.Evaluation;
+import sopra.formation.model.Filiere;
 import sopra.formation.model.Formateur;
 import sopra.formation.model.Matiere;
+import sopra.formation.model.NiveauEtude;
+import sopra.formation.model.Stagiaire;
 
 public class TestDao {
 
@@ -120,34 +124,52 @@ public class TestDao {
 //		
 //		stagiaireDao.update(manon);
 		
-		Formateur eric = new Formateur("e.sultan@ajc-ingenierie.fr");
-		eric.setCivilite(Civilite.M);
-		eric.setNom("SULTAN");
-		eric.setPrenom("Eric");
-		eric.setTelephone("0645104506");
-		eric.setAdresse("4 rue de Corono", "", "33160", "Saint-Médard-en-Jalles");
-		eric.setReferent(true);
-		eric.setExperience(20);
-		
-		formateurDao.create(eric);
-		
-		Matiere unix = new Matiere("UNIX", 1);
-		matiereDao.create(unix);
-		
-		Matiere html = new Matiere("HTML", 2);
-		matiereDao.create(html);
-		
-		eric.addCompetence(unix);
-		eric.addCompetence(html);
-		
-		formateurDao.update(eric);
+//		Formateur eric = new Formateur("e.sultan@ajc-ingenierie.fr");
+//		eric.setCivilite(Civilite.M);
+//		eric.setNom("SULTAN");
+//		eric.setPrenom("Eric");
+//		eric.setTelephone("0645104506");
+//		eric.setAdresse("4 rue de Corono", "", "33160", "Saint-Médard-en-Jalles");
+//		eric.setReferent(true);
+//		eric.setExperience(20);
+//		
+//		formateurDao.create(eric);
+//		
+//		Matiere unix = new Matiere("UNIX", 1);
+//		matiereDao.create(unix);
+//		
+//		Matiere html = new Matiere("HTML", 2);
+//		matiereDao.create(html);
+//		
+//		eric.addCompetence(unix);
+//		eric.addCompetence(html);
+//		
+//		formateurDao.update(eric);
 		
 //		unix.addFormateur(eric); côté esclave non nécessaire pour la synchronisation en BDD
 //		html.addFormateur(eric);
 //		
 //		matiereDao.update(unix);
 //		matiereDao.update(html);
+	
+//		Stagiaire stagiaire = new Stagiaire(Civilite.M, "Poul", "Tristan", "tristan.poul@hotmail.fr", "0665590784", sdf.parse("15/03/1995"), NiveauEtude.BAC_5);
+//		stagiaireDao.create(stagiaire);
+//		
+//		Filiere filiere = new Filiere("J2EE", "Dream Team", sdf.parse("12/04/2021"), 3, Dispositif.POEI);
+//		filiereDao.create(filiere);
+//		
+//		stagiaire.setFiliere(filiere);
+//		
+//		stagiaireDao.update(stagiaire);
 		
+//		stagiaireDao.deleteById(11L);
+		
+		List<Stagiaire> stagiaires = stagiaireDao.findAll();
+		
+		for(Stagiaire s : stagiaires) {
+			System.out.println(s);
+		}
+
 	}
 
 }

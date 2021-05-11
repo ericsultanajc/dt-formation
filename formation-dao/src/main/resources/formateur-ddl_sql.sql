@@ -134,3 +134,6 @@ describe salle;
 
 SELECT *
 FROM personne;
+
+DELETE FROM personne 
+WHERE disc = 'Stagiaire' AND id = 15;

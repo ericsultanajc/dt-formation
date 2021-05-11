@@ -15,19 +15,23 @@ import sopra.formation.dao.IFormateurDao;
 import sopra.formation.model.Adresse;
 import sopra.formation.model.Civilite;
 import sopra.formation.model.Formateur;
+import sopra.formation.model.Matiere;
 
 public class FormateurDaoSql implements IFormateurDao {
 
 	@Override
 	public List<Formateur> findAll() {
-		List<Formateur> formateurs = new ArrayList<Formateur>();
-
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		ResultSet resultSet = null;
+		List<Formateur> formateurs 						= new ArrayList<Formateur>();
+		Connection connection 							= null;
+		PreparedStatement preparedStatement 			= null;
+		ResultSet resultSet 							= null;
+		Connection connectionCompetence 				= null;
+		PreparedStatement preparedStatementCompetence 	= null;
+		ResultSet resultSetCompetence 					= null;
 
 		try {
 			connection = Application.getInstance().getConnection();
+			connectionCompetence = Application.getInstance().getConnection();
 
 			preparedStatement = connection.prepareStatement(
 					"SELECT id, civilite, nom, prenom, email, telephone, referent, experience, rue, complement, code_postal, ville FROM personne WHERE disc = ?");
@@ -54,6 +58,25 @@ public class FormateurDaoSql implements IFormateurDao {
 
 				Adresse adresse = new Adresse(rue, complement, codePostal, ville);
 				formateur.setAdresse(adresse);
+				
+				preparedStatementCompetence = connectionCompetence.prepareStatement(
+						  "SELECT c.id, m.nom, d.duree"
+						+ "FROM competence c JOIN matiere m "
+						+ "ON c.matiere_id = m.id AND c.formateur_id = ?");
+				
+				preparedStatementCompetence.setLong(1, id);
+				
+				resultSetCompetence = preparedStatementCompetence.executeQuery();
+				
+				while(resultSetCompetence.next()) {
+					Long matiereId = resultSetCompetence.getLong("c.id");
+					String matiereNom = resultSetCompetence.getString("m.nom");
+					Integer matiereDuree = resultSetCompetence.getInt("m.duree");
+					
+					Matiere matiere = new Matiere(matiereId, matiereNom, matiereDuree);
+					
+					formateur.addCompetence(matiere);
+				}
 
 				formateurs.add(formateur);
 			}
@@ -63,8 +86,11 @@ public class FormateurDaoSql implements IFormateurDao {
 		} finally {
 			try {
 				resultSet.close();
+				resultSetCompetence.close();
 				preparedStatement.close();
+				preparedStatementCompetence.close();
 				connection.close();
+				connectionCompetence.close();
 			} catch (SQLException | NullPointerException e) {
 				e.printStackTrace();
 			}
@@ -75,13 +101,17 @@ public class FormateurDaoSql implements IFormateurDao {
 
 	@Override
 	public Formateur findById(Long id) {
-		Formateur formateur = null;
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		ResultSet resultSet = null;
+		Formateur formateur 							= null;
+		Connection connection 							= null;
+		PreparedStatement preparedStatement 			= null;
+		ResultSet resultSet 							= null;
+		Connection connectionCompetence 				= null;
+		PreparedStatement preparedStatementCompetence 	= null;
+		ResultSet resultSetCompetence 					= null;
 
 		try {
 			connection = Application.getInstance().getConnection();
+			connectionCompetence = Application.getInstance().getConnection();
 
 			preparedStatement = connection.prepareStatement(
 					"SELECT civilite, nom, prenom, email, telephone, referent, experience, rue, complement, code_postal, ville FROM personne WHERE disc = ? AND id = ?");
@@ -108,14 +138,36 @@ public class FormateurDaoSql implements IFormateurDao {
 
 				Adresse adresse = new Adresse(rue, complement, codePostal, ville);
 				formateur.setAdresse(adresse);
+				
+				preparedStatementCompetence = connectionCompetence.prepareStatement(
+						  "SELECT c.id, m.nom, d.duree"
+						+ "FROM competence c JOIN matiere m "
+						+ "ON c.matiere_id = m.id AND c.formateur_id = ?");
+				
+				preparedStatementCompetence.setLong(1, id);
+				
+				resultSetCompetence = preparedStatementCompetence.executeQuery();
+				
+				while(resultSetCompetence.next()) {
+					Long matiereId = resultSetCompetence.getLong("c.id");
+					String matiereNom = resultSetCompetence.getString("m.nom");
+					Integer matiereDuree = resultSetCompetence.getInt("m.duree");
+					
+					Matiere matiere = new Matiere(matiereId, matiereNom, matiereDuree);
+					
+					formateur.addCompetence(matiere);
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			try {
 				resultSet.close();
+				resultSetCompetence.close();
 				preparedStatement.close();
+				preparedStatementCompetence.close();
 				connection.close();
+				connectionCompetence.close();
 			} catch (SQLException | NullPointerException e) {
 				e.printStackTrace();
 			}
@@ -126,13 +178,16 @@ public class FormateurDaoSql implements IFormateurDao {
 
 	@Override
 	public void create(Formateur obj) {
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		PreparedStatement preparedStatementCompetences = null;
-		ResultSet resultSet = null;
+		Connection connection 							= null;
+		PreparedStatement preparedStatement 			= null;
+		ResultSet resultSet 							= null;
+		Connection connectionCompetence 				= null;
+		PreparedStatement preparedStatementCompetence 	= null;
+		ResultSet resultSetCompetence 					= null;
 
 		try {
 			connection = Application.getInstance().getConnection();
+			connectionCompetence = Application.getInstance().getConnection();
 
 			preparedStatement = connection.prepareStatement(
 					"INSERT INTO personne (disc, civilite, nom, prenom, email, telephone, referent, experience, rue, complement, code_postal, ville) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",
@@ -168,6 +223,10 @@ public class FormateurDaoSql implements IFormateurDao {
 				preparedStatement.setNull(11, Types.VARCHAR);
 				preparedStatement.setNull(12, Types.VARCHAR);
 			}
+			
+			if(obj.getCompetences().size() != 0) {
+				
+			}
 
 			int rows = preparedStatement.executeUpdate();
 
@@ -187,10 +246,12 @@ public class FormateurDaoSql implements IFormateurDao {
 			e.printStackTrace();
 		} finally {
 			try {
-				preparedStatementCompetences.close();
 				resultSet.close();
+				resultSetCompetence.close();
 				preparedStatement.close();
+				preparedStatementCompetence.close();
 				connection.close();
+				connectionCompetence.close();
 			} catch (SQLException | NullPointerException e) {
 				e.printStackTrace();
 			}
