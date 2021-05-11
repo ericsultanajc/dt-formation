@@ -2,7 +2,6 @@ package sopra.formation.test;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import sopra.formation.model.Adresse;
 import sopra.formation.model.Civilite;
@@ -21,7 +20,7 @@ public class TestModel {
 
 	public static void main(String[] args) throws ParseException {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		
+
 		Stagiaire lea = new Stagiaire("lea.dumont@gmail.com");
 		lea.setCivilite(Civilite.MLLE);
 		lea.setNom("DUMONT");
@@ -46,7 +45,7 @@ public class TestModel {
 		manon.setTelephone("0645457845");
 		((Stagiaire) manon).setDtNaissance(sdf.parse("01/01/1996"));
 		((Stagiaire) manon).setNiveauEtude(NiveauEtude.BAC_5);
-		
+
 		manon.setAdresse(new Adresse("21 avenue du Colonel Pierre Bourgoin", "", "33000", "BORDEAUX"));
 
 		Salle wim = new Salle("San Fransisco", 15, true);
@@ -143,7 +142,6 @@ public class TestModel {
 		((Stagiaire) manon).setEvaluation(new Evaluation(16, 11, "difficultés passagères"));
 
 		System.out.println(dreamTeam);
-
 
 	}
 
