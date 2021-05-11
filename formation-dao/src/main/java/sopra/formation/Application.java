@@ -6,6 +6,7 @@ import java.sql.SQLException;
 
 import sopra.formation.dao.IEvaluationDao;
 import sopra.formation.dao.IFiliereDao;
+import sopra.formation.dao.IFormateurDao;
 import sopra.formation.dao.IMatiereDao;
 import sopra.formation.dao.ISalleDao;
 import sopra.formation.dao.IStagiaireDao;
@@ -60,9 +61,9 @@ public class Application {
 	public IMatiereDao getMatiereDao() {
 		return matiereDao;
 	}
-	
-	public IFiliereDao getFiliereDao() {
-		return filiereDao;
+
+	public ISalleDao getSalleDao() {
+		return salleDao;
 	}
 
 	public IStagiaireDao getStagiaireDao() {
