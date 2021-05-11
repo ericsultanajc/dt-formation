@@ -202,9 +202,7 @@ public class FormateurDaoCsv implements IFormateurDao {
 				sb.append(this.separator);
 			}
 
-			String line = sb.toString();
-
-			lines.add(line);
+			lines.add(sb.toString());
 
 			for (Matiere matiere : formateur.getCompetences()) {
 				if (matiere.getId() != null) {

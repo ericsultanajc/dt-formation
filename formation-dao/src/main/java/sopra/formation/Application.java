@@ -19,6 +19,9 @@ import sopra.formation.dao.file.csv.SalleDaoCsv;
 import sopra.formation.dao.file.csv.StagiaireDaoCsv;
 import sopra.formation.dao.file.csv.UEDaoCsv;
 import sopra.formation.dao.sql.EvaluationDaoSql;
+import sopra.formation.dao.sql.MatiereDaoSql;
+import sopra.formation.dao.sql.SalleDaoSql;
+import sopra.formation.dao.sql.StagiaireDaoSql;
 
 public class Application {
 	private static Application instance = null;
@@ -26,9 +29,9 @@ public class Application {
 	private final IEvaluationDao evaluationDao = new EvaluationDaoSql();
 	private final IFiliereDao filiereDao = new FiliereDaoCsv("filieres.txt");
 	private final IFormateurDao formateurDao = new FormateurDaoCsv("formateurs.txt", "competences.txt");
-	private final IMatiereDao matiereDao = new MatiereDaoCsv("matieres.txt");
-	private final ISalleDao salleDao = new SalleDaoCsv("salles.txt");
-	private final IStagiaireDao stagiaireDao = new StagiaireDaoCsv("stagiaires.txt");
+	private final IMatiereDao matiereDao = new MatiereDaoSql();
+	private final ISalleDao salleDao = new SalleDaoSql();
+	private final IStagiaireDao stagiaireDao = new StagiaireDaoSql();
 	private final IUEDao ueDao = new UEDaoCsv("ues.txt");
 
 	private Application() {

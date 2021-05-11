@@ -122,3 +122,15 @@ alter table UE
 alter table UE
    add constraint FK_UE_REFERENCE_FILIERE foreign key (FILIERE_ID)
       references FILIERE (ID);
+      
+SELECT *
+FROM matiere;
+
+SELECT *
+from salle;
+
+DESCRIBE matiere;
+describe salle;
+
+SELECT *
+FROM personne;
