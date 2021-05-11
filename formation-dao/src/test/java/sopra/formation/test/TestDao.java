@@ -14,6 +14,7 @@ import sopra.formation.model.Civilite;
 import sopra.formation.model.Dispositif;
 import sopra.formation.model.Evaluation;
 import sopra.formation.model.Filiere;
+import sopra.formation.model.Matiere;
 import sopra.formation.model.NiveauEtude;
 import sopra.formation.model.Stagiaire;
 
@@ -56,6 +57,30 @@ public class TestDao {
 		evaluationDao.update(evaluation);
 
 		evaluationDao.delete(evaluation);
+		
+List<Matiere> matieres = matiereDao.findAll();
+		
+		for (Matiere matiere : matieres) {
+			System.out.println(matiere);
+		}
+		
+		
+		System.out.println(matiereDao.findById(5L));
+		
+		
+
+		Matiere matiere = new Matiere("java", 57);
+
+		matiereDao.create(matiere);
+		
+		
+
+		matiere.setDuree(12);
+		matiere.setNom("algo");
+
+		matiereDao.update(matiere);
+
+		matiereDao.delete(matiere);
 		
 //		Stagiaire lea = new Stagiaire("lea.dumont@gmail.com");
 //		lea.setCivilite(Civilite.MLLE);
