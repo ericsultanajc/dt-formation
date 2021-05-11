@@ -10,8 +10,11 @@ import sopra.formation.dao.IFiliereDao;
 import sopra.formation.dao.IFormateurDao;
 import sopra.formation.dao.IMatiereDao;
 import sopra.formation.dao.IStagiaireDao;
+import sopra.formation.model.Adresse;
 import sopra.formation.model.Civilite;
+import sopra.formation.model.Dispositif;
 import sopra.formation.model.Evaluation;
+import sopra.formation.model.Filiere;
 import sopra.formation.model.Formateur;
 import sopra.formation.model.Matiere;
 
@@ -47,6 +50,7 @@ public class TestDao {
 		evaluationDao.create(evaluation);
 		
 		
+		
 
 		evaluation.setComportemental(18);
 		evaluation.setTechnique(15);
@@ -78,7 +82,7 @@ List<Matiere> matieres = matiereDao.findAll();
 
 		matiereDao.update(matiere);
 
-		matiereDao.delete(matiere);
+		//matiereDao.delete(matiere);
 		
 //		Stagiaire lea = new Stagiaire("lea.dumont@gmail.com");
 //		lea.setCivilite(Civilite.MLLE);
@@ -101,52 +105,63 @@ List<Matiere> matieres = matiereDao.findAll();
 //		
 //		
 //		stagiaireDao.create(lea);
-//
-//		Stagiaire manon = new Stagiaire("serain.manon@yahoo.com");
-//		manon.setCivilite(Civilite.MME);
-//		manon.setNom("SERAIN");
-//		manon.setPrenom("Manon");
-//		manon.setTelephone("0645457845");
-//		((Stagiaire) manon).setDtNaissance(sdf.parse("01/01/1996"));
-//		((Stagiaire) manon).setNiveauEtude(NiveauEtude.BAC_5);
-//		
-//		stagiaireDao.create(manon);
-//		
-//		Filiere dreamTeam = new Filiere("DREAM TEAM");
-//		dreamTeam.setIntitule("JAVA SPRING ANGULAR");
-//		dreamTeam.setDtDebut(sdf.parse("13/04/2021"));
-//		dreamTeam.setDuree(57);
-//		dreamTeam.setDispositif(Dispositif.POEI);
-//		
-//		
-//
-//		manon.setFiliere(dreamTeam);
-//		
-//		filiereDao.create(dreamTeam);
-//		
-//		stagiaireDao.update(manon);
+
+		Stagiaire manon = new Stagiaire("serain.manon@yahoo.com");
+		manon.setCivilite(Civilite.MME);
+		manon.setNom("SERAIN");
+		manon.setPrenom("Manon");
+		manon.setTelephone("0645457845");
+		((Stagiaire) manon).setDtNaissance(sdf.parse("01/01/1996"));
+		((Stagiaire) manon).setNiveauEtude(NiveauEtude.BAC_5);
 		
-		Formateur eric = new Formateur("e.sultan@ajc-ingenierie.fr");
-		eric.setCivilite(Civilite.M);
-		eric.setNom("SULTAN");
-		eric.setPrenom("Eric");
-		eric.setTelephone("0645104506");
-		eric.setAdresse("4 rue de Corono", "", "33160", "Saint-Médard-en-Jalles");
-		eric.setReferent(true);
-		eric.setExperience(20);
+		stagiaireDao.create(manon);
 		
-		formateurDao.create(eric);
+		Filiere dreamTeam = new Filiere("DREAM TEAM");
+		dreamTeam.setIntitule("JAVA SPRING ANGULAR");
+		dreamTeam.setDtDebut(sdf.parse("13/04/2021"));
+		dreamTeam.setDuree(57);
+		dreamTeam.setDispositif(Dispositif.POEI);
 		
-		Matiere unix = new Matiere("UNIX", 1);
-		matiereDao.create(unix);
 		
-		Matiere html = new Matiere("HTML", 2);
-		matiereDao.create(html);
+
+		manon.setFiliere(dreamTeam);
+				
 		
-		eric.addCompetence(unix);
-		eric.addCompetence(html);
+		filiereDao.create(dreamTeam);
 		
-		formateurDao.update(eric);
+		stagiaireDao.update(manon);
+		
+		Evaluation premiere = new Evaluation();
+		premiere.setComportemental(18);
+		premiere.setTechnique(15);
+		premiere.setCommentaires("Grosse amélioration");
+		
+		manon.setEvaluation(premiere);
+		evaluationDao.create(premiere);
+		
+		stagiaireDao.update(manon);
+		
+//		Formateur eric = new Formateur("e.sultan@ajc-ingenierie.fr");
+//		eric.setCivilite(Civilite.M);
+//		eric.setNom("SULTAN");
+//		eric.setPrenom("Eric");
+//		eric.setTelephone("0645104506");
+//		eric.setAdresse("4 rue de Corono", "", "33160", "Saint-Médard-en-Jalles");
+//		eric.setReferent(true);
+//		eric.setExperience(20);
+//		
+//		formateurDao.create(eric);
+//		
+//		Matiere unix = new Matiere("UNIX", 1);
+//		matiereDao.create(unix);
+//		
+//		Matiere html = new Matiere("HTML", 2);
+//		matiereDao.create(html);
+//		
+//		eric.addCompetence(unix);
+//		eric.addCompetence(html);
+//		
+//		formateurDao.update(eric);
 		
 //		unix.addFormateur(eric); côté esclave non nécessaire pour la synchronisation en BDD
 //		html.addFormateur(eric);

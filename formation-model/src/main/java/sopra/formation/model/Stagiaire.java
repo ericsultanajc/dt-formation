@@ -12,10 +12,9 @@ public class Stagiaire extends Personne {
 		super();
 		
 	}
-	public Stagiaire(Long id, Civilite civilite, String nom, String prenom, String email, String telephone,
-			Date dtNaissance2, NiveauEtude niveauEtude2) {
+	//public Stagiaire(Long id, Civilite civilite, String nom, String prenom, String email, String telephone, Date dtNaissance2, NiveauEtude niveauEtude2) {
 	
-	}
+	//}
 
 	public Stagiaire(String email) {
 		super(email);

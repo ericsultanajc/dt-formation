@@ -211,8 +211,12 @@ public class StagiaireDaoSql implements IStagiaireDao {
 			} else {
 				preparedStatement.setNull(13, Types.INTEGER);
 			}
+			if (obj.getFiliere() != null && obj.getFiliere().getId() != null) {
+				preparedStatement.setLong(14, obj.getFiliere().getId());
+			} else {
 
 			preparedStatement.setNull(14, Types.INTEGER);
+			}
 
 			int rows = preparedStatement.executeUpdate();
 
@@ -288,8 +292,14 @@ public class StagiaireDaoSql implements IStagiaireDao {
 			} else {
 				preparedStatement.setNull(12, Types.INTEGER);
 			}
+			
+			if (obj.getFiliere() != null && obj.getFiliere().getId() != null) {
+				preparedStatement.setLong(13, obj.getFiliere().getId());
+			} else {
+
 
 			preparedStatement.setNull(13, Types.INTEGER);
+			}
 
 			preparedStatement.setString(14, "Stagiaire");
 			preparedStatement.setLong(15, obj.getId());

@@ -14,8 +14,10 @@ import sopra.formation.Application;
 import sopra.formation.dao.IFormateurDao;
 import sopra.formation.model.Adresse;
 import sopra.formation.model.Civilite;
+import sopra.formation.model.Filiere;
 import sopra.formation.model.Formateur;
 import sopra.formation.model.Matiere;
+
 
 public class FormateurDaoSql implements IFormateurDao {
 
@@ -50,6 +52,7 @@ public class FormateurDaoSql implements IFormateurDao {
 				String complement = resultSet.getString("complement");
 				String codePostal = resultSet.getString("code_postal");
 				String ville = resultSet.getString("ville");
+				
 
 				Formateur formateur = new Formateur(id, civilite, nom, prenom, email, telephone, referent, experience);
 
@@ -61,6 +64,8 @@ public class FormateurDaoSql implements IFormateurDao {
 				formateur.setCompetences(competences);
 				
 				formateurs.add(formateur);
+				
+				
 			}
 
 		} catch (SQLException e) {
@@ -108,15 +113,14 @@ public class FormateurDaoSql implements IFormateurDao {
 				String complement = resultSet.getString("complement");
 				String codePostal = resultSet.getString("code_postal");
 				String ville = resultSet.getString("ville");
+				
 
 				formateur = new Formateur(id, civilite, nom, prenom, email, telephone, referent, experience);
 
 				Adresse adresse = new Adresse(rue, complement, codePostal, ville);
 				formateur.setAdresse(adresse);
 				
-				List<Matiere> competences = Application.getInstance().getMatiereDao().findAllByFormateurById(id);
-				
-				formateur.setCompetences(competences);
+							
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -144,7 +148,8 @@ public class FormateurDaoSql implements IFormateurDao {
 			connection = Application.getInstance().getConnection();
 
 			preparedStatement = connection.prepareStatement(
-					"INSERT INTO personne (disc, civilite, nom, prenom, email, telephone, referent, experience, rue, complement, code_postal, ville) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
+					"INSERT INTO personne (disc, civilite, nom, prenom, email, telephone, referent, experience, rue, complement, code_postal, ville, matiere_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)",
+					Statement.RETURN_GENERATED_KEYS);
 
 			preparedStatement.setString(1, "Formateur");
 
@@ -176,6 +181,8 @@ public class FormateurDaoSql implements IFormateurDao {
 				preparedStatement.setNull(11, Types.VARCHAR);
 				preparedStatement.setNull(12, Types.VARCHAR);
 			}
+			
+			
 
 			int rows = preparedStatement.executeUpdate();
 
