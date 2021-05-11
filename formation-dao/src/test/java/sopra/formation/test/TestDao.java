@@ -7,15 +7,13 @@ import java.util.List;
 import sopra.formation.Application;
 import sopra.formation.dao.IEvaluationDao;
 import sopra.formation.dao.IFiliereDao;
+import sopra.formation.dao.IFormateurDao;
 import sopra.formation.dao.IMatiereDao;
 import sopra.formation.dao.IStagiaireDao;
-import sopra.formation.model.Adresse;
 import sopra.formation.model.Civilite;
-import sopra.formation.model.Dispositif;
 import sopra.formation.model.Evaluation;
-import sopra.formation.model.Filiere;
-import sopra.formation.model.NiveauEtude;
-import sopra.formation.model.Stagiaire;
+import sopra.formation.model.Formateur;
+import sopra.formation.model.Matiere;
 
 public class TestDao {
 
@@ -25,6 +23,7 @@ public class TestDao {
 		
 		IEvaluationDao evaluationDao = Application.getInstance().getEvaluationDao();
 		IStagiaireDao stagiaireDao = Application.getInstance().getStagiaireDao();
+		IFormateurDao formateurDao = Application.getInstance().getFormateurDao();
 		IMatiereDao matiereDao = Application.getInstance().getMatiereDao();
 		IFiliereDao filiereDao = Application.getInstance().getFiliereDao();
 
@@ -96,6 +95,35 @@ public class TestDao {
 //		filiereDao.create(dreamTeam);
 //		
 //		stagiaireDao.update(manon);
+		
+		Formateur eric = new Formateur("e.sultan@ajc-ingenierie.fr");
+		eric.setCivilite(Civilite.M);
+		eric.setNom("SULTAN");
+		eric.setPrenom("Eric");
+		eric.setTelephone("0645104506");
+		eric.setAdresse("4 rue de Corono", "", "33160", "Saint-Médard-en-Jalles");
+		eric.setReferent(true);
+		eric.setExperience(20);
+		
+		formateurDao.create(eric);
+		
+		Matiere unix = new Matiere("UNIX", 1);
+		matiereDao.create(unix);
+		
+		Matiere html = new Matiere("HTML", 2);
+		matiereDao.create(html);
+		
+		eric.addCompetence(unix);
+		eric.addCompetence(html);
+		
+		formateurDao.update(eric);
+		
+//		unix.addFormateur(eric); côté esclave non nécessaire pour la synchronisation en BDD
+//		html.addFormateur(eric);
+//		
+//		matiereDao.update(unix);
+//		matiereDao.update(html);
+		
 	}
 
 }

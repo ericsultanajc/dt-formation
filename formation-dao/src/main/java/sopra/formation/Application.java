@@ -10,25 +10,24 @@ import sopra.formation.dao.IMatiereDao;
 import sopra.formation.dao.ISalleDao;
 import sopra.formation.dao.IStagiaireDao;
 import sopra.formation.dao.IUEDao;
-import sopra.formation.dao.file.csv.EvaluationDaoCsv;
-import sopra.formation.dao.file.csv.FiliereDaoCsv;
-import sopra.formation.dao.file.csv.MatiereDaoCsv;
-import sopra.formation.dao.file.csv.SalleDaoCsv;
-import sopra.formation.dao.file.csv.StagiaireDaoCsv;
-import sopra.formation.dao.file.csv.UEDaoCsv;
 import sopra.formation.dao.sql.EvaluationDaoSql;
+import sopra.formation.dao.sql.FiliereDaoSql;
+import sopra.formation.dao.sql.FormateurDaoSql;
+import sopra.formation.dao.sql.MatiereDaoSql;
+import sopra.formation.dao.sql.SalleDaoSql;
+import sopra.formation.dao.sql.StagiaireDaoSql;
+import sopra.formation.dao.sql.UEDaoSql;
 
 public class Application {
 	private static Application instance = null;
 
 	private final IEvaluationDao evaluationDao = new EvaluationDaoSql();
-	private final IFiliereDao filiereDao = new FiliereDaoCsv("filieres.txt");
-	private final IFormateurDao formateurDao = new FormateurDaoCsv("formateurs.txt", "competences.txt");
-	private final IMatiereDao matiereDao = new MatiereDaoCsv("matieres.txt");
-	private final ISalleDao salleDao = new SalleDaoCsv("salles.txt");
-	private final IStagiaireDao stagiaireDao = new StagiaireDaoCsv("stagiaires.txt");
-	private final IMatiereDao matiereDao = new MatiereDaoCsv("matieres.txt");
-	private final IFiliereDao filiereDao = new FiliereDaoCsv ("filieres.txt");
+	private final IFiliereDao filiereDao = new FiliereDaoSql();
+	private final IFormateurDao formateurDao = new FormateurDaoSql();
+	private final IMatiereDao matiereDao = new MatiereDaoSql();
+	private final ISalleDao salleDao = new SalleDaoSql();
+	private final IStagiaireDao stagiaireDao = new StagiaireDaoSql();
+	private final IUEDao ueDao = new UEDaoSql();
 
 	private Application() {
 		try {
@@ -73,7 +72,7 @@ public class Application {
 	public IUEDao getUeDao() {
 		return ueDao;
 	}
-	
+
 	public Connection getConnection() throws SQLException {
 		return DriverManager.getConnection("jdbc:mysql://localhost:3306/formation", "root", "admin");
 	}
