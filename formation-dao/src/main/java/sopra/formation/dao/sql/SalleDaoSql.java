@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -128,10 +129,19 @@ public class SalleDaoSql implements ISalleDao {
 			ps.setString(1, obj.getNom());
 			ps.setInt(2, obj.getCapacite());
 			ps.setBoolean(3, obj.getVideoProjecteur());
-			ps.setString(4, obj.getAdr().getRue());
-			ps.setString(5, obj.getAdr().getComplement());
-			ps.setString(6, obj.getAdr().getCodePostal());
-			ps.setString(7, obj.getAdr().getVille());
+
+			
+			if (obj.getAdr() != null) {
+				ps.setString(4, obj.getAdr().getRue());
+				ps.setString(5, obj.getAdr().getComplement());
+				ps.setString(6, obj.getAdr().getCodePostal());
+				ps.setString(7, obj.getAdr().getVille());
+			} else {
+				ps.setNull(4, Types.VARCHAR);
+				ps.setNull(5, Types.VARCHAR);
+				ps.setNull(6, Types.VARCHAR);
+				ps.setNull(7, Types.VARCHAR);
+			}
 			
 			int rows = ps.executeUpdate();
 			
