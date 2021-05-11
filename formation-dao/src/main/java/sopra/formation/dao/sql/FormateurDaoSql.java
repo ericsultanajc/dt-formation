@@ -25,15 +25,19 @@ public class FormateurDaoSql implements IFormateurDao {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
+		
+		PreparedStatement preparedStatement2 = null;
+		ResultSet resultSet2 = null;
 
 		try {
 			connection = Application.getInstance().getConnection();
 
 			preparedStatement = connection.prepareStatement(
 					"SELECT id, civilite, nom, prenom, email, telephone, referent, experience, rue, complement, code_postal, ville FROM personne WHERE disc = ?");
-
+			
 			preparedStatement.setString(1, "Formateur");
 
+			
 			resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
@@ -54,6 +58,17 @@ public class FormateurDaoSql implements IFormateurDao {
 
 				Adresse adresse = new Adresse(rue, complement, codePostal, ville);
 				formateur.setAdresse(adresse);
+				
+				preparedStatement2 = connection.prepareStatement( 
+						"SELECT matiere_id FROM competence WHERE disc = " + id);
+				
+				resultSet2 = preparedStatement2.executeQuery();
+				List<Long> matieres = new ArrayList<Long>();
+
+				while (resultSet2.next()) {
+					Long matiere_id = resultSet2.getLong("matiere_id");
+					matieres.add(matiere_id);
+				}
 
 				formateurs.add(formateur);
 			}
