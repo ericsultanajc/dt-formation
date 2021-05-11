@@ -164,4 +164,10 @@ public class MatiereDaoCsv implements IMatiereDao {
 		}
 
 	}
+
+	@Override
+	public List<Matiere> findAllByFormateurById(Long idFormateur) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
