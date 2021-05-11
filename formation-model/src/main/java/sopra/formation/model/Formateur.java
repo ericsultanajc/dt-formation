@@ -21,6 +21,13 @@ public class Formateur extends Personne {
 		super(id, email);
 	}
 
+	public Formateur(Long id, Civilite civilite, String nom, String prenom, String email, String telephone,
+			Boolean referent, Integer experience) {
+		super(id, civilite, nom, prenom, email, telephone);
+		this.referent = referent;
+		this.experience = experience;
+	}
+
 	public Boolean getReferent() {
 		return referent;
 	}
