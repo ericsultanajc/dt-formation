@@ -1,5 +1,7 @@
 package sopra.formation.test;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -11,12 +13,14 @@ import sopra.formation.dao.IMatiereDao;
 import sopra.formation.dao.IStagiaireDao;
 import sopra.formation.model.Civilite;
 import sopra.formation.model.Evaluation;
-import sopra.formation.model.Formateur;
+import sopra.formation.model.Filiere;
 import sopra.formation.model.Matiere;
+import sopra.formation.model.NiveauEtude;
+import sopra.formation.model.Stagiaire;
 
 public class TestDao {
 
-	public static void main(String[] args) throws ParseException {
+	public static void main(String[] args) {
 	
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		
@@ -46,29 +50,40 @@ public class TestDao {
 
 		evaluationDao.update(evaluation);
 
-		evaluationDao.delete(evaluation);
+//		evaluationDao.delete(evaluation);
+		Matiere mat = new Matiere("Math", 250);
+		matiereDao.create(mat);
+		List<Matiere> matieres = matiereDao.findAll();
+		for (Matiere matiere : matieres) {
+			System.out.println(matiere);
+			
+		}
+		Stagiaire lea = new Stagiaire("lea.dumont@gmail.com");
+		lea.setCivilite(Civilite.MLLE);
+		lea.setNom("DUMONT");
+		lea.setPrenom("Léa");
+		lea.setTelephone("0606060606");
+		try {
+			lea.setDtNaissance(sdf.parse("25/12/1995"));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		lea.setNiveauEtude(NiveauEtude.BAC_8);
+//
+		Adresse adrLea = new Adresse();
+
+		adrLea.setRue("5 avenue villemejan");
+		adrLea.setComplement("Résidence Diderot");
+		adrLea.setCodePostal("33600");
+		adrLea.setVille("PESSAC");
+
+		lea.setAdresse(adrLea);
 		
-//		Stagiaire lea = new Stagiaire("lea.dumont@gmail.com");
-//		lea.setCivilite(Civilite.MLLE);
-//		lea.setNom("DUMONT");
-//		lea.setPrenom("Léa");
-//		lea.setTelephone("0606060606");
-//		lea.setDtNaissance(sdf.parse("25/12/1995"));
-//		lea.setNiveauEtude(NiveauEtude.BAC_8);
-//
-//		Adresse adrLea = new Adresse();
-//
-//		adrLea.setRue("5 avenue villemejan");
-//		adrLea.setComplement("Résidence Diderot");
-//		adrLea.setCodePostal("33600");
-//		adrLea.setVille("PESSAC");
-//
-//		lea.setAdresse(adrLea);
+		lea.setEvaluation(evaluation);
 //		
-//		lea.setEvaluation(evaluation);
-//		
-//		
-//		stagiaireDao.create(lea);
+		
+		stagiaireDao.create(lea);
 //
 //		Stagiaire manon = new Stagiaire("serain.manon@yahoo.com");
 //		manon.setCivilite(Civilite.MME);
