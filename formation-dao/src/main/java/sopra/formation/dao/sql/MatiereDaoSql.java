@@ -190,4 +190,46 @@ public class MatiereDaoSql implements IMatiereDao {
 		}
 	}
 
+	@Override
+	public List<Matiere> findAllByFormateurById(Long idFormateur) {
+		List<Matiere> matieres = new ArrayList<Matiere>();
+
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+
+		try {
+			connection = Application.getInstance().getConnection();
+
+			preparedStatement = connection.prepareStatement("SELECT m.id, m.nom, m.duree FROM matiere m JOIN competence c ON m.id = c.matiere_id WHERE c.formateur_id = ?");
+
+			preparedStatement.setLong(1, idFormateur);
+			
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				Long id = resultSet.getLong("id");
+				String nom = resultSet.getString("nom");
+				Integer duree = resultSet.getInt("duree");
+
+				Matiere matiere = new Matiere(id, nom, duree);
+
+				matieres.add(matiere);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				resultSet.close();
+				preparedStatement.close();
+				connection.close();
+			} catch (SQLException | NullPointerException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return matieres;
+	}
+
 }
