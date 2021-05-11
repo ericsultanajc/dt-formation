@@ -15,6 +15,7 @@ import sopra.formation.dao.IFormateurDao;
 import sopra.formation.model.Adresse;
 import sopra.formation.model.Civilite;
 import sopra.formation.model.Formateur;
+import sopra.formation.model.Matiere;
 
 public class FormateurDaoSql implements IFormateurDao {
 
@@ -25,7 +26,8 @@ public class FormateurDaoSql implements IFormateurDao {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
-
+		PreparedStatement preparedStatementLink = null;
+		ResultSet resultSetLink = null;
 		try {
 			connection = Application.getInstance().getConnection();
 
@@ -49,11 +51,24 @@ public class FormateurDaoSql implements IFormateurDao {
 				String complement = resultSet.getString("complement");
 				String codePostal = resultSet.getString("code_postal");
 				String ville = resultSet.getString("ville");
-
+				
 				Formateur formateur = new Formateur(id, civilite, nom, prenom, email, telephone, referent, experience);
-
+				
 				Adresse adresse = new Adresse(rue, complement, codePostal, ville);
 				formateur.setAdresse(adresse);
+				preparedStatementLink = connection.prepareStatement(
+						"SELECT c.matiere_id as matiere_id,m.nom as nom,m.duree as duree FROM competence c WHERE c.formateur_id = ? JOIN c.matiere m ON c.matiere_id = m.matiere_id");
+
+				preparedStatementLink.setLong(1, id);
+				resultSetLink = preparedStatementLink.executeQuery();
+				while (resultSetLink.next()) {
+					long idMat = resultSetLink.getLong("matiere_id");
+					String nomMat = resultSetLink.getString("nom");
+					int duree = resultSetLink.getInt("duree");
+					Matiere matiere = new Matiere(idMat, nomMat, duree);
+					formateur.addCompetence(matiere);
+				}
+				
 
 				formateurs.add(formateur);
 			}
@@ -63,7 +78,9 @@ public class FormateurDaoSql implements IFormateurDao {
 		} finally {
 			try {
 				resultSet.close();
+				resultSetLink.close();
 				preparedStatement.close();
+				preparedStatementLink.close();
 				connection.close();
 			} catch (SQLException | NullPointerException e) {
 				e.printStackTrace();
@@ -79,6 +96,8 @@ public class FormateurDaoSql implements IFormateurDao {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
+		PreparedStatement preparedStatementLink = null;
+		ResultSet resultSetLink = null;
 
 		try {
 			connection = Application.getInstance().getConnection();
@@ -114,7 +133,9 @@ public class FormateurDaoSql implements IFormateurDao {
 		} finally {
 			try {
 				resultSet.close();
+				resultSetLink.close();
 				preparedStatement.close();
+				preparedStatementLink.close();
 				connection.close();
 			} catch (SQLException | NullPointerException e) {
 				e.printStackTrace();
