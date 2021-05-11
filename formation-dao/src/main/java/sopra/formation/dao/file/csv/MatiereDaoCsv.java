@@ -141,13 +141,6 @@ public class MatiereDaoCsv implements IMatiereDao {
 		}
 	}
 
-	
-	@Override
-	public List<Matiere> findAllByNom(String nom) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	private void write(List<Matiere> matieres) {
 		List<String> lines = new ArrayList<String>();
 
