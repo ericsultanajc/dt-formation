@@ -25,12 +25,10 @@ public class Application {
 	private final IEvaluationDao evaluationDao = new EvaluationDaoSql();
 	private final IFiliereDao filiereDao = new FiliereDaoSql();
 	private final IFormateurDao formateurDao = new FormateurDaoSql();
-//	private final IMatiereDao matiereDao = new MatiereDaoCsv("matieres.txt");
 	private final IMatiereDao matiereDao = new MatiereDaoSql();
 	private final ISalleDao salleDao = new SalleDaoSql();
 	private final IStagiaireDao stagiaireDao = new StagiaireDaoSql();
 	private final IUEDao ueDao = new UEDaoSql();
-	
 
 	private Application() {
 		try {
